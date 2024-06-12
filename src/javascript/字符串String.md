@@ -1,0 +1,198 @@
+# 字符串 String
+
+## 字符串属性和方法
+
+**所有字符串方法都会返回新字符串，它们不会修改原始字符串**
+
+```javascript
+const str = "hello world!";
+```
+
+1️⃣ `length`
+
+```javascript
+// length 属性，返回字符串长度
+str.length; // 12
+```
+
+2️⃣ `slice()`
+
+```javascript
+// String.slice(start, end) 裁剪字符串
+const s = str.slice(2, 5); // "llo"
+```
+
+3️⃣ `substring()`
+
+```javascript
+// String.substring(start, end) 裁剪字符串，类似 slice，但不能传入负的索引值
+const s = str.substring(2, 5); // "llo"
+```
+
+4️⃣ `substr()`
+
+```javascript
+// String.substr(start, length)  第二个参数表示提取的字符串的长度，裁剪字符串
+const s = str.substr(2, 5)  // "llo w"
+```
+
+5️⃣ `replace()`
+
+```javascript
+// String.replace(old, new) 用另一个值替换在字符串中指定的值，只替换首个匹配
+const s = str.replace("e", "d")  // "hdllo world!"
+const s = JSON.stringify(s).replace(/'/g, '"'); // 将数组中字符串的单引号全部替换成双引号
+```
+
+6️⃣ `split()`
+
+```javascript
+// String.split() 将字符串转换成数组
+const s = str.split(); // 不传入分隔符，字符串成为一整个数组，数组长度为 1
+const s = str.split(""); // 每个字符都被分开，数组长度为 12
+```
+
+7️⃣ `concat()`
+
+```javascript
+// String.concat() 连接两个字符串
+const a = "hello ";
+const b = "world";
+const c = a.concat(b); // "hello world"
+```
+
+8️⃣ `startsWith()` `endsWith()`
+
+```javascript
+// String.startsWith() String.endsWith() 判断字符串是否以某个字串开头或结尾，返回布尔值
+const str = 'Hello ECMAScript 2015';
+const r1 = str.startsWith('Hello'); // true
+const r2 = str.endsWith('2016'); // false
+```
+
+9️⃣ 其它
+
+```javascript
+// String.toUpperCase()
+// String.toLowerCase()
+// String.trim() 去除首尾空白
+// String.repeat(n) 将字符串重复 n 次，返回新字符串
+```
+
+## 字符串搜索
+
+1️⃣ `indexof()` `lastIndexOf()`
+
+```javascript
+const str = "hello world!";
+// String.indexOf(char, start) 返回字符串中一个子串第一处出现的索引，没找到返回 -1
+// 可声明第二个参数表示起始检索位置
+const index = str.indexOf("wo"); // 6
+// 字符串中 indexOf 空字符串，结果是 0
+
+// String.lastIndexOf() 向后进行检索（从尾到头）
+```
+
+2️⃣ `search()`
+
+```javascript
+// String.search(str) 搜索特定值的字符串，并返回首次匹配的位置
+const index = str.search("wo"); // 6
+```
+
+3️⃣ `includes()`
+
+```javascript
+// String.includes(str) 返回是否包含指定字符串的布尔值
+str.includes("m"); // false
+```
+
+4️⃣ `charAt()`
+
+```javascript
+// String.charAt(index) 根据索引位置返回字符，类似于 str[index]
+str.charAt(0); // "h"
+```
+
+## 字符串遍历
+
+```javascript
+// 遍历索引 for in
+for (const i in str) {
+  console.log(str[i]);
+}
+
+// 遍历字符 for of
+for (const char of "Hello") {
+  console.log(char);
+}
+```
+
+```javascript
+/********** 求字符串中出现次数最多的字符 (Object 方法) **********/
+const mostFrequentChars = (str) => {
+  // 创建一个空对象来存储字符和它们的计数
+  const charCount = {};
+  // 字符的最大出现次数
+  let maxCount = 0;
+
+  // 遍历字符串中的每个字符，统计每个字符出现的次数
+  for (const char of str) {
+    charCount[char] = (charCount[char] || 0) + 1;
+    // 更新字符的最大出现次数
+    maxCount = charCount[char] > maxCount ? charCount[char] : maxCount;
+  }
+
+  // 创建一个空数组来存储出现次数最多的字符
+  const mostFrequentChars = [];
+
+  // 遍历字符计数对象，将出现次数等于最大出现次数的字符添加到数组中
+  for (const char in charCount) {
+    if (charCount[char] === maxCount) {
+      mostFrequentChars.push(char);
+    }
+  }
+  // 也可以使用下面这种方法遍历对象
+  // for (const [char, count] of Object.entries(charCount)) {
+  //   if (count === maxCount) {
+  //     mostFrequentChars.push(char);
+  //   }
+  // }
+
+  console.log('🚀🚀🚀 maxCount: ', maxCount);
+  // 返回出现次数最多的字符数组
+  return mostFrequentChars;
+}
+
+/********** 求字符串中出现次数最多的字符 (Map 方法) **********/
+const mostFrequentChars = (str) => {
+  // 创建一个空 Map 来存储字符和它们的计数
+  const charCount = new Map();
+  // 字符的最大出现次数
+  let maxCount = 0;
+
+  // 遍历字符串中的每个字符，统计每个字符出现的次数
+  for (const char of str) {
+    charCount.set(char, (charCount.get(char) || 0) + 1);
+    // 更新字符的最大出现次数
+    maxCount = charCount.get(char) > maxCount ? charCount.get(char) : maxCount;
+  }
+
+  // 创建一个空数组来存储出现次数最多的字符
+  const mostFrequentChars = [];
+
+  // 遍历 Map，将出现次数等于最大出现次数的字符添加到数组中
+  for (const [char, count] of charCount.entries()) {
+    if (count === maxCount) {
+      mostFrequentChars.push(char);
+    }
+  }
+
+  console.log('🚀🚀🚀 maxCount: ', maxCount);
+  // 返回出现次数最多的字符数组
+  return mostFrequentChars;
+}
+
+console.log(mostFrequentChars(str));
+// 还可以把字符串变成数组，排序，使用 indexOf 和 lastIndexOf 计算长度。利用 set
+```
