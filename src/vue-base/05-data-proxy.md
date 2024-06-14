@@ -2,6 +2,7 @@
 
 ## MVVM 模型
 
+<img src="https://s2.loli.net/2024/06/14/ja3g9LhxTk24CA5.png" alt="mvvm.png" style="zoom:33%;" /> 
 
 M：模型 (Model) ：data 中的数据；
 V：视图 (View) ：模板代码，即 template 标签中的内容；
@@ -20,7 +21,7 @@ VM：视图模型 (ViewModel)：Vue 实例对象
 // Vue 响应式原理
 let number = 18;
 
-// 1. 数据属性
+// 1. 数据属性 (4 项)
 Object.defineProperty(person, 'age', {
   value: 18,
   enumerable: true,  // 控制属性是否可以枚举，默认值是 false
@@ -28,12 +29,13 @@ Object.defineProperty(person, 'age', {
   configurable: true  // 控制属性是否可以被删除，默认值是 false
 })
 
-// 2. 访问器属性
+// 2. 访问器属性 (4 项)
 Object.defineProperty(person, 'age', {
   enumerable: true,  // 控制属性是否可以枚举，默认值是 false
   configurable: true,  // 控制属性是否可以被删除，默认值是 false
   // 当有人读取 person 的 age 属性时，get 函数(getter)就会被调用，且返回值就是 age 的值
-  get() {  // 收集依赖
+  get() {
+    // 收集依赖
     console.log('有人读取age属性了');
     return number;
   },
@@ -41,7 +43,7 @@ Object.defineProperty(person, 'age', {
   set(newVal) {
     // 如果新的值和旧的值相等就不用修改
     if (newVal === number) return;
-    
+    // 触发依赖更新
     console.log('有人修改了age属性，且值是', newVal);
     number = newVal;
   }
@@ -57,14 +59,15 @@ Object.defineProperty(person, 'age', {
 *  ~~`vm._data` 中的数据来自于 data 配置项，也运用到了数据代理，添加了getter 和 setter，相当于 `vm._data` 和 vm 中都有 data 中数据的 getter 和 setter。~~
 *  `vm._data` 中的数据来自于 data 配置项，使用的是数据劫持，为了实现响应式
 
+<img src="https://s2.loli.net/2024/06/14/sXQ1nYPga9HMcI7.png" alt="data-proxy.png" style="zoom:20%;" />   
 
 ## 数据劫持 (监听)
 
-> Vue 2 响应式原理
+> **Vue 2 响应式原理**
 
 ### 1️⃣ Vue 监测对象中数据的改变
 
-1. 加工 data 对象中的数据，添加 getter 和 setter，**在 setter 中加入重新解析模板操作**
+1. 通过一个 `Observer` 加工劫持 data 对象中的数据，添加 getter 和 setter，**在 setter 中加入重新解析模板操作**
 2. 将加工后的数据给 `vm._data`
 3. 使用数据代理，把 `vm._data` 下的数据给到 vm
 
@@ -76,16 +79,17 @@ Object.defineProperty(person, 'age', {
 // Vue 数据劫持的基本原理 (实现响应式)
 
 // 1. 数据
-const data = { name:'尚硅谷', address:'北京' };
+const data = { name:'Vue', version:'2.0' };
 
 // 2. 创建一个监视的实例对象，用于监视 data 中属性的变化
-const obs = new Observer(data);  // 订阅者
+const obs = new Observer(data); // 订阅者
 
 // 3. 观察者 obs 上具有 data 的所有属性和对应的 getter 和 setter；将 obs 赋给 data 和 vm._data
 const vm = {};
 vm._data = data = obs; // 使用 obs 包装 data
 
-// 创建一个 Observer 构造函数，Observer 复制了 data 的所有数据，并添加了 getter 和 setter
+// 创建一个 Observer 构造函数，Observer 复制了 data 对象的所有数据，并添加了 getter 和 setter
+// 没有考虑递归
 function Observer(obj){
   // 汇总对象中所有的属性形成一个数组
   const keys = Object.keys(obj);
@@ -122,6 +126,7 @@ const data = {
 
 function Observer(obj) {
   Object.keys(obj).forEach((key) => {
+    // 需要用中转变量存储 obj[key] 值，防止死循环
     let value = obj[key];
     
     Object.defineProperty(obj, key, {
@@ -145,7 +150,7 @@ new Observer(data);
 
 > 总结：Vue 先劫持 data 对象，添加 getter 和 setter，并在 setter 中调用重新解析模板的操作（每个 setter 中有一个 watcher）；之后将劫持的数据赋给 `vm._data` 对象；然后使用数据代理，将数据赋给 vm 对象做代理，这样就可以直接在 vm 身上拿到 data 中的数据了。
 
-`Vue.set()`
+**`Vue.set()`**
 
 * 如果初始化时 vm 的 data 里面没有的属性，需要增加时，要调用 `Vue.set()`，不能直接使用 `vm._data` 添加，不然会没有 getter 和 setter
 * 但是注意：**不能使用此方法往 vm 和 vm.data 中添加属性**，只能往其下一层添加
@@ -175,7 +180,7 @@ const data = {
 /** Vue 2 这里用了递归 */
 function Observer(obj) {
   Object.keys(obj).forEach((key) => {
-    // 如果写 Object.defineProperty(obj, key, {}) 就会出现超出最大回调站错误
+    // 如果写 Object.defineProperty(obj, key, {}) 就会出现超出最大回调栈错误
     // 因为下方 getter 中的 return obj[key] 会再次触发 getter 操作
     // 所以不能把 getter 加在 data 自身，而是放在实例 obs 上
     Object.defineProperty(this, key, {
@@ -202,10 +207,8 @@ obs.name = 'React'; // Setting name=React! 触发解析模板操作
 ### 4️⃣ Vue 3 响应式原理
 
 ```javascript
-const data = {
-  name: 'Vue',
-  version: '2.0'
-};
+// 使用代理和反射 API 替代 Object.defineProperty
+const data = { name: 'Vue', version: '2.0' };
 
 const proxy = new Proxy(data, {
   get(target, property, receiver) {
@@ -221,8 +224,6 @@ const proxy = new Proxy(data, {
 proxy.name; // Getting name!
 proxy.name = 'React'; // Setting name=React! 触发解析模板操作
 ```
-
-
 
 ## 双向绑定原理
 
@@ -247,7 +248,7 @@ class Vue {
       // 获取到参数数组 (从第二位开始截取参数，因为第一个参数是 type)
       const args = Array.prototype.slice.call(arguments, 1);
       // 循环队列调用 fn
-      this.subs[type].forEach((fn) => fn(...args))
+      this.subs[type].forEach((fn) => fn(...args));
     } else {
       console.log('该事件不存在');
     }
@@ -272,7 +273,7 @@ eventHub.$emit('sum', 1, 2, 4, 5, 6, 7, 8, 9, 10)
 class Subject {
   constructor() {
     // 1. 被观察者拥有所有观察者的完整数组
-    this.observerLists = []; // 观察者列表
+    this.observerList = []; // 观察者列表
   }
 
   // 添加观察者
@@ -280,28 +281,26 @@ class Subject {
     // 判断观察者是否有和存在更新订阅的方法
     if (obs && obs.update) {
       // 添加到观察者列表中
-      this.observerLists.push(obs);
+      this.observerList.push(obs);
     }
   }
 
   // 通知观察者，发送消息
   notify(msg) {
     // 2. 事件发布时遍历观察者列表，通知每一个观察者 (调用观察者的更新事件函数)
-    this.observerLists.forEach((obs) => {
-      obs.update(msg);
-    })
+    this.observerList.forEach(obs => obs.update(msg));
   }
 }
 
 /** 观察者 (学生) */
 class Observer {
   constructor(name) {
-    this.name = name;
+    this.name_ = name;
   }
   
   // 定义更新事件函数
   update(msg) {
-    console.log(`目标更新了，我${this.name}收到了这条消息：${msg}`);
+    console.log(`目标更新了，我${this.name_}收到了这条消息：${msg}`);
   }
 }
 

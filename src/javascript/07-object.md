@@ -2,7 +2,7 @@
 
 ## 创建类
 
-JavaScript 类是 JavaScript 对象的模板；类的本质是一个函数；构造函数的另一种写法
+JavaScript 类是 JavaScript 对象的模板；类的本质是一个函数；构造函数的另一种写法，ES6 引入的，作为构造函数的语法糖
 
 ```javascript
 class Car { // 使用关键字 class 创建类
@@ -15,15 +15,15 @@ class Car { // 使用关键字 class 创建类
   methods...
 }
 
-// 创建一个对象，使用new关键字，对象的实例化
+// 创建一个对象，使用 new 关键字，对象的实例化
 const myCar1 = new Car("Ford", 2014);
 ```
 
 ## 类的继承
 
-* 子类通过 extends 继承父类的属性和方法；
-* constructor 里面的 this 指向的是创建的实例对象；方法中的 this 指向的是方法的调用者（子类继承父类的方法，方法的调用者还是父类）；
-* super 关键字是用于访问和调用对象父类上的函数。可以用于调用父类的构造函数，也可以调用普通函数。
+* 子类通过 `extends` 继承父类的属性和方法；
+* `constructor` 里面的 `this` 指向的是创建的实例对象；方法中的 `this` 指向的是方法的调用者（子类继承父类的方法，方法的调用者还是父类）；
+* `super` 关键字是用于访问和调用对象父类上的函数。可以用于调用父类的构造函数，也可以调用普通函数。
 
 ```javascript
 class Father { // 父类
@@ -31,16 +31,16 @@ class Father { // 父类
     this.x = x;
     this.y = y;
   }
-  sum() { console.log(this.x + this.y) } // 父类的属性和方法
+  sum() { console.log(this.x + this.y) }; // 父类的属性和方法
 }
 
 // 继承
 class Son extends Father {
   constructor(x, y) { 
-    super(x, y) // 调用了父类中的构造函数，将这里的 x 和 y 传递给父类
+    super(x, y); // 调用了父类中的构造函数，将这里的 x 和 y 传递给父类
   }
 }
-Son.sum(x, y) // sum 方法是父类中的方法，x 和 y 先传递给子类的构造函数，再通过 super 传递给父类的构造函数
+Son.sum(x, y); // sum 方法是父类中的方法，x 和 y 先传递给子类的构造函数，再通过 super 传递给父类的构造函数
 
 class Son extends Father {
   constructor(x, y) {
@@ -62,7 +62,7 @@ class Son extends Father {
 const obj = {
   uname: '张三',
   age: 18,
-  sayHi : function() { console.log('hi') }
+  sayHi: function() { console.log('hi') }
 }
 // 多个属性或方法中间用逗号隔开，方法冒号后面是一个匿名函数
 obj.uname // 用该方法时，属性 uname 是字符串，不可以是变量
@@ -92,7 +92,7 @@ const ldh = new Star('刘德华', 18, '男');
 
 ```javascript
 // obj.hasOwnProperty(key) 判断对象是否具有某个键，而且是在其自身，不是原型链上的
-// for in 遍历对象时也会返回其原型链上的属性
+// for...in 遍历对象时也会返回其原型链上的属性
 // (key in obj) 也会返回一个布尔值
 
 for (const key in obj) { // 遍历对象

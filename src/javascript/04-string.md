@@ -2,7 +2,7 @@
 
 ## 字符串属性和方法
 
-**所有字符串方法都会返回新字符串，它们不会修改原始字符串**
+**所有字符串方法都会返回新字符串，它们不会修改原始字符串，因为字符串变量是不可修改的**
 
 ```javascript
 const str = "hello world!";
@@ -18,7 +18,7 @@ str.length; // 12
 2️⃣ `slice()`
 
 ```javascript
-// String.slice(start, end) 裁剪字符串
+// String.slice(start, end) 裁剪字符串 (和数组的该方法相同)
 const s = str.slice(2, 5); // "llo"
 ```
 
@@ -40,6 +40,7 @@ const s = str.substr(2, 5)  // "llo w"
 
 ```javascript
 // String.replace(old, new) 用另一个值替换在字符串中指定的值，只替换首个匹配
+// 第一个参数可以传正则表达式
 const s = str.replace("e", "d")  // "hdllo world!"
 const s = JSON.stringify(s).replace(/'/g, '"'); // 将数组中字符串的单引号全部替换成双引号
 ```
@@ -117,16 +118,18 @@ str.charAt(0); // "h"
 ## 字符串遍历
 
 ```javascript
-// 遍历索引 for in
+// 遍历索引 for...in
 for (const i in str) {
   console.log(str[i]);
 }
 
-// 遍历字符 for of
+// 遍历字符 for...of
 for (const char of "Hello") {
   console.log(char);
 }
 ```
+
+## 算法题
 
 ```javascript
 /********** 求字符串中出现次数最多的字符 (Object 方法) **********/

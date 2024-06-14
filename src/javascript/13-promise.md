@@ -3,11 +3,9 @@
 ## 前置知识
 
 * 函数对象：将函数作为对象使用
-* 实例对象：通过 new 构造函数或类产生的对象
+* 实例对象：通过 `new` 构造函数或类产生的对象
 * 同步回调函数：立即在主线程执行，不会放入回调队列，如数组遍历相关的回调 `arr.forEach(() => {})`
 * 异步回调函数：不会立即执行，会放入回调队列中等待主线程执行完毕再执行，如定时器，ajax，Promise 的回调
-
-![事件循环](/javascript/event-loop.png)
 
 ```javascript
 // 函数对象
@@ -21,7 +19,7 @@ const p = new Person();
 
 ## 异步编程
 
-同步就是按照代码书写的顺序执行，异步不按照代码顺序执行，异步的执行效率更高；主线程作为一个线程，不能够同时接受多方面的请求。所以，当一个事件没有结束时，界面将无法处理其他请求；我们常常用子线程来完成一些可能消耗时间足够长以至于被用户察觉的事情。
+同步就是按照代码书写的顺序执行，异步不按照代码顺序执行，异步的执行效率更高；浏览器主线程作为一个线程，不能够同时接受多方面的请求。所以当一个事件没有结束时，界面将无法处理其他请求；我们常常用子线程来完成一些可能消耗时间足够长以至于被用户察觉的事情。
 
 因为子线程独立于主线程，所以即使出现阻塞也不会影响主线程的运行。但是子线程有一个局限：一旦发射了以后就**会与主线程失去同步，我们无法确定它的结束**，如果结束之后需要处理一些事情，比如处理来自服务器的信息，我们是无法将它合并到主线程中去的。为了解决这个问题，JavaScript 中的异步操作函数往往通过**回调函数**来实现异步任务的结果处理。
 
@@ -31,19 +29,19 @@ const p = new Person();
 
 ### Promise 类
 
-Promise 是一个 ES 6 提供的**类**，或者说是一个**构造函数**，目的是更加优雅地书写复杂的异步任务。将“函数瀑布”变成顺序格式的代码。
+Promise 是一个 ES6 提供的**类**，或者说是一个**构造函数**，目的是更加优雅地书写复杂的异步任务。将“函数瀑布”变成顺序格式的代码。
 
-Promise 的实例对象可以用来封装一个异步操作，并可以获取其成功或失败的值
+> **Promise 的实例对象可以用来封装一个异步操作，并可以获取其成功或失败的值**
 
-1️⃣ 起始函数 executor
+1️⃣ 起始函数 `executor`
 
 * Promise 构造函数只有一个参数，是一个**同步回调函数**，这个函数在构造之后会立即在主线程被**同步**运行，所以我们称之为**起始函数 executor** 函数
 * **起始函数**包含两个函数参数， `resolve()` 和 `reject()` 函数
-* 在 Promise 的 executor 函数体中书写**异步任务**，之后调用 `resolve()` 和 `reject()`
-* 当调用 `resolve()`，表示异步任务成功，Promise 状态变为成功态；`resolve()` 中可以放置一个参数用于指定成功的 value 值
-* 当调用 `reject()`，表示异步任务失败，Promise 状态变为失败态；`reject()` 参数中一般会传递一个错误对象用于指定失败的 reason 值
-* `resolve()` 和 `reject()` 的作用域只有起始函数，不包括 then 以及其他序列；
-* `resolve()` 和 `reject()`  并不能够使起始函数停止运行，如果希望起始函数在 resolve 之后停止，别忘了 return；
+* 在 Promise 的 `executor` 函数体中书写**异步任务**，之后调用 `resolve()` 和 `reject()`
+* 当调用 `resolve()`，表示异步任务成功，Promise 状态变为成功态；`resolve()` 中可以放置一个参数用于指定成功的 `value` 值
+* 当调用 `reject()`，表示异步任务失败，Promise 状态变为失败态；`reject()` 参数中一般会传递一个错误对象用于指定失败的 `reason` 值
+* `resolve()` 和 `reject()` 的作用域只有起始函数，不包括 `then` 以及其他序列；
+* `resolve()` 和 `reject()`  并不能够使起始函数停止运行，如果希望起始函数在 `resolve` 之后停止，别忘了 `return`；
 
 2️⃣ Promise 实例的方法
 
@@ -52,7 +50,7 @@ Promise 的实例对象可以用来封装一个异步操作，并可以获取其
   * `catch()` 用于指定 Promise 失败时的回调
   * `finally()` 用于指定 Promise 最终执行的回调
 * `then()` 中的回调函数是**异步回调函数**，**then 方法返回一个新 Promise 实例**，因此可以继续**链式调用** ，解决传统的回调地狱的问题
-  * 如果 then 指定的回调执行后返回一个非 Promise 值，如 a，那么新 Promise 实例的状态为成功，值为 a
+  * 如果 then 指定的回调执行后返回一个非 Promise 值，如 undefined，那么新 Promise 实例的状态为成功，值为 undefined
   * 如果 then 指定的回调执行后返回一个 Promise 实例 p，那么新 Promise 实例的状态和值与 p 一致
   * 如果 then 指定的回调执行后抛出异常，那么新 Promise 实例的状态为失败，值为抛出的异常
 
@@ -135,8 +133,6 @@ p.then(
 	reason => { console.log('失败了'， reason); }
 )
 ```
-
-
 
 ## Promise 函数
 
@@ -227,19 +223,19 @@ Promise 解决了传统回调函数的回调地狱的问题，但是导致了纵
 
 传入包含 n 个 Promise 的数组，返回一个新的 Promise 实例，只有**所有的 Promise 都成功才成功**，且成功的 value 是所有 Promise 成功的 value 的数组，只要有一个失败了就直接失败。并且只要检测到失败的，就立即返回失败的 Promise。
 
-2️⃣ `Promise.allSettled(PromiseArr)`
+2️⃣ `Promise.any(PromiseArr)`
+
+**只要其中一个 Promise 成功，返回的 Promise 就会成功；如果所有的 Promise 都失败，则返回失败**
+
+3️⃣ `Promise.allSettled(PromiseArr)`
 
 **等待所有 Promise 都完成（无论成功还是失败），并返回一个包含每个 Promise 结果的数组**
 
-3️⃣ `Promise.race(PromiseArr)`
+4️⃣ `Promise.race(PromiseArr)`
 
 **只要其中一个 Promise 解决或拒绝，返回的 Promise 实例就会解决或拒绝，也就是说第一个完成的 Promise 的结果状态就是最终的结果状态**
 
 传入包含 n 个 Promise 的数组，返回一个新的 Promise，**第一个完成的 Promise 的结果状态**就是最终的结果状态，和 all 方法一样，获取到当第一个完成的 Promise 的结果状态，就立即返回。
-
-4️⃣ `Promise.any(PromiseArr)`
-
-**只要其中一个 Promise 成功，返回的 Promise 就会成功；如果所有的 Promise 都失败，则返回失败**
 
 5️⃣ `Promise.resolve()`
 
@@ -259,7 +255,7 @@ const p2 = Promise.reject(404);
 **任务队列**：JS 是单线程的语言，为了实现不阻塞，可以使用事件循环。在 JS 中，所有任务可以分成两种
 
 * 同步任务 (synchronous)：在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务
-* 异步任务 (asynchronous)：不进入主线程、而进入"任务队列" (task queue) 的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行 (异步永远和队列挂钩)
+* 异步任务 (asynchronous)：不进入主线程、而进入"任务队列" (task queue) 的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行 **(异步永远和队列挂钩)**
 
 ```javascript
 for (let i = 0; i < 3; i++) {
@@ -271,10 +267,14 @@ console.log(i);
 
 **事件循环：**同步任务进入主线程，异步任务进入任务队列，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就事件循环。
 
+<img src="https://s2.loli.net/2024/06/13/GM2aciYh7UoKzCN.png" alt="event-loop.png" style="zoom: 50%;" /> 
+
 **异步任务**也可以细分为两种，一种宏任务（MacroTask）也叫Task，一种叫微任务（MicroTask）。
 
 * 宏任务：一般 script 代码，用户交互事件、setTimeout、setInterval、requestAnimationFrame (浏览器独有)、I/O、UI rendering (浏览器独有)等；（用户调用的）
 * 微任务：Promise 相关任务，process.nextTick (JS 调用的)
+
+**任务执行流程**
 
 1. 先执行同步任务，全部执行完；
 2. 执行微任务，如果在执行微任务的过程中，又产生了微任务，那么会加入到队列的末尾，也会在这个周期被调用执行，直到微任务队列为空停止；

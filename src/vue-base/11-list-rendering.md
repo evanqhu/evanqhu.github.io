@@ -11,6 +11,8 @@
 
 **`key` 的重要性**
 
+<img src="https://s2.loli.net/2024/06/14/JgR6iGxI9K2ZFMz.png" alt="key.png" style="zoom: 25%;" /> 
+
 
 * key 是 Vue 内部在用，不会出现在 DOM 结构上；
 * key 是虚拟 DOM 对象的标识，当数据发生变化时，Vue 会根据【新数据】生成【新的虚拟 DOM】，随后 Vue 进行【新虚拟 DOM】与【旧虚拟 DOM】的差异比较；
@@ -21,7 +23,7 @@
   * 旧虚拟 DOM 中未找到与新虚拟 DOM 相同的 key
     * 创建新的真实 DOM，随后渲染到到页面
 
-### 11.2 列表过滤 filter
+### 列表过滤 filter
 
 ```javascript
 new Vue ({

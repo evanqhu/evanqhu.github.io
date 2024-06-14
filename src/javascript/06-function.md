@@ -8,23 +8,23 @@
 // 1. 自定义函数 (命名函数)
 function fn() {};
 // 2. 函数表达式 (匿名函数)
-var fun = function() {};
-var fun = () => {};
+const fun = function() {};
+const fun = () => {};
 // 3. 利用 new Function('参数1', '参数2', '函数体')
-var f = new Function('a', 'b', 'console.log(a + b)');
+const f = new Function('a', 'b', 'console.log(a + b)');
 ```
 
 #### 调用函数
 
 ```javascript
-// 1.调用普通函数 fn(); fn.call()
+// 1.调用普通函数 fn(); fn.call() fn.apply()
 // 2.对象的方法，Object.key，value 是函数，则被调用了
 // 3.构造函数 new
 // 4.绑定事件函数，执行事件即可 (回调函数)
 // 5.定时器函数 (回调函数)
 // 6.立即执行函数，自动调用 ()()，前一个()里面写一个函数；后一个()表示立即执行这个函数，可传参
-(function() {
-  console.log('人生的巅峰');
+void (function() {
+  console.log('...');
 })();
 ```
 
@@ -37,11 +37,13 @@ var f = new Function('a', 'b', 'console.log(a + b)');
   - `arguments` 无需指出参数名就可访问
 
 ```javascript
+// args 可以换成其它名字，如 demo,它属于是剩余参数
+// arguments 不能换
 function fn(...args) {
-  for (let i = 0; i < arguments.length; i++) {
-    console.log(arguments[i]); // 也可用 args
-  }
+  console.log("🚀🚀🚀  args: ", args); // [ 'a', 'b' ]
+  console.log("🚀🚀🚀  arguments: ", arguments); // [Arguments] { '0': 'a', '1': 'b' }
 }
+fn("a", "b");
 
 // 剩余参数
 function sum(first, ...args) {
@@ -62,20 +64,40 @@ sum(10, 20, 30);
 
 #### 改变 this 指向
 
-```javascript
+1️⃣ `call()`
+
+```js
 const p = {}; // 一个对象
 function fn(a, b) {}; // 一个函数
 
 // 1.call()
 fn.call(p, a, b); // 把 this 指向对象 p；实参依次传入
+function greet(greeting, punctuation) {
+  console.log(greeting + ', ' + this.name + punctuation);
+}
+const person = { name: 'Alice' };
+greet.call(person, 'Hello', '!'); // Hello, Alice!
+```
 
-// 2.apply()
+2️⃣ `apply()`
+
+```js
 fn.apply(p, [a, b]); // 把 this 指向对象 p；实参以数组或伪数组形式传入
+function greet(greeting, punctuation) {
+    console.log(greeting + ', ' + this.name + punctuation);
+}
+const person = { name: 'Alice' };
+greet.apply(person, ['Hello', '!']); // Hello, Alice!
 
-const max = Math.max.apply(Math, arr); // 利用 apply 借助于数学内置对象的方法求数组最大值
+// 利用 apply 借助于数学内置对象的方法求数组最大值
+const max = Math.max.apply(Math, arr);
+```
 
-// 3.bind()
-const fn2 = fn.bind(p, 1, 2);  // 不会调用原来的函数，返回的是原函数改变 this 之后产生的新函数
+3️⃣ `bind()`
+
+```javascript
+// 该方法不会调用原来的函数，返回的是原函数改变 this 之后产生的新函数
+const fn2 = fn.bind(p, 1, 2);  
 // 可用在 setTimeout 里面，绑定回调函数，改变其 this 指向
 ```
 
@@ -104,7 +126,7 @@ obj.say(); // 输出 100（对象不产生作用域，箭头函数 say 实际上
 
 ## 闭包
 
-**高阶函数定义：**对其他函数进行操作的函数，它接收**函数作为参数**或者将**函数作为返回值**输出；如回调函数，它就是将 callback 作为参数，在高阶函数的函数体内最后一行执行。
+**高阶函数定义：**对其他函数进行操作的函数，它接收**函数作为参数**或者将**函数作为返回值**输出；如回调函数，它就是将 `callback` 作为参数，在高阶函数的函数体内最后一行执行。
 
 #### 闭包
 
@@ -133,13 +155,39 @@ const f = fn();  // 调用 f 就可以拿到 num 的值，相当于从函数外�
 
 // 可简写
 function fn() {
-  var num = 10;
+  const num = 10;
   return () => console.log(num); // 直接返回一个匿名函数或箭头函数
 }
 // 使用 fn()() 即可打印出 num 的值，从外部访问函数作用域的变量
 ```
 
-闭包应用案例：循环注册点击事件（点击事件是异步任务）
+#### 闭包应用案例
+
+**数据私有化**：createCounter 返回了一个包含闭包的对象，这些闭包可以访问 count 变量，但 count 变量本身无法从外部直接访问。
+
+```js
+function createCounter() {
+    let count = 0;
+    
+    return {
+        increment: () => {
+            count++;
+            return count;
+        },
+        decrement: () => {
+            count--;
+            return count;
+        }
+    };
+}
+
+const counter = createCounter();
+console.log(counter.increment()); // 输出：1
+console.log(counter.increment()); // 输出：2
+console.log(counter.decrement()); // 输出：1
+```
+
+**循环注册点击事件（点击事件是异步任务）**
 
 以下代码点击任意 `li` 只会输出 4 。原因如下：
 点击事件是异步任务，只有点击了才会执行函数；但 for 循环是同步任务，它会立即执行，然后就给 4 个 `li` 注册了点击事件函数，这时 `i` 的值已经变为 4，所以点击任意 `li`，执行其点击事件函数，输出的都是 4。
@@ -149,17 +197,13 @@ function fn() {
 const lis = document.querySelector('.nav').querySelectorAll('li'); // 4 个 li
 for (let i = 0; i < lis.length; i++) { 
   // 循环注册点击事件
-  lis[i].onclick = function() {
-    console.log(i); // 输出索引号
-  }
+  lis[i].onclick = () => { console.log(i); }
 }
 
 // 正确写法1：动态添加属性
 for (let i = 0; i < lis.length; i++) {
   lis[i].index = i;  // 保存 li 的索引号
-  lis[i].onclick = function() {
-    console.log(this.index); // 输出索引号
-  }
+  lis[i].onclick = () => { console.log(this.index); }
 }
 
 // 正确写法2：闭包
@@ -167,14 +211,14 @@ for (let i = 0; i < lis.length; i++) {
   // 利用 for 循环创建了 4 个立即执行函数
   // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的 i 这个变量
   (function(i) { // i 表示接收的参数
-    lis[i].onclick = function() {
+    lis[i].onclick = () => {
       console.log(i); // 使用了立即执行函数的 i 这个变量（闭包）
     }
   })(i); // i 表示传入的参数
 }  
 ```
 
-闭包应用案例：定时器中的闭包（定时器是异步任务）
+**定时器中的闭包（定时器是异步任务）**
 
 ```javascript
 // 写法1：闭包
@@ -182,12 +226,12 @@ for (let i = 0; i < lis.length; i++) {
   (function(i) {
     setTimeout(function() {
       console.log(lis[i].innerHTML);
-    }, 3000)： // 3 秒之后一次全部打印
+    }, 3000); // 3 秒之后一次全部打印
   })(i);
 }
 
 // 写法2：非闭包（一次输出 0，1，2，3，4）
-var output = function(i) {
+const output = function(i) {
   setTimeout(function() {
     console.log(i);
   }, 1000);

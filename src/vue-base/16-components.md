@@ -4,6 +4,8 @@
 
 ## 非单文件组件
 
+<img src="https://s2.loli.net/2024/06/14/mxi7fZKS5RuwUVe.png" alt="components.png" style="zoom:50%;" /> 
+
 
 * 什么是组件：**实现应用中局部功能代码和资源的集合**；组件就是把图形、非图形的各种逻辑均抽象为一个统一的概念（组件）来实现开发的模式，在 Vue 中每一个 `.vue` 文件都可以视为一个组件；
 * 组件化的优点：复用代码，简化项目编码，提高效率；
@@ -67,6 +69,8 @@
 * Vue 的实例对象，简称 vm；VueComponent 的实例对象，简称 vc（组件实例对象）；
 * **组件配置中**，data 函数、methods 中的函数、watch 中的函数、computed 中的函数 它们的 this 均是【VueComponent实例对象 vc】；
 * **new Vue(options) 配置中**，data 函数、methods 中的函数、watch 中的函数、computed 中的函数 它们的 this 均是【Vue 实例对象 vm】
+
+<img src="https://s2.loli.net/2024/06/14/h9qCBil8LDUxSZ6.png" alt="Vue-VueComponent.png" style="zoom: 67%;" /> 
 
 
 > `Vue.prototype === VueComponent.prototype.__proto__`

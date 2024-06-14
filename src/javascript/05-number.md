@@ -32,7 +32,8 @@ num = Number("12"); // 12
 // 变量转字符串
 str = String(12); // "12"
 
-// parseInt(string, radix)  解析一段字符串并返回一个整数；开头结尾允许空格；如果第一个字符不能被转换为数字，则返回 NaN
+// parseInt(string, radix)
+// 解析一段字符串并返回一个整数；开头结尾允许空格；如果第一个字符不能被转换为数字，则返回 NaN
 parseInt("  12.3 years  ")  // 12
 parseFloat("  12.3 years  ")  // 12.3
 ```

@@ -12,11 +12,11 @@
 ```javascript
 // 标记清除
 function test(){
-  var a = 10 ;       // 被标记 ，进入环境 
+  const a = 10 ; // 被标记，进入环境 
 }
-test();            // 执行完毕 之后 a 又被标离开环境，被回收。
+test(); // 执行完毕 之后 a 又被标离开环境，被回收
 
-// 引用计数
+// 引用计数 (很少使用了)
 function test() {
   var a = {};    // a指向对象的引用次数为1
   var b = a;     // a指向对象的引用次数加1，为2
@@ -61,12 +61,14 @@ clearInterval(t); // 如果不关计时器，node 对象和回调函数都不会
 
 ```javascript
 function createPerson(name, age, job) {
-  let o = new Object(); o.name = name;
-  o.age = age;
-  o.job = job;
-  o.sayName = function () { console.log(this.name); };
-  return o;
+  const obj = new Object();
+  obj.name = name;
+  obj.age = age;
+  obj.job = job;
+  obj.sayName = function () { console.log(this.name); };
+  return obj;
 }
+
 const person1 = createPerson("Nicholas", 29, "Software Engineer");
 const person2 = createPerson("Greg", 27, "Doctor"); 
 ```
@@ -80,9 +82,7 @@ function Person(name, age, job) {
   this.name = name;
   this.age = age;
   this.job = job;
-  this.sayName = function () {
-    console.log(this.name);
-  };
+  this.sayName = function () { console.log(this.name); };
 }
 const person1 = new Person("Nicholas", 29, "Software Engineer");
 const person2 = new Person("Greg", 27, "Doctor");
@@ -101,16 +101,16 @@ person2.sayName();  // Greg
 3️⃣ 原型模式
 
 ```javascript
-function Person() { }
+function Person() { };
 Person.prototype.name = "Nicholas";
 Person.prototype.age = 29;
 Person.prototype.job = "Software Engineer";
-Person.prototype.sayName = function () {
-  console.log(this.name);
-};
+Person.prototype.sayName = function () { console.log(this.name); };
+
 const person1 = new Person();
 person1.sayName(); // "Nicholas" 
 const person2 = new Person();
 person2.sayName(); // "Nicholas" 
 console.log(person1.sayName == person2.sayName); // true 
 ```
+

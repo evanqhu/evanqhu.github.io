@@ -13,14 +13,14 @@
 <script type="text/javascript">
   // 全局过滤器（写在 Vue 实例之前）
   Vue.filter('mySlice', function (value) {
-    return value.slice(0, 4)  // 截取前四位
+    return value.slice(0, 4); // 截取前四位
   })
 
   new Vue({
     // 局部过滤器（本质是一个函数）
     filters: {
-      timeFormater(value, str = 'YYYY年MM月DD日 HH:mm:ss') {  // str 传一个形参默认值
-        return dayjs(value).format(str)
+      timeFormater(value, str = 'YYYY年MM月DD日 HH:mm:ss') { // str 传一个形参默认值
+        return dayjs(value).format(str);
       }
     }
   })

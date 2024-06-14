@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: JavaScript
-      link: /javascript/JavaScript基础
+      link: /javascript/01-javascript-base
     - theme: alt
       text: Vue
-      link: /vue-base/初识Vue
+      link: /vue-base/01-vue-base
   image:
     src: /vitepress-logo-large.webp
     alt: VitePress

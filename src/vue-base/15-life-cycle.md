@@ -1,5 +1,7 @@
 ## 生命周期
 
+<img src="https://s2.loli.net/2024/06/14/aW5xOtHmPKofSNB.png" alt="life-cycle.png" style="zoom: 50%;" /> 
+
 - 生命周期回调函数、生命周期函数、生命周期钩子，是 Vue 在关键时刻帮我们调用的一些特殊名称的函数；生命周期函数中的 this 指向是 vm 或组件实例对象 vc；
 - `mounted` Vue 完成模板的解析并把初始的真实 DOM 元素放入页面后（挂载完毕）调用；发送 ajax 请求、启动定时器、绑定自定义事件、订阅消息等**初始化操作**；
 - `beforeUpdated` 页面和数据未同步；

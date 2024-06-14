@@ -29,20 +29,24 @@ const arr = Array.from(arrayLike, item => item * 2); // 把伪数组转换成真
 
 ## 迭代器方法
 
-Array 的原型上暴露了 3 个用于检索数组内容的方法：`keys()`、`values()` 和 `entries()`。
+Array 的原型上暴露了 3 个用于检索数组内容的方法：`keys()`、`values()` 和 `entries()`
 
 * `keys()` **返回数组索引的迭代器**
 * `values()` 返回数组元素的迭代器
 * `entries()` 返回索引/值对的迭代器
 
-这 3 个方法的返回值可以直接使用 `for of` 语句遍历，也可以直接用 `Array.from()` 方法转换成数组
+> 数组直接调用这 3 个方法，返回的是一个迭代器，返回值可以直接使用 `for...of` 语句遍历，也可以直接用 `Array.from()` 方法转换成数组
+>
+> `Object.keys(arr)` 和 `Object.values()`的返回值是数组，`Object.entries()` 的返回值是二维数组
 
 ```js
 const arr = ["foo", "bar", "baz"]; 
 
-const arrKeys = Array.from(arr.keys()); // [0, 1, 2] 
-const arrValues = Array.from(arr.values()); // ["foo", "bar", "baz"]
-const arrEntries = Array.from(arr.entries()); // [[0, "foo"], [1, "bar"], [2, "baz"]]
+console.log(arr.keys()); // Object [Array Iterator] {}
+
+Array.from(arr.keys()); // [0, 1, 2] 
+Array.from(arr.values()); // ["foo", "bar", "baz"]
+Array.from(arr.entries()); // [[0, "foo"], [1, "bar"], [2, "baz"]]
 
 for (const [key, value] of arr.entries()) {
   console.log(key);
@@ -138,8 +142,8 @@ console.log(fruits); // ["Banana", "Orange", "Lemon","Kiwi", "Mango"]
 
 ```js
 // indexOf() 返回数组中指定元素的第一个索引号，找不到则返回 -1（同理有 lastIndexOf() 从后往前找）
-const arr = [1, 2, 3];
-const index = arr.indexOf(2); // 1
+const arr = ["a", "b", "c"];
+const index = arr.indexOf("b"); // 1
 ```
 
 2️⃣ `arr.lastIndexof()`
@@ -149,7 +153,7 @@ const index = arr.indexOf(2); // 1
 ```js
 // arr.includes(item) 表示数组中是否包含某个元素，返回布尔值
 const arr = ["a", "b", "c"];
-const isTrue = arr.includes('a'); // true
+const isTrue = arr.includes("a"); // true
 ```
 
 4️⃣ `arr.find()`
@@ -174,10 +178,10 @@ const index = arr.findIndex(item => item > 15); // 1
 const arr = [1, 2, 3]
 /* ********** 其他数组的方法 ********** */
 // length属 性，返回数组长度
-arr.length;  // 3
+arr.length; // 3
 
 // toString() 以逗号分隔的字符串返回数组
-const a = arr.toString();  // "1,2,3"  等同于 arr.join()
+const a = arr.toString(); // "1,2,3"  等同于 arr.join()
 
 // join() 把数组中的所有元素转换一个字符串，默认输出以逗号分隔，可传入分隔符参数；不改变原数组
 const arr1 = [1, 2, 3];
@@ -264,12 +268,12 @@ const sum = arr.reduce((prev, item) => prev + item); // 数组元素求和
 #### for 语句
 
 ```javascript
-// for in 遍历数组的 key
+// for...in 遍历数组的 key
 for (const key in arr) {
   console.log(arr[key]);
 }
 
-// for of 遍历数组的 value
+// for...of 遍历数组的 value
 for (const val of arr) {
 	console.log(val);
 }
