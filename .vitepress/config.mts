@@ -19,8 +19,8 @@ export default defineConfig({
         text: 'Vue',
         items: [
           { text: 'Vue 基础', link: '/vue-base/01-vue-base' },
-          { text: 'Vue 2', link: '/vue2/Vue2' },
-          { text: 'Vue 3', link: '/vue3/Vue3' },
+          { text: 'Vue 2', link: '/vue2/01-vue2-base' },
+          { text: 'Vue 3', link: '/vue3/01-vue3-base' },
         ]
       },
     ],
@@ -74,6 +74,52 @@ export default defineConfig({
               { text: '自定义指令 directives', link: '14-directives' },
               { text: '生命周期', link: '15-life-cycle' },
               { text: '组件', link: '16-components' },
+            ]
+          }
+        ]
+      },
+      '/vue2/': {
+        base: '/vue2/',
+        items: [
+          {
+            text: 'Vue 2',
+            items: [
+              { text: 'Vue2 脚手架', link: '01-vue2-base' },
+              { text: 'ref 属性', link: '02-ref-property' },
+              { text: 'props 配置项', link: '03-props' },
+              { text: 'mixins 配置项', link: '04-mixin' },
+              { text: '插件 Plugin', link: '05-plugin' },
+              { text: 'scoped 样式', link: '06-scoped' },
+              { text: 'TodoList 案例', link: '07-todo-list' },
+              { text: '浏览器存储 WebStorage', link: '08-web-storage' },
+              { text: '自定义事件', link: '09-custom-event' },
+              { text: '全局事件总线', link: '10-global-event-bus' },
+              { text: '消息订阅与发布', link: '11-pubsub' },
+              { text: 'nextTick', link: '12-next-tick' },
+              { text: 'Vue 动画', link: '13-animation' },
+              { text: '代理服务器', link: '14-proxy-server' },
+              { text: '插槽 Slot', link: '15-slot' },
+              { text: 'Vuex 状态管理器', link: '16-vuex' },
+              { text: '路由', link: '17-router' },
+              { text: '权限管理', link: '18-permission' },
+            ]
+          }
+        ]
+      },
+      '/vue3/': {
+        base: '/vue3/',
+        items: [
+          {
+            text: 'Vue 3',
+            items: [
+              { text: 'Vue2 简介', link: '01-vue3-base' },
+              { text: '创建 Vue3 工程', link: '02-vue3-project' },
+              { text: 'Vue3 核心语法', link: '03-vue3-grammer' },
+              { text: '路由', link: '04-router' },
+              { text: 'Pinia', link: '05-pinia' },
+              { text: '组件通信', link: '06-communication' },
+              { text: '其它 API', link: '07-other-apis' },
+              { text: 'Vue3 新组件', link: '08-new-components' },
             ]
           }
         ]
