@@ -594,7 +594,7 @@ Object.assign(car, { brand:  '大众', price:  10 }) // 正确做法
 <template>
   <div class="person">
     <h1>需求：水温达到 50，或水位达到 20，则联系服务器</h1>
-    <h2 id="demo">水温：{{ temp} }</h2>
+    <h2 id="demo">水温：{{ temp }}</h2>
     <h2>水位：{{ height }}</h2>
     <button @click="changePrice">水温+1</button>
     <button @click="changeSum">水位+10</button>
