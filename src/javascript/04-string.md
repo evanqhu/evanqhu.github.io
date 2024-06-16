@@ -131,6 +131,8 @@ for (const char of "Hello") {
 
 ## 算法题
 
+### 求字符串中出现次数最多的字符
+
 ```javascript
 /********** 求字符串中出现次数最多的字符 (Object 方法) **********/
 const mostFrequentChars = (str) => {
@@ -199,3 +201,20 @@ const mostFrequentChars = (str) => {
 console.log(mostFrequentChars(str));
 // 还可以把字符串变成数组，排序，使用 indexOf 和 lastIndexOf 计算长度。利用 set
 ```
+
+
+
+### 字符串开头匹配
+
+```js
+string.startsWith(str);
+string.indexOf(str) === 0;
+string.search(str) === 0;
+string.slice(0, str.length) === str;
+string.substring(0, str.length) === str
+string.substr(0, str.length) === str;
+
+const regExp = new RegExp('^' + str);
+return arr.filter(item => regexp.test(item));
+```
+

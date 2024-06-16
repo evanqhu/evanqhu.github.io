@@ -105,3 +105,29 @@ for (const key in obj) { // 遍历对象
 ```
 
 > 不可使用 for of 遍历对象
+
+### Object.prototype.toString()
+
+每一个继承 Object 的对象都有 toString 方法，如果 toString 方法没有重写的话，会返回 `[object type]`，其中 type 为对象的类型。但当除了 Object 类型的对象外，其他类型直接使用 toString 方法时，会直接返回都是内容的字符串，所以我们需要使用 call 或者 apply 方法来改变 toString 方法的执行上下文。
+
+```js
+const arr = ['Hello','World'];
+arr.toString(); // "Hello,World"
+Object.prototype.toString.call(arr); // "[object Array]"
+
+Object.prototype.toString.call("this"); // [object String]
+Object.prototype.toString.call(12); // [object Number]
+Object.prototype.toString.call(true); // [object Boolean]
+Object.prototype.toString.call(undefined); // [object Undefined]
+Object.prototype.toString.call(null); // [object Null]
+Object.prototype.toString.call({name: "this"}); // [object Object]
+Object.prototype.toString.call(function(){}); // [object Function]
+Object.prototype.toString.call([]); // [object Array]
+Object.prototype.toString.call(new Date); // [object Date]
+Object.prototype.toString.call(/\d/); // [object RegExp]
+function Person(){};
+Object.prototype.toString.call(new Person); // [object Object] 无法区分自定义对象类型
+(new Person) instanceof Person; // true
+```
+
+> `Object.prototype.toString.call()` 常用于判断浏览器内置对象，缺点在于无法区分自定义对象类型，可以用 `instanceof` 来区分

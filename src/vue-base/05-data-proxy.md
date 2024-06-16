@@ -169,6 +169,8 @@ vm$set(vm.student, 'sex', '男')
 
 ### 3️⃣ Vue 2 响应式原理
 
+采用数据劫持结合观察者模式的方式实现响应式，也借鉴了发布订阅模式的思想
+
 > obs 身上具有 data 的所有属性，读取或修改这些属性时就会触发 getter 或 setter
 
 ```javascript

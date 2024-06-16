@@ -310,7 +310,7 @@ function fb(n) {
 }
 ```
 
-#### 赋值和深浅拷贝
+### 赋值和深浅拷贝
 
 深拷贝和浅拷贝是只针对 Object 和 Array 这样的引用数据类型的。
 
@@ -397,3 +397,26 @@ const deepCloneHash = (obj, hash = new WeakMap()) => {
   return clone;
 }
 ```
+
+## 函数柯里化
+
+把接收多个参数的函数转化成多个只接收一个参数的函数；把函数的返回值设为一个新的函数，实现参数复用
+
+```js
+// before
+function myInfo(info, name, age) {
+    return `${info}：${name}${age}`;
+}
+const myInfo = myInfo('个人信息', 'evan', '19'); // 个人信息：ljc19
+
+//  after curring
+function myInfoCurry(info) {
+    return (name) => {
+        return (age) => {
+          return `${info}：${name}${age}`;
+        }
+    }
+}
+const myInfo = myInfoCurry('个人信息')('evan')('19'); // 个人信息：ljc19
+```
+
