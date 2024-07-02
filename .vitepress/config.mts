@@ -23,6 +23,10 @@ export default defineConfig({
           { text: 'Vue 3', link: '/vue3/01-vue3-base' },
         ]
       },
+      { text: 'React', link: '/react/01-react-start' },
+      { text: 'Node', link: '/node/01-node-start' },
+      { text: '浏览器', link: '/browser/01-browser-cache' },
+      { text: '其他', link: '/others/01-git' },
     ],
 
     sidebar: {
@@ -120,6 +124,58 @@ export default defineConfig({
               { text: '组件通信', link: '06-communication' },
               { text: '其它 API', link: '07-other-apis' },
               { text: 'Vue3 新组件', link: '08-new-components' },
+            ]
+          }
+        ]
+      },
+      '/react/': {
+        base: '/react/',
+        items: [
+          {
+            text: 'React',
+            items: [
+              { text: 'React 基础', link: '01-react-start' },
+              { text: '协程', link: '02-fiber' },
+            ]
+          }
+        ]
+      },
+      '/node/': {
+        base: '/node/',
+        items: [
+          {
+            text: 'Node',
+            items: [
+              { text: 'Node 基础', link: '01-node-start' },
+              { text: '事件循环', link: '02-event-loop' },
+              { text: '包与包管理器', link: '03-package' },
+              { text: '缓冲器', link: '04-buffer' },
+              { text: '文件系统', link: '05-file-system' },
+              { text: '原生 Node 创建服务器', link: '06-node-server' },
+              { text: 'Express 创建服务器', link: '07-express-server' },
+              { text: 'HTTP 相关知识', link: '08-http' },
+            ]
+          }
+        ]
+      },
+      '/browser/': {
+        base: '/browser/',
+        items: [
+          {
+            text: '浏览器',
+            items: [
+              { text: '浏览器缓存', link: '01-browser-cache' },
+            ]
+          }
+        ]
+      },
+      '/others/': {
+        base: '/others/',
+        items: [
+          {
+            text: '其他',
+            items: [
+              { text: 'Git', link: '01-git' },
             ]
           }
         ]

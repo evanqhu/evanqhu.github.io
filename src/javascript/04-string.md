@@ -29,7 +29,7 @@ const s = str.slice(2, 5); // "llo"
 const s = str.substring(2, 5); // "llo"
 ```
 
-4️⃣ `substr()`
+4️⃣ `substr()` 已弃用
 
 ```javascript
 // String.substr(start, length)  第二个参数表示提取的字符串的长度，裁剪字符串

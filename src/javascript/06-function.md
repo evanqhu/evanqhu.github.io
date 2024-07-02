@@ -35,6 +35,7 @@ void (function() {
   - 不确定有多少参数传递时，用 `arguments` 对象获取，存取了传递的所有实参
   - 以伪数组形式展示：具有 `length` 属性；按照索引的方式存储；没有真正数组的一些方法;
   - `arguments` 无需指出参数名就可访问
+  - `arguments` 身上有一个属性 `callee`，存储的是这个函数本身
 
 ```javascript
 // args 可以换成其它名字，如 demo,它属于是剩余参数
@@ -193,25 +194,38 @@ console.log(counter.decrement()); // 输出：1
 点击事件是异步任务，只有点击了才会执行函数；但 for 循环是同步任务，它会立即执行，然后就给 4 个 `li` 注册了点击事件函数，这时 `i` 的值已经变为 4，所以点击任意 `li`，执行其点击事件函数，输出的都是 4。
 
 ```javascript
-// 点击 li 输出其索引号（错误写法）
+// 点击 li 输出其索引号（错误写法 var）
+const lis = document.querySelector('.nav').querySelectorAll('li'); // 4 个 li
+for (var i = 0; i < lis.length; i++) { 
+  // 循环注册点击事件
+  lis[i].onclick = function() {
+    console.log(i); // 输出索引号
+  }
+}
+
+// 正确写法1：let
 const lis = document.querySelector('.nav').querySelectorAll('li'); // 4 个 li
 for (let i = 0; i < lis.length; i++) { 
   // 循环注册点击事件
-  lis[i].onclick = () => { console.log(i); }
+  lis[i].onclick = function() {
+    console.log(i); // 输出索引号
+  }
 }
 
-// 正确写法1：动态添加属性
-for (let i = 0; i < lis.length; i++) {
+// 正确写法2：动态添加属性
+for (var i = 0; i < lis.length; i++) {
   lis[i].index = i;  // 保存 li 的索引号
-  lis[i].onclick = () => { console.log(this.index); }
+  lis[i].onclick = function() {
+    console.log(this.index); // 输出索引号
+  }
 }
 
-// 正确写法2：闭包
-for (let i = 0; i < lis.length; i++) {
+// 正确写法3：闭包
+for (var i = 0; i < lis.length; i++) {
   // 利用 for 循环创建了 4 个立即执行函数
   // 立即执行函数也称为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的 i 这个变量
   (function(i) { // i 表示接收的参数
-    lis[i].onclick = () => {
+    lis[i].onclick = function() {
       console.log(i); // 使用了立即执行函数的 i 这个变量（闭包）
     }
   })(i); // i 表示传入的参数
@@ -384,14 +398,14 @@ const deepCloneHash = (obj, hash = new WeakMap()) => {
 
   // 3. 创建一个新的对象或数组
   const clone = Array.isArray(obj) ? [] : {};
+  
+  // 4. 将新创建的对象添加到哈希表中
+  hash.set(obj, clone);
 
-  // 4. 遍历对象或数组的每一个属性
+  // 5. 遍历对象或数组的每一个属性
   for (const key of Object.keys(obj)) {
     clone[key] = deepCloneHash(obj[key], hash); // 递归拷贝属性
   }
-
-  // 5. 将新创建的对象添加到哈希表中
-  hash.set(obj, clone);
 
   // 6. 返回新的对象或数组
   return clone;
@@ -418,5 +432,112 @@ function myInfoCurry(info) {
     }
 }
 const myInfo = myInfoCurry('个人信息')('evan')('19'); // 个人信息：ljc19
+```
+
+## 扁平数据结构和树解构转换
+
+```js
+const items = [
+  { id: 1, name: 'Item 1', pid: 0 },
+  { id: 2, name: 'Item 2', pid: 1 },
+  { id: 3, name: 'Item 3', pid: 1 },
+  { id: 4, name: 'Item 4', pid: 3 },
+  { id: 5, name: 'Item 5', pid: 4 },
+];
+
+const tree = {
+  id: 1,
+  name: 'Item 1',
+  pid: 0,
+  children: [
+    {
+      id: 2,
+      name: 'Item 2',
+      pid: 1,
+      children: []
+    },
+    {
+      id: 3,
+      name: 'Item 3',
+      pid: 1,
+      children: [
+        {
+          id: 4,
+          name: 'Item 4',
+          pid: 3,
+          children: [
+            {
+              id: 5,
+              name: 'Item 5',
+              pid: 4,
+              children: []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+1️⃣ 数组转对象
+
+```js
+const arrayToTree = (arr) => {
+  // 1. 初始化根节点和查找表
+  let result = {};
+  const lookup = {};
+
+  // 2. 创建查找表，每个元素以其 id 为键存储在 lookup 中，并初始化 children 属性为空数组
+  arr.forEach(item => {
+    lookup[item.id] = { ...item, children: [] };
+  });
+
+  // 3. 构建树结构
+  arr.forEach(item => {
+    // 获取当前元素在查找表中的引用，也就是一个树节点
+    const treeItem = lookup[item.id];
+    if (item.pid === null || item.pid === 0) {
+      // 1. 如果当前元素是根节点，直接将其赋值给根节点
+      result = treeItem;
+    } else {
+      // 2. 如果当前元素有父节点，将其添加到父节点的 children 数组中
+      const parent = lookup[item.pid];
+      if (parent) {
+        parent.children.push(treeItem);
+      }
+    }
+  });
+
+  // 4. 返回根节点数组，这个数组包含所有的树结构
+  return result;
+}
+
+// 使用 JSON.stringify 打印数据 (否则在控制台看到的是 Object)
+console.log(JSON.stringify(arrayToTree(items), null, 2));
+```
+
+2️⃣ 对象转数组
+
+```js
+const treeToArray = (obj) => {
+  // 初始化结果数组
+  const result = [];
+
+  const traverse = (node) => {
+    // 移除 children 属性
+    const { children, ...item } = node;
+    result.push(item);
+    // 递归遍历 children
+    
+    if (children?.length) {
+      children.forEach(child => traverse(child));
+    }
+  }
+
+  traverse(obj);
+
+  return result;
+}
 ```
 

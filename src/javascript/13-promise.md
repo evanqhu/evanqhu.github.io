@@ -241,6 +241,10 @@ Promise 解决了传统回调函数的回调地狱的问题，但是导致了纵
 
 **用于快速返回一个状态为 fulfilled 的 Promise 实例对象**
 
+* 将值转换为已解决的 Promise。如果传入的是一个普通值，`Promise.resolve` 会返回一个已解决的 Promise，解析值为该普通值
+* 保持原有的 Promise。如果传入的值已经是一个 Promise，`Promise.resolve` 会直接返回这个 Promise，不做任何修改
+* 处理 thenable 对象。如果传入的是一个 `thenable` 对象（即具有 `then` 方法的对象），`Promise.resolve` 会返回一个跟踪这个 `thenable` 对象最终状态的 Promise
+
 ```js
 const p1 = Promise.resolve(200);
 const p2 = Promise.reject(404);
@@ -249,6 +253,53 @@ const p2 = Promise.reject(404);
 6️⃣ `Promise.reject()`
 
 **用于快速返回一个状态为 rejected 的 Promise 实例对象**
+
+> 手动实现 `Promise.all()`
+
+```javascript
+const myPromiseAll = (promises) => {
+  // 检查传入的是否为一个可迭代对象
+  if (!Array.isArray(promises)) {
+    return Promise.reject(new TypeError('Argument must be an iterable'));
+  }
+
+  // 返回一个新的 Promise
+  return new Promise((resolve, reject) => {
+    // 定义结果数组
+    const results = [];
+    // 定义变量存储完成的 Promise 数量
+    let completedPromises = 0;
+
+    // 如果是空数组
+    if (promises.length === 0) {
+      return resolve(results);
+    }
+
+    // 循环遍历 Promise 数组
+    promises.forEach((promise, index) => {
+      // 使用 Promise.resolve 确保每个项都是一个 Promise，因为数组中传入的可能不是 Promise，而是一个值
+      Promise.resolve(promise).then(
+        (value) => {
+          // 保证返回结果的数组顺序不变
+          results[index] = value;
+          completedPromises++;
+
+          // 如果所有的 Promise 都完成，则返回解决的 Promise
+          if (completedPromises === promises.length) {
+            resolve(results);
+          }
+        },
+        (reason) => {
+          // 如果有一个 Promise 被拒绝，则返回拒绝的 Promise
+          reject(reason);
+        }
+      );
+    });
+  });
+};
+```
+
+
 
 ## 任务队列和事件循环
 

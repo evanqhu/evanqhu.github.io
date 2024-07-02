@@ -33,3 +33,45 @@ new Vue({
 * 被 Vue 管理的函数，最好写成普通函数，这样 this 的指向才是 vm 或 vc；
 * 不被 Vue 所管理的函数 (定时器的回调函数、ajax 的回调函数、Promise 的回调函数等)，最好写成箭头函数。
 
+### 手动实现一个 computed 函数
+
+```javascript
+const memory = (fn) => {
+  // 缓存对象，用于存储函数的计算结果
+  const cache = new Map();
+
+  // 返回一个新的函数
+  return function (...args) {
+    // 将参数转换为字符串，用作缓存的键
+    const key = JSON.stringify(args);
+
+    // 如果缓存中存在结果，则直接返回缓存结果
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+
+    // 否则，调用原函数计算结果
+    const result = fn(...args);
+
+    // 将结果存入缓存中
+    cache.set(key, result);
+
+    // 返回计算结果
+    return result;
+  };
+};
+
+// 示例用法
+const complexCalculation = (num) => {
+  console.log('计算中...');
+  return num * num;
+};
+
+const memoizedCalculation = memory(complexCalculation);
+
+console.log(memoizedCalculation(5)); // 计算中... 25
+console.log(memoizedCalculation(5)); // 25（从缓存中读取，不会再次计算）
+console.log(memoizedCalculation(6)); // 计算中... 36
+console.log(memoizedCalculation(6)); // 36（从缓存中读取，不会再次计算）
+```
+

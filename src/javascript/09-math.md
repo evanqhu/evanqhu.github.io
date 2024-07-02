@@ -12,3 +12,26 @@
 * `Math.floor(x)` 的返回值是 x **下舍入**最接近的整数
 * `Math.min()` 和 `Math.max()` 可用于查找参数列表中的最低或最高值
 * `Math.random()` 返回介于 0（包括） 与 1（不包括） 之间的随机数 `[0, 1)`
+
+## 随机值的妙用
+
+### 获取随机颜色
+
+```javascript
+const getRandomColor = () => {
+  return '#' + Math.random().toString(16).substring(2, 8).padEnd(0);
+};
+```
+
+### 获取随机值
+
+```javascript
+const selectFrom = (lowerValue, upperValue) => {
+  const choices = upperValue - lowerValue + 1;
+  return Math.floor(Math.random() * choices + lowerValue);
+};
+
+const num = selectFrom(2, 10);
+console.log(num); // 2~10 范围内的值，其中包含 2 和 10
+```
+
