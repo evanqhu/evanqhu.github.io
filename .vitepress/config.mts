@@ -175,7 +175,8 @@ export default defineConfig({
           {
             text: '其他',
             items: [
-              { text: 'Git', link: '01-git' },
+              { text: '笔记', link: '01-note' },
+              { text: 'Git', link: '02-git' },
             ]
           }
         ]
