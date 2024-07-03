@@ -26,7 +26,7 @@ export default defineConfig({
       { text: 'React', link: '/react/01-react-start' },
       { text: 'Node', link: '/node/01-node-start' },
       { text: '浏览器', link: '/browser/01-browser-cache' },
-      { text: '其他', link: '/others/01-git' },
+      { text: '其他', link: '/others/01-notes' },
     ],
 
     sidebar: {
@@ -175,7 +175,7 @@ export default defineConfig({
           {
             text: '其他',
             items: [
-              { text: '笔记', link: '01-note' },
+              { text: '笔记', link: '01-notes' },
               { text: 'Git', link: '02-git' },
             ]
           }
