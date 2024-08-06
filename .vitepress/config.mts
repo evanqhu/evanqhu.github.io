@@ -14,6 +14,7 @@ export default defineConfig({
     logo: '/vitepress-logo-mini.svg',
     nav: [
       { text: '首页', link: '/' },
+      { text: 'CSS', link: '/css/01-animation' },
       { text: 'JavaScript', link: '/javascript/01-javascript-base' },
       { 
         text: 'Vue',
@@ -52,6 +53,20 @@ export default defineConfig({
               { text: '构造函数和原型', link: '14-prototype' },
               { text: '代理和反射', link: '15-proxy' },
               { text: '其它', link: '16-others' },
+              { text: 'DOM', link: '17-DOM' },
+              { text: 'BOM', link: '18-BOM' },
+            ]
+          }
+        ]
+      },
+      'css': {
+        base: '/css/',
+        items: [
+          {
+            text: 'CSS',
+            items: [
+              { text: '动画', link: '01-animation' },
+              { text: 'scss', link: '02-scss' },
             ]
           }
         ]
@@ -177,6 +192,7 @@ export default defineConfig({
             items: [
               { text: '笔记', link: '01-notes' },
               { text: 'Git', link: '02-git' },
+              { text: '微信小程序', link: '03-wxapp' },
             ]
           }
         ]

@@ -100,38 +100,37 @@ const citys2 = reactive(citys)
 
 * 创建一个自定义的 `ref`，并对其依赖项跟踪和更新触发进行逻辑控制
 
-实现防抖效果 `useMsgRef.ts`
+实现防抖效果 `useDebouncedRef.ts`
 
-```typescript
+```js
 import { customRef } from "vue";
 
-// initValue 初始值
-export default function(initValue: string, delay: number){
-  // 自定义 ref
-  const msg = customRef((track, trigger) => {
-    let timer: number
+// value 初始值
+export function useDebouncedRef(value, delay = 300) {
+  return customRef((track, trigger) => {
+    let timer;
     return {
       // msg 被读取时调用
       get() {
-        track() // 告诉 Vue 数据 msg 很重要，要对 msg 持续关注，一旦变化就更新
-        return initValue
+        track(); // 告诉 Vue 数据 msg 很重要，要对 msg 持续关注，一旦变化就更新
+        return value;
       },
       // msg 被修改时调用
-      set(value) {
-        clearTimeout(timer)
+      set(newValue) {
+        // 延迟派发更新
+        clearTimeout(timer);
         timer = setTimeout(() => {
-          initValue = value
-          trigger() // 通知 Vue 数据 msg 变化了
+          value = newValue;
+          trigger(); // 通知 Vue 数据 msg 变化了
         }, delay);
       }
     }
   }) 
-  return { msg }
 }
 ```
 
 组件中使用
 
 ```js
-const { msg } = useMsgRef('你好'， 2000)
+const msg = useDebouncedRef('你好', 2000);
 ```

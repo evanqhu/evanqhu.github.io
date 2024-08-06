@@ -13,3 +13,35 @@
 组合起来，`arch -x86_64 zsh` 意思是在 x86_64 架构下启动 Zsh Shell。这在使用 Apple Silicon 的 macOS 设备时特别有用，因为这些设备默认运行在 arm64 架构下，但有时可能需要在 x86_64 架构下运行某些程序或命令。
 
 例如，当你在 Apple Silicon Mac 上运行一些只兼容 x86_64 架构的软件时，可以使用这种方法启动兼容环境。
+
+
+
+## ES6 模块化语法
+
+在 ES6 的模块化语法中使用到了符号绑定，即导入的变量和导出的变量使用的是同一块内存空间。
+
+```js
+// module.js
+export let count = 1; // 注意这里的 let
+export function increase() {
+  count++;
+}
+```
+
+模块化的特殊语法，具名导入，导入后的数据都变成了常量
+
+```js
+// index.js
+import { count, increase } from "./module.js"; // 具名导入
+
+count++; // 报错，这里的 count 是常量了
+
+console.log(count); // 1
+increase();
+console.log(count); // 2
+// 按道理这里第二次打印 count 也应该是 1，因为常量不可变
+// 在 JS 语法中所有的传值都是复制粘贴，用到两块内存空间。
+// 而这里是用的符号绑定，也就是引用
+```
+
+> 因此在导出的时候不要使用 let，都要用 const

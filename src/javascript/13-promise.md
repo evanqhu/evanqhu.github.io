@@ -231,6 +231,22 @@ Promise 解决了传统回调函数的回调地狱的问题，但是导致了纵
 
 **等待所有 Promise 都完成（无论成功还是失败），并返回一个包含每个 Promise 结果的数组**
 
+数组中的每一项都是一个对象，status 字段表示状态，value 表示成功的值，reason 表示失败的原因
+
+```javascript
+[
+  { status: 'fulfilled', value: 1 },
+  { status: 'fulfilled', value: 2 },
+  {
+    status: 'rejected',
+    reason: Error: 出错了，出错请求：92
+        at Timeout._onTimeout (/Users/code/请求并发.js:13:20)
+        at listOnTimeout (node:internal/timers:569:17)
+        at process.processTimers (node:internal/timers:512:7)
+  },
+]
+```
+
 4️⃣ `Promise.race(PromiseArr)`
 
 **只要其中一个 Promise 解决或拒绝，返回的 Promise 实例就会解决或拒绝，也就是说第一个完成的 Promise 的结果状态就是最终的结果状态**
