@@ -62,6 +62,10 @@
 
 ## 具名插槽
 
+* Vue 2.6 以前，通过 `slot="header"` 属性标记往哪个具名插槽中插入子组件内容
+* Vue 2.6 之后，使用 `v-slot:header` 来标记，同时还可以与作用域插槽结合，用于接收数据 `v-slot:header="slotProps"`
+* `v-slot` 可简写为 `#`
+
 ```html
 <!-- 具名插槽 -->
 <!-- 父组件 App 中 -->
@@ -85,17 +89,21 @@
 ## 作用域插槽
 
 * 功能：**数据在子组件的自身，但根据数据生成的结构需要组件的使用者（父组件）来决定。**（games 数据在 Category 组件中，但使用数据所遍历出来的结构由App组件决定）。**子给父传数据**；
-* 子组件中：写数据，写 slot，配置 games 属性传递数据；
-* 父组件中：使用 template，写 scope 属性接收数据，写结构，在结构中调用 scope 属性的值；
-* 可以用解构赋值：`scope="{ games }"`
+* 子组件中：写数据，写 `slot` 标签 ，定义插槽，同时配置 `games` 属性传递数据；
+* 父组件中：使用 `template` 标签，使用插槽，同时接收数据（接收数据的方式）
+  * Vue 2.6 以前，可通过 `scope="slotProps"` 或 `slot-scope="slotProps"` 来接收数据
+  * Vue 2.6 及以后，通过 `v-slot="slotProps"` 或 `#slotName="slotProps"` 来接收数据
+
+* 可以用解构赋值：`v-slot="{ games }"`
+* 如果 `v-slot` 不声明插槽名，则默认为 `default`
 
 ```html
 <!-- 作用域插槽 -->
 <!-- 父组件 App 中 -->
-<Category>  <!-- 或者用 slot-scope="scopeData"  -->
-  <template scope="scopeData">  <!-- scope 属性，scopData 对象来自子组件games -->
-    <ul>  <!-- 这里的 scopeData 来自子组件，是一个对象，存放 slot 传过来的数据 -->
-      <li v-for="g in scopeData.games" :key="g">{{ g }}</li>
+<Category>
+  <template v-slot="slotProps">
+    <ul>  <!-- 这里的 scopeData 来自子组件，是一个对象，存放子组件中 slot 标签传过来的数据 -->
+      <li v-for="g in slotProps.games" :key="g">{{ g }}</li>
     </ul>
   </template>
 </Category>
@@ -118,8 +126,8 @@
 </script>
 
 <!-- Element UI -->
-<el-table-column prop="logoUrl" label="品牌LOGO" width="width">
-  <template slot-scope="{ row, $index }">
+<el-table-column prop="logoUrl" label="品牌 LOGO" width="width">
+  <template v-slot="{ row, $index }">
     <img :src="row.logoUrl" alt="" style="width: 100px; height: 100px" />
   </template>
 </el-table-column>

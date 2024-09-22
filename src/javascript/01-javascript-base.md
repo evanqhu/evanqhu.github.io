@@ -61,6 +61,19 @@ console.log()  // 写入浏览器控制台
 - 在 JavaScript 中，一切皆对象
 - 分为原始值类型和引用数据类型
 
+|           | typeof          |
+| --------- | --------------- |
+| Number    | number          |
+| Boolean   | boolean         |
+| String    | string          |
+| BigInt    | bigint          |
+| Symbol    | symbol          |
+| Undefined | undefined       |
+| Null      | object          |
+| Object    | object function |
+
+
+
 ```javascript
 /* ********** 原始值类型 ********** */
 // 1.布尔型 Boolean
@@ -77,7 +90,7 @@ const a = null;
 const sym = Symbol(str); // 表示独一无二的值
 // 7.大数字 BigInt（ES6新增）
 
-/* ********** 对象类型 ********** */
+/* ********** 对象类型（严格来说只有一种，object） ********** */
 // 1.数组 Array
 const a = [1, 2, 3, 4];
 // 2.对象 Object

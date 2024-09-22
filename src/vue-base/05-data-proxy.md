@@ -24,8 +24,8 @@ let number = 18;
 // 1. 数据属性 (4 项)
 Object.defineProperty(person, 'age', {
   value: 18,
-  enumerable: true,  // 控制属性是否可以枚举，默认值是 false
   writable: true,  // 控制属性是否可以被修改，默认值是 false
+  enumerable: true,  // 控制属性是否可以枚举，默认值是 false
   configurable: true  // 控制属性是否可以被删除，默认值是 false
 })
 
@@ -57,7 +57,7 @@ Object.defineProperty(person, 'age', {
 * 数据代理：通过一个对象 B 代理对另一个对象 A 中属性的操作，给对象 B 添加对象 A 的属性即可
 * **Vue 中的数据代理**：通过 `vm` 对象来代理 `vm._data` 对象中属性的操作，添加了getter 和 setter
 *  ~~`vm._data` 中的数据来自于 data 配置项，也运用到了数据代理，添加了getter 和 setter，相当于 `vm._data` 和 vm 中都有 data 中数据的 getter 和 setter。~~
-*  `vm._data` 中的数据来自于 data 配置项，使用的是数据劫持，为了实现响应式
+*  `vm._data` 中的数据来自于 data 配置项，使用的是**数据劫持**，为了实现响应式
 
 <img src="https://s2.loli.net/2024/06/14/sXQ1nYPga9HMcI7.png" alt="data-proxy.png" style="zoom:20%;" />   
 
@@ -119,10 +119,7 @@ function Observer(obj){
 
 ```javascript
 // 这种方法使用中转变量 value 存储了 obj[key] 的值，避免了无限循环
-const data = {
-  name: 'Vue',
-  version: '2.0'
-};
+const data = { name: 'Vue', version: '2.0' };
 
 function Observer(obj) {
   Object.keys(obj).forEach((key) => {
@@ -174,10 +171,7 @@ vm$set(vm.student, 'sex', '男')
 > obs 身上具有 data 的所有属性，读取或修改这些属性时就会触发 getter 或 setter
 
 ```javascript
-const data = {
-  name: 'Vue',
-  version: '2.0'
-};
+const data = { name: 'Vue', version: '2.0' };
 
 /** Vue 2 这里用了递归 */
 function Observer(obj) {
@@ -248,6 +242,8 @@ class Vue {
     // 首先得判断该方法是否存在
     if (this.subs[type]) {
       // 获取到参数数组 (从第二位开始截取参数，因为第一个参数是 type)
+      // arguments 不是真正的数组，不能直接使用 slice 方法
+      // const args = Array.from(arguments).slice(1);
       const args = Array.prototype.slice.call(arguments, 1);
       // 循环队列调用 fn
       this.subs[type].forEach((fn) => fn(...args));

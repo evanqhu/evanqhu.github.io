@@ -5,13 +5,13 @@
 ```javascript
 // 方法1
 new Vue({
-  el: '#root',  // new Vue 时配置 el 属性
+  el: '#root', // new Vue 时配置 el 属性
   ...
 })
 
 // 方法2
 const vm = new Vue({ ... })
-vm.$mount('#root')  // 创建 Vue 实例 vm，使用 vm.$mount('#root')，这是 Vue 原型身上的方法
+vm.$mount('#root') // 创建 Vue 实例 vm，使用 vm.$mount('#root')，这是 Vue 原型身上的方法
 ```
 
 ## data 的写法

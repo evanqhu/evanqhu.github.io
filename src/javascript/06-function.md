@@ -374,8 +374,16 @@ const deepClone = (obj) => {
 
   // 2. 创建一个新的对象或数组
   const clone = Array.isArray(obj) ? [] : {};
+  
+  // 5. 设置对象的原型
+  Object.setPrototypeOf(clone, Object.getPrototypeOf(obj));
 
-  // 3. 遍历对象或数组的每一个属性 (注意是 const key of Object.keys(obj) !!!)
+  // 3. 遍历对象或数组的每一个属性
+  /**
+   * for (const key of Object.keys(obj)) 只遍历对象自身的可枚举属性（不包括继承的属性）
+   * for (let key in obj) 遍历对象的所有可枚举属性，包括对象原型链上的可枚举属性
+   * 根据实际需求选择不同的遍历方式
+   */
   for (const key of Object.keys(obj)) {
     clone[key] = deepClone(obj[key]); // 递归拷贝属性
   }
@@ -386,6 +394,7 @@ const deepClone = (obj) => {
 
 // 方法2 (防止循环引用)
 const deepCloneHash = (obj, hash = new WeakMap()) => {
+  // 使用 WeakMap，当 map 中引用的对象被销毁时，会自动垃圾回收
   // 1. 判断是否是对象或者数组 (递归出口)
   if (obj === null || typeof obj !== 'object') {
     return obj;

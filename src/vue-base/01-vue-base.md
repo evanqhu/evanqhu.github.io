@@ -15,7 +15,7 @@ Vue.js（简称 Vue）是一个用于构建用户界面的渐进式 JavaScript �
 // main.js 里面 new Vue 生成的叫做 vm；其他 .vue 文件中 export default 的都是 vc
 new Vue ({
   // 1.数据
-  data: function() { },  // 可简写为对象形式，但不推荐
+  data() { },  // 可简写为对象形式，但不推荐
   computed: { },  // 计算属性
   watch: { },  // 监视属性
   methods: { },  // 方法（函数）
