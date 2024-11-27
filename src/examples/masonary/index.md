@@ -1,8 +1,10 @@
 ---
 aside: false
+prev: false
+next: false
 ---
 
-无限瀑布流
+<div class="my-title">无限瀑布流</div>
 
 <script setup lang="ts">
 import VueMasonary from "./VueMasonary/index.vue"
