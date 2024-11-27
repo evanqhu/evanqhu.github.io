@@ -12,6 +12,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/vitepress-logo-mini.svg',
+    // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
       { text: 'CSS', link: '/css/01-animation' },
@@ -29,9 +30,9 @@ export default defineConfig({
       { text: '浏览器', link: '/browser/01-browser-cache' },
       { text: '其他', link: '/others/01-notes' },
     ],
-
+    // 侧边栏目录
     sidebar: {
-      '/javascript/': {
+      'javascript': {
         base: '/javascript/',
         items: [
           {
@@ -71,7 +72,7 @@ export default defineConfig({
           }
         ]
       },
-      '/vue-base/': {
+      'vue-base': {
         base: '/vue-base/',
         items: [
           {
@@ -97,7 +98,7 @@ export default defineConfig({
           }
         ]
       },
-      '/vue2/': {
+      'vue2': {
         base: '/vue2/',
         items: [
           {
@@ -125,7 +126,7 @@ export default defineConfig({
           }
         ]
       },
-      '/vue3/': {
+      'vue3': {
         base: '/vue3/',
         items: [
           {
@@ -143,7 +144,7 @@ export default defineConfig({
           }
         ]
       },
-      '/react/': {
+      'react': {
         base: '/react/',
         items: [
           {
@@ -155,7 +156,7 @@ export default defineConfig({
           }
         ]
       },
-      '/node/': {
+      'node': {
         base: '/node/',
         items: [
           {
@@ -173,7 +174,7 @@ export default defineConfig({
           }
         ]
       },
-      '/browser/': {
+      'browser': {
         base: '/browser/',
         items: [
           {
@@ -184,7 +185,7 @@ export default defineConfig({
           }
         ]
       },
-      '/others/': {
+      'others': {
         base: '/others/',
         items: [
           {
