@@ -326,6 +326,10 @@ Object.assign(car, { brand:  '大众', price:  10 }) // 正确做法
 
 作用：根据已有数据计算出新数据（和 `Vue2` 中的 `computed` 作用一致）
 
+参数：一个 getter 函数
+
+返回值：一个计算数属性 ref
+
 ```vue
 <template>
   <div class="person">
