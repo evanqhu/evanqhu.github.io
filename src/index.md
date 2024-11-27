@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: Vue
       link: /vue-base/01-vue-base
+    - theme: alt
+      text: 代码示例
+      link: /examples
   image:
     src: /vitepress-logo-large.webp
     alt: VitePress
