@@ -205,12 +205,20 @@ export default defineConfig({
         base: '/examples',
         items: [
           {
-            text: '代码示例',
+            text: '算法',
+            collapsed: false,
+            items: [
+              { text: '深拷贝', link: '/deepclone/' },
+            ]
+          },
+          {
+            text: '组件',
+            collapsed: false,
             items: [
               { text: '无限瀑布流', link: '/masonary/' },
               { text: '3D 轮播图', link: '/carousel-3d/' },
             ]
-          }
+          },
         ]
       }
     },
