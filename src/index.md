@@ -49,5 +49,9 @@ features:
     --vp-home-hero-image-filter: blur(68px);
   }
 }
+
+.VPNavBar {
+  border-bottom: 1px solid var(--vp-c-divider)
+}
 </style>
 

@@ -9,6 +9,7 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/vitepress-logo-mini.svg' }],
     ['link', { rel: 'icon', type: 'image/png', href: '/vitepress-logo-mini.png' }]
   ],
+  cleanUrls: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/vitepress-logo-mini.svg',
@@ -29,9 +30,22 @@ export default defineConfig({
       { text: 'Node', link: '/node/01-node-start' },
       { text: '浏览器', link: '/browser/01-browser-cache' },
       { text: '其他', link: '/others/01-notes' },
+      { text: '代码示例', link: '/examples'}
     ],
     // 侧边栏目录
     sidebar: {
+      'css': {
+        base: '/css/',
+        items: [
+          {
+            text: 'CSS',
+            items: [
+              { text: '动画', link: '01-animation' },
+              { text: 'scss', link: '02-scss' },
+            ]
+          }
+        ]
+      },
       'javascript': {
         base: '/javascript/',
         items: [
@@ -56,18 +70,6 @@ export default defineConfig({
               { text: '其它', link: '16-others' },
               { text: 'DOM', link: '17-DOM' },
               { text: 'BOM', link: '18-BOM' },
-            ]
-          }
-        ]
-      },
-      'css': {
-        base: '/css/',
-        items: [
-          {
-            text: 'CSS',
-            items: [
-              { text: '动画', link: '01-animation' },
-              { text: 'scss', link: '02-scss' },
             ]
           }
         ]
@@ -198,6 +200,18 @@ export default defineConfig({
           }
         ]
       },
+      // 代码示例
+      'examples': {
+        base: '/examples/',
+        items: [
+          {
+            text: '代码示例',
+            items: [
+              { text: '无限瀑布流', link: 'masonary' }
+            ]
+          }
+        ]
+      }
     },
 
     socialLinks: [
@@ -207,5 +221,13 @@ export default defineConfig({
     outline: {
       label: '页面导航'
     },
+
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'full',
+        timeStyle: 'medium'
+      }
+    }
   }
 })
