@@ -16,21 +16,45 @@ export default defineConfig({
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
-      { text: 'CSS', link: '/css/01-animation' },
-      { text: 'JavaScript', link: '/javascript/01-javascript-base' },
-      {
-        text: 'Vue',
+      { 
+        text: '系统笔记',
         items: [
-          { text: 'Vue 基础', link: '/vue-base/01-vue-base' },
-          { text: 'Vue 2', link: '/vue2/01-vue2-base' },
-          { text: 'Vue 3', link: '/vue3/01-vue3-base' },
+          { 
+            text: 'JavaScript', 
+            items: [
+              { text: 'JavaScript', link: '/javascript/01-javascript-base' },
+            ]
+          },
+          { 
+            text: 'Vue', 
+            items: [
+              { text: 'Vue 基础', link: '/vue-base/01-vue-base' },
+              { text: 'Vue 2', link: '/vue2/01-vue2-base' },
+              { text: 'Vue 3', link: '/vue3/01-vue3-base' },
+            ]
+          },
+          { 
+            text: 'React', 
+            items: [
+              { text: 'React', link: '/react/01-react-start' },
+            ]
+          },
+          { 
+            text: 'Node', 
+            items: [
+              { text: 'Node', link: '/node/01-node-start' },
+            ]
+          },
+          { 
+            text: 'CSS', 
+            items: [
+              { text: 'CSS', link: '/css/01-animation' },
+            ]
+          },
         ]
       },
-      { text: 'React', link: '/react/01-react-start' },
-      { text: 'Node', link: '/node/01-node-start' },
-      { text: '浏览器', link: '/browser/01-browser-cache' },
       { text: '其他', link: '/others/01-notes' },
-      { text: '代码示例', link: '/examples' },
+      { text: '组件/算法', link: '/examples' },
       { text: '工程化', link: '/engineering' }
     ],
     // 侧边栏目录
@@ -177,17 +201,6 @@ export default defineConfig({
           }
         ]
       },
-      'browser': {
-        base: '/browser',
-        items: [
-          {
-            text: '浏览器',
-            items: [
-              { text: '浏览器缓存', link: '/01-browser-cache' },
-            ]
-          }
-        ]
-      },
       'others': {
         base: '/others',
         items: [
@@ -197,6 +210,7 @@ export default defineConfig({
               { text: '笔记', link: '/01-notes' },
               { text: 'Git', link: '/02-git' },
               { text: '微信小程序', link: '/03-wxapp' },
+              { text: '浏览器缓存', link: '/browser-cache' },
             ]
           }
         ]

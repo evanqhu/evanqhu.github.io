@@ -4,7 +4,7 @@
 # next: false
 ---
 
-<span class="my-title">CommitLint</span>
+# CommitLint
 
 ::: info Note
 husky：https://typicode.github.io/husky/

@@ -4,7 +4,7 @@
 # next: false
 ---
 
-<span class="my-title">ESLint</span>
+# ESLint
 
 ::: info Note
 ESLint 是一个开源的 JavaScript 代码检查工具，用于识别和报告代码中的模式，帮助开发者遵循最佳实践，提高代码质量和可维护性。

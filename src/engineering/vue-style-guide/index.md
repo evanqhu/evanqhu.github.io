@@ -4,7 +4,7 @@
 # next: false
 ---
 
-<span class="my-title">Vue 风格指南</span>
+# Vue 风格指南
 
 ::: info Note
 Vue 3：https://cn.vuejs.org/style-guide/
