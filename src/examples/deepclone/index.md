@@ -4,6 +4,6 @@ prev: false
 next: false
 ---
 
-<div class="my-title">深拷贝</div>
+<span class="my-title">深拷贝</span>
 
 <<< ./index.js

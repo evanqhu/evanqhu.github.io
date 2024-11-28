@@ -4,4 +4,4 @@ prev: false
 next: false
 ---
 
-<div class="my-title">ESLint</div>
+<span class="my-title">ESLint</span>

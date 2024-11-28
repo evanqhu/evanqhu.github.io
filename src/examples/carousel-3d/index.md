@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-<div class="my-title">3D 轮播图</div>
+<span class="my-title">3D 轮播图</span>
 
 <script setup lang="ts">
 import Carousel3D from "./Carousel3D/Carousel3D.vue"

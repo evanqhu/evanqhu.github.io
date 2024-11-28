@@ -4,7 +4,7 @@ prev: false
 next: false
 ---
 
-<div class="my-title">无限瀑布流</div>
+<span class="my-title">无限瀑布流</span>
 
 <script setup lang="ts">
 import VueMasonary from "./VueMasonary/index.vue"
