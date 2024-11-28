@@ -1,6 +1,6 @@
 # 笔记
 
-## 在 Apple Silicon 设备上安装 X86 软件
+## 以 x86 架构运行 shell
 
 `arch -x86_64 zsh` 是一个命令，用于在 macOS 系统上以 x86_64 架构运行 Zsh
 
@@ -45,3 +45,12 @@ console.log(count); // 2
 ```
 
 > 因此在导出的时候不要使用 let，都要用 const
+
+## VPN 终端代理
+
+在 clashX 中点击 `复制终端代理命令`，粘贴到终端中执行，当前终端的网络请求即可强制使用代理
+
+复制的命令一般为：
+```bash
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+```
