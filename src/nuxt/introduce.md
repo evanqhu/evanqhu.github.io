@@ -1,3 +1,3 @@
 introduce nuxt
 
-![替代文本](./images/image.png)
+<img src="./images/image.png" class="my-img">
