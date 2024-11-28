@@ -20,6 +20,7 @@ ESLint 是一个开源的 JavaScript 代码检查工具，用于识别和报告�
 > ESLint 的规则集命名一般为 `eslint-config-xxx`，使用时可省略 `eslint-config-`
 > @vue 这种表示 scoped 组织
 
+
 ## 01 安装依赖包
 
 ```bash
@@ -30,6 +31,7 @@ pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
 
 > 我们在项目中安装 `ESlint`，最终是会通过命令 `pnpm lint` 或者 `pnpm lint:fix` 去执行，这个命令会用项目中安装的 `eslint` 去检查指定目录/文件的代码，最终输出不符合规则的代码错误信息。
 > 
+
 
 ## 02 依赖包介绍
 
@@ -43,6 +45,7 @@ pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
 - `eslint-plugin-prettier` ESLint 的 Prettier 插件；将 Prettier 作为 ESLint 规则来运行
 - `eslint-config-prettier` 关闭 ESLint 中可能与 Prettier 发生冲突的规则（仅此功能）
 
+
 ## 03 在 package.json 中配置命令
 
 `package.json`
@@ -54,6 +57,7 @@ pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
   },
 }
 ```
+
 
 ## 04 ESLint 平面配置文件
 
@@ -258,6 +262,7 @@ export default defineFlatConfig([
 ```
 :::
 
+
 ## 05 Prettier 配置文件
 
 `.prettierrc.js`
@@ -273,7 +278,9 @@ export default {
 };
 ```
 
+
 ## 06 简洁方案
+
 使用 @antfu/eslint-config 包
 
 * 安装依赖包
@@ -287,6 +294,8 @@ import antfu from '@antfu/eslint-config'
 
 export default antfu()
 ```
+
+
 ## 07 ESLint < 9 的方案
 
 ```js
@@ -297,6 +306,7 @@ module.exports = {
   ],
 }
 ```
+
 
 ### 安装的包
 
@@ -317,9 +327,11 @@ pnpm i eslint prettier -D
 pnpm i eslint-plugin-vue @vue/eslint-config-typescript @vue/eslint-config-prettier -D
 ```
 
-### ESLint 配置文件
 
-```js
+### 配置文件
+
+::: code-group
+```js [.eslintrc.cjs]
 require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
@@ -341,12 +353,7 @@ module.exports = {
 }
 ```
 
-> 使用 `.eslint.cjs` 作为 ESLint 配置文件的命名是为了明确它是一个 CommonJS 模块（运行在 Node 环境，使用 `require` 导入，`module.exports` 导出），便于与 ESM 文件区分。
-> 
-
-### Prettier 配置文件
-
-```json
+```json [.prettierrc.json]
 {
   "$schema": "https://json.schemastore.org/prettierrc",
   "semi": false,
@@ -357,9 +364,7 @@ module.exports = {
 }
 ```
 
-### 脚本
-
-```json
+```json [package.json]
 {
 	"scripts": {
     "dev": "vite",
@@ -372,12 +377,18 @@ module.exports = {
   },
 }
 ```
+:::
+
+> 使用 `.eslint.cjs` 作为 ESLint 配置文件的命名是为了明确它是一个 CommonJS 模块（运行在 Node 环境，使用 `require` 导入，`module.exports` 导出），便于与 ESM 文件区分。
+
 
 ## 08 Nuxt 中的方案
+
 直接使用 Nuxt ESLint Module 并开启 stylistic
 
-`nuxt.config.ts`
-```ts
+::: code-group
+```ts [nuxt.config.ts]
+// @ts-nocheck
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint'
@@ -390,9 +401,8 @@ export default defineNuxtConfig({
 })
 ```
 
-`eslint.config.mjs`
-```ts
-// @ts-check
+```ts [eslint.config.mjs]
+// @ts-nocheck
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
@@ -421,3 +431,4 @@ export default withNuxt(
   },
 )
 ```
+:::
