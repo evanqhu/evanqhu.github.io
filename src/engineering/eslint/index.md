@@ -14,12 +14,9 @@ ESLint 是一个开源的 JavaScript 代码检查工具，用于识别和报告�
 中文文档：https://eslint.nodejs.cn/docs/latest/use/getting-started
 :::
 
-# ESLint 9
-
 > ESLint 的插件命名一般为 `eslint-plugin-xxx`，使用时可省略 `eslint-plugin-`
 > ESLint 的规则集命名一般为 `eslint-config-xxx`，使用时可省略 `eslint-config-`
 > @vue 这种表示 scoped 组织
-
 
 ## 01 安装依赖包
 
@@ -29,9 +26,7 @@ pnpm i eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/par
 pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
 ```
 
-> 我们在项目中安装 `ESlint`，最终是会通过命令 `pnpm lint` 或者 `pnpm lint:fix` 去执行，这个命令会用项目中安装的 `eslint` 去检查指定目录/文件的代码，最终输出不符合规则的代码错误信息。
-> 
-
+> 我们在项目中安装 `ESlint`，最终是会通过命令 `pnpm lint`  或者 `pnpm lint:fix`  去执行，这个命令会用项目中安装的 `eslint` 去检查指定目录/文件的代码，最终输出不符合规则的代码错误信息。
 
 ## 02 依赖包介绍
 
@@ -45,23 +40,23 @@ pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
 - `eslint-plugin-prettier` ESLint 的 Prettier 插件；将 Prettier 作为 ESLint 规则来运行
 - `eslint-config-prettier` 关闭 ESLint 中可能与 Prettier 发生冲突的规则（仅此功能）
 
-
 ## 03 在 package.json 中配置命令
 
 `package.json`
+
 ```json
 {
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-  },
+    "lint:fix": "eslint . --fix"
+  }
 }
 ```
-
 
 ## 04 ESLint 平面配置文件
 
 ::: details `eslint.config.js`
+
 ```js
 import js from "@eslint/js";
 import pluginVue from "eslint-plugin-vue";
@@ -78,14 +73,7 @@ export default defineFlatConfig([
     // 使用 ESLint 推荐的 js 配置
     ...js.configs.recommended,
     // 配置忽略的文件或目录
-    ignores: [
-      "**/.*",
-      "dist/*",
-      "*.d.ts",
-      "public/*",
-      "src/assets/**",
-      "src/**/iconfont/**"
-    ],
+    ignores: ["**/.*", "dist/*", "*.d.ts", "public/*", "src/assets/**", "src/**/iconfont/**"],
     // 语言选项
     languageOptions: {
       // 定义全局变量（只读），避免在代码中使用这些变量时报错
@@ -118,12 +106,12 @@ export default defineFlatConfig([
         PromiseFn: "readonly",
         ComponentElRef: "readonly",
         parseInt: "readonly",
-        parseFloat: "readonly"
-      }
+        parseFloat: "readonly",
+      },
     },
     plugins: {
       // 启用 Prettier 插件，用于代码格式化
-      prettier: pluginPrettier
+      prettier: pluginPrettier,
     },
     rules: {
       // 合并 Prettier 的默认规则
@@ -135,17 +123,17 @@ export default defineFlatConfig([
         "error",
         {
           argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_"
-        }
+          varsIgnorePattern: "^_",
+        },
       ],
       // 配置 Prettier 格式化规则，忽略行尾符号差异
       "prettier/prettier": [
         "error",
         {
-          endOfLine: "auto"
-        }
-      ]
-    }
+          endOfLine: "auto",
+        },
+      ],
+    },
   },
   // 2. 适用于 .ts 文件
   {
@@ -154,11 +142,11 @@ export default defineFlatConfig([
       parser: parserTypeScript, // 使用 TypeScript 的解析器
       parserOptions: {
         sourceType: "module", // 使用 ECMAScript 模块
-        warnOnUnsupportedTypeScriptVersion: false // 忽略 TypeScript 版本不兼容的警告
-      }
+        warnOnUnsupportedTypeScriptVersion: false, // 忽略 TypeScript 版本不兼容的警告
+      },
     },
     plugins: {
-      "@typescript-eslint": pluginTypeScript // 启用 TypeScript 插件
+      "@typescript-eslint": pluginTypeScript, // 启用 TypeScript 插件
     },
     rules: {
       // 启用 TypeScript 严格模式的规则
@@ -174,20 +162,20 @@ export default defineFlatConfig([
       "@typescript-eslint/explicit-module-boundary-types": "off", // 关闭函数返回值类型声明的强制要求
       "@typescript-eslint/consistent-type-imports": [
         "error",
-        { disallowTypeAnnotations: false, fixStyle: "inline-type-imports" } // 强制使用一致的类型导入格式
+        { disallowTypeAnnotations: false, fixStyle: "inline-type-imports" }, // 强制使用一致的类型导入格式
       ],
       "@typescript-eslint/prefer-literal-enum-member": [
         "error",
-        { allowBitwiseExpressions: true } // 允许使用按位操作符
+        { allowBitwiseExpressions: true }, // 允许使用按位操作符
       ],
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
           argsIgnorePattern: "^_", // 忽略未使用的函数参数
-          varsIgnorePattern: "^_" // 忽略未使用的变量
-        }
-      ]
-    }
+          varsIgnorePattern: "^_", // 忽略未使用的变量
+        },
+      ],
+    },
   },
   // 3. 适用于 .d.ts 类型声明文件
   {
@@ -195,16 +183,16 @@ export default defineFlatConfig([
     rules: {
       "eslint-comments/no-unlimited-disable": "off", // 允许在注释中使用无限制的 ESLint 禁用规则
       "import/no-duplicates": "off", // 允许重复的 import
-      "unused-imports/no-unused-vars": "off" // 允许未使用的变量
-    }
+      "unused-imports/no-unused-vars": "off", // 允许未使用的变量
+    },
   },
   // 4. 适用于 .js 文件
   {
     files: ["**/*.?([cm])js"],
     rules: {
       "@typescript-eslint/no-require-imports": "off", // 允许使用 require 导入
-      "@typescript-eslint/no-var-requires": "off" // 允许使用 var require
-    }
+      "@typescript-eslint/no-var-requires": "off", // 允许使用 var require
+    },
   },
   // 5. 适用于 .vue 文件
   {
@@ -217,20 +205,20 @@ export default defineFlatConfig([
         $customRef: "readonly",
         $ref: "readonly",
         $shallowRef: "readonly",
-        $toRef: "readonly"
+        $toRef: "readonly",
       },
       parser: parserVue, // 使用 Vue 的解析器
       parserOptions: {
         ecmaFeatures: {
-          jsx: true // 支持 JSX 语法
+          jsx: true, // 支持 JSX 语法
         },
         extraFileExtensions: [".vue"], // 额外支持 .vue 文件
         parser: "@typescript-eslint/parser", // Vue 文件中的脚本部分使用 TypeScript 解析器
-        sourceType: "module" // 使用 ECMAScript 模块
-      }
+        sourceType: "module", // 使用 ECMAScript 模块
+      },
     },
     plugins: {
-      vue: pluginVue // 启用 Vue 插件
+      vue: pluginVue, // 启用 Vue 插件
     },
     processor: pluginVue.processors[".vue"], // 处理 .vue 文件的特殊解析逻辑
     rules: {
@@ -250,22 +238,23 @@ export default defineFlatConfig([
           html: {
             void: "always", // HTML 中的空元素总是自闭合
             normal: "always", // HTML 中的普通元素总是自闭合
-            component: "always" // Vue 组件总是自闭合
+            component: "always", // Vue 组件总是自闭合
           },
           svg: "always", // SVG 元素总是自闭合
-          math: "always" // MathML 元素总是自闭合
-        }
-      ]
-    }
-  }
+          math: "always", // MathML 元素总是自闭合
+        },
+      ],
+    },
+  },
 ]);
 ```
-:::
 
+:::
 
 ## 05 Prettier 配置文件
 
 `.prettierrc.js`
+
 ```js
 // @ts-check
 
@@ -274,27 +263,28 @@ export default {
   bracketSpacing: true,
   singleQuote: false,
   arrowParens: "avoid",
-  trailingComma: "none"
+  trailingComma: "none",
 };
 ```
-
 
 ## 06 简洁方案
 
 使用 @antfu/eslint-config 包
 
-* 安装依赖包
+- 安装依赖包
+
 ```bash
 pnpm i eslint @antfu/eslint-config -D
 ```
-* 配置文件
+
+- 配置文件
+
 ```js
 // eslint.config.mjs
-import antfu from '@antfu/eslint-config'
+import antfu from "@antfu/eslint-config";
 
-export default antfu()
+export default antfu();
 ```
-
 
 ## 07 ESLint < 9 的方案
 
@@ -307,50 +297,49 @@ module.exports = {
 }
 ```
 
-
 ### 安装的包
 
 - `eslint`
 - `prettier`
 - `eslint-plugin-vue ` Vue 官方 ESLint 插件
 - `@vue/eslint-config-typescript` [npm 地址](https://www.npmjs.com/package/@vue/eslint-config-typescript)
-    - Vue 官方 TS-ESLint 规则集
-    - 内部依赖了  `@typescript-eslint/parser` 解析器和 `@typescript-eslint/eslint-plugin`  插件
+  - Vue 官方 TS-ESLint 规则集
+  - 内部依赖了 `@typescript-eslint/parser` 解析器和 `@typescript-eslint/eslint-plugin` 插件
 - `@vue/eslint-config-prettier` [npm 地址](https://www.npmjs.com/package/@vue/eslint-config-prettier)
-    - Vue 官方 Prettier-ESLint 规则集
-    - 内部依赖了 `eslint-config-prettier` 规则集和 `eslint-plugin-prettier` 插件
+  - Vue 官方 Prettier-ESLint 规则集
+  - 内部依赖了 `eslint-config-prettier` 规则集和 `eslint-plugin-prettier` 插件
 - `@rushstack/eslint-patch`
-    - 配合 Vue 官方的两个规则集使用的
+  - 配合 Vue 官方的两个规则集使用的
 
 ```bash
 pnpm i eslint prettier -D
 pnpm i eslint-plugin-vue @vue/eslint-config-typescript @vue/eslint-config-prettier -D
 ```
 
-
 ### 配置文件
 
 ::: code-group
+
 ```js [.eslintrc.cjs]
-require('@rushstack/eslint-patch/modern-module-resolution')
+require("@rushstack/eslint-patch/modern-module-resolution");
 
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: [
-    'plugin:vue/vue3-essential', // eslint-plugin-vue 包
-    'eslint:recommended', // eslint 包
-    '@vue/eslint-config-typescript', // @vue/eslint-config-typescript 包
-    '@vue/eslint-config-prettier' // @vue/eslint-config-prettier 包
+    "plugin:vue/vue3-essential", // eslint-plugin-vue 包
+    "eslint:recommended", // eslint 包
+    "@vue/eslint-config-typescript", // @vue/eslint-config-typescript 包
+    "@vue/eslint-config-prettier", // @vue/eslint-config-prettier 包
     // Vue 推荐的是 @vue/eslint-config-prettier/skip-formatting
     // 但是这样就不会在代码中报 Prettier 的警告，这里改了一下
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
-  }
-}
+    ecmaVersion: "latest",
+  },
+};
 ```
 
 ```json [.prettierrc.json]
@@ -366,7 +355,7 @@ module.exports = {
 
 ```json [package.json]
 {
-	"scripts": {
+  "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
@@ -374,61 +363,64 @@ module.exports = {
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
-  },
+  }
 }
 ```
+
 :::
 
 > 使用 `.eslint.cjs` 作为 ESLint 配置文件的命名是为了明确它是一个 CommonJS 模块（运行在 Node 环境，使用 `require` 导入，`module.exports` 导出），便于与 ESM 文件区分。
-
 
 ## 08 Nuxt 中的方案
 
 直接使用 Nuxt ESLint Module 并开启 stylistic
 
 ::: code-group
+
 ```ts [nuxt.config.ts]
 // @ts-nocheck
 export default defineNuxtConfig({
-  modules: [
-    '@nuxt/eslint'
-  ],
+  modules: ["@nuxt/eslint"],
   eslint: {
     config: {
-      stylistic: true // <---
-    }
-  }
-})
+      stylistic: true, // <---
+    },
+  },
+});
 ```
 
 ```ts [eslint.config.mjs]
 // @ts-nocheck
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt(
   // Your custom configs here
   {
     rules: {
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@stylistic/quotes': 'warn', // 单引号
-      '@stylistic/semi': 'warn', // 不添加尾随分号
-      '@stylistic/comma-dangle': 'warn', // 添加尾随逗号
-      'vue/html-quotes': 'warn', // Vue template 中用单引号
-      '@stylistic/no-trailing-spaces': 'warn', // 删除尾随空格
-      '@stylistic/eol-last': 'warn', // 添加尾随换行
-      '@stylistic/no-multiple-empty-lines': 'warn', // 删除多余的空行
-      '@typescript-eslint/no-explicit-any': 'warn', // 允许使用 any 类型
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@stylistic/quotes": "warn", // 单引号
+      "@stylistic/semi": "warn", // 不添加尾随分号
+      "@stylistic/comma-dangle": "warn", // 添加尾随逗号
+      "vue/html-quotes": "warn", // Vue template 中用单引号
+      "@stylistic/no-trailing-spaces": "warn", // 删除尾随空格
+      "@stylistic/eol-last": "warn", // 添加尾随换行
+      "@stylistic/no-multiple-empty-lines": "warn", // 删除多余的空行
+      "@typescript-eslint/no-explicit-any": "warn", // 允许使用 any 类型
       // Vue 属性换行
-      'vue/max-attributes-per-line': ['warn', {
-        singleline: {
-          max: 5,
+      "vue/max-attributes-per-line": [
+        "warn",
+        {
+          singleline: {
+            max: 5,
+          },
+          multiline: {
+            max: 1,
+          },
         },
-        multiline: {
-          max: 1,
-        },
-      }],
+      ],
     },
-  },
-)
+  }
+);
 ```
+
 :::

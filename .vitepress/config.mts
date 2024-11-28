@@ -231,6 +231,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: 'ESLint', link: '/eslint/' },
+              { text: 'CommitLint', link: '/commitlint/' },
               { text: 'Vue 风格指南', link: '/vue-style-guide/' },
             ]
           }
