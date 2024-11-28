@@ -236,10 +236,15 @@ export default defineConfig({
             text: "代码规范",
             collapsed: false,
             items: [
-              { text: "ESLint", link: "/eslint/" },
-              { text: "CommitLint", link: "/commitlint/" },
-              { text: "Vue 风格指南", link: "/vue-style-guide/" },
+              { text: "ESLint", link: "/eslint" },
+              { text: "CommitLint", link: "/commitlint" },
+              { text: "Vue 风格指南", link: "/vue-style-guide" },
             ],
+          },
+          {
+            text: "其它",
+            collapsed: false,
+            items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
           },
         ],
       },
@@ -250,6 +255,7 @@ export default defineConfig({
             text: "Nuxt",
             items: [
               { text: "介绍", link: "/introduce" },
+              { text: "自定义路由", link: "/custom-route" },
             ],
           },
         ],
