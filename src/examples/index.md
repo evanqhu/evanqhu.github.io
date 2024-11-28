@@ -1,7 +1,6 @@
 ---
 prev: false
 next: false
-lastUpdated: false
 ---
 
 ::: info 提示

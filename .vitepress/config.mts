@@ -18,7 +18,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: 'CSS', link: '/css/01-animation' },
       { text: 'JavaScript', link: '/javascript/01-javascript-base' },
-      { 
+      {
         text: 'Vue',
         items: [
           { text: 'Vue 基础', link: '/vue-base/01-vue-base' },
@@ -30,7 +30,8 @@ export default defineConfig({
       { text: 'Node', link: '/node/01-node-start' },
       { text: '浏览器', link: '/browser/01-browser-cache' },
       { text: '其他', link: '/others/01-notes' },
-      { text: '代码示例', link: '/examples'}
+      { text: '代码示例', link: '/examples' },
+      { text: '工程化', link: '/engineering' }
     ],
     // 侧边栏目录
     sidebar: {
@@ -219,6 +220,19 @@ export default defineConfig({
               { text: '3D 轮播图', link: '/carousel-3d/' },
             ]
           },
+        ]
+      },
+      // 工程化
+      'engineering': {
+        base: '/engineering',
+        items: [
+          {
+            text: '代码规范',
+            collapsed: false,
+            items: [
+              { text: 'ESLint', link: '/eslint/' },
+            ]
+          }
         ]
       }
     },
