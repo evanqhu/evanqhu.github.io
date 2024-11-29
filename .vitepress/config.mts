@@ -219,6 +219,7 @@ export default defineConfig({
             items: [
               { text: "深拷贝", link: "/deepclone/" },
               { text: "时间分片", link: "/time-slicing/" },
+              { text: "React 渲染顺序", link: "/react-render-order/" },
             ],
           },
           {
