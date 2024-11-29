@@ -195,6 +195,7 @@ export default defineConfig({
           },
         ],
       },
+      // 其它
       others: {
         base: "/others",
         items: [
@@ -209,6 +210,7 @@ export default defineConfig({
               { text: "时间分片", link: "/time-slicing" },
               { text: "React 渲染顺序", link: "/react-render-order" },
               { text: "交叉观察器", link: "/intersection-observer" },
+              { text: "区分设备类型", link: "/device-detect" },
             ],
           },
         ],
