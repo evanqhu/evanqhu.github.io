@@ -18,6 +18,7 @@ export default defineConfig({
       { text: "首页", link: "/" },
       {
         text: "系统笔记",
+        activeMatch: "/(javascript|vue-base|vue2|vue3|react|node|css)/",
         items: [
           {
             text: "JavaScript",
@@ -45,10 +46,10 @@ export default defineConfig({
           },
         ],
       },
-      { text: "Nuxt", link: "/nuxt/introduce" },
-      { text: "其它", link: "/others/notes" },
-      { text: "组件/算法", link: "/examples" },
-      { text: "工程化", link: "/engineering" },
+      { text: "Nuxt", link: "/nuxt/introduce", activeMatch: "/nuxt/" },
+      { text: "其它", link: "/others/notes", activeMatch: "/others/"},
+      { text: "组件/算法", link: "/examples", activeMatch: "/examples/"},
+      { text: "工程化", link: "/engineering", activeMatch: "/engineering/"},
     ],
     // 侧边栏目录
     sidebar: {
@@ -265,13 +266,10 @@ export default defineConfig({
         ],
       },
     },
-
     socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
-
     outline: {
       label: "页面导航",
     },
-
     lastUpdated: {
       text: "最后更新于",
       formatOptions: {
@@ -279,7 +277,6 @@ export default defineConfig({
         timeStyle: "medium",
       },
     },
-
     search: {
       provider: "local",
     },
