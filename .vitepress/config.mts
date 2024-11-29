@@ -47,9 +47,9 @@ export default defineConfig({
         ],
       },
       { text: "Nuxt", link: "/nuxt/introduce", activeMatch: "/nuxt/" },
-      { text: "其它", link: "/others/notes", activeMatch: "/others/"},
-      { text: "组件/算法", link: "/examples", activeMatch: "/examples/"},
-      { text: "工程化", link: "/engineering", activeMatch: "/engineering/"},
+      { text: "其它", link: "/others/notes", activeMatch: "/others/" },
+      { text: "组件/算法", link: "/examples", activeMatch: "/examples/" },
+      { text: "工程化", link: "/engineering", activeMatch: "/engineering/" },
     ],
     // 侧边栏目录
     sidebar: {
@@ -206,6 +206,9 @@ export default defineConfig({
               { text: "微信小程序", link: "/wxapp" },
               { text: "浏览器缓存", link: "/browser-cache" },
               { text: "绝对和相对路径", link: "/ap-rp" },
+              { text: "时间分片", link: "/time-slicing" },
+              { text: "React 渲染顺序", link: "/react-render-order" },
+              { text: "交叉观察器", link: "/intersection-observer" },
             ],
           },
         ],
@@ -217,11 +220,7 @@ export default defineConfig({
           {
             text: "算法",
             collapsed: false,
-            items: [
-              { text: "深拷贝", link: "/deepclone/" },
-              { text: "时间分片", link: "/time-slicing/" },
-              { text: "React 渲染顺序", link: "/react-render-order/" },
-            ],
+            items: [{ text: "深拷贝", link: "/deepclone/" }],
           },
           {
             text: "组件",
