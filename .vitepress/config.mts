@@ -216,7 +216,10 @@ export default defineConfig({
           {
             text: "算法",
             collapsed: false,
-            items: [{ text: "深拷贝", link: "/deepclone/" }],
+            items: [
+              { text: "深拷贝", link: "/deepclone/" },
+              { text: "时间分片", link: "/time-slicing/" },
+            ],
           },
           {
             text: "组件",
