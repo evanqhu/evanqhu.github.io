@@ -22,8 +22,10 @@ https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B1%E5%BA%A6%E4%BD%9
 
 ```css
 <style scoped>
->>> .demo {
-  color: red;
+.parent {
+  >>> .child {
+    color: red;
+  }
 }
 </style>
 ```
@@ -34,18 +36,20 @@ https://vue-loader.vuejs.org/zh/guide/scoped-css.html#%E6%B7%B1%E5%BA%A6%E4%BD%9
 
 ```css
 <style scoped>
-/deep/ .demo {
-  color: red;
+.parent {
+  /deep/ .child {
+    color: red;
+  }
 }
 </style>
 ```
 
 ### 3️⃣ `::v-deep`
 
-Vue 3 中弃用
+Vue 3 中弃用（目前也能用）
 
-```css
-<style scoped>
+```scss
+<style scoped lang="scss">
 ::v-deep .demo {
   color: red;
 }
@@ -56,8 +60,8 @@ Vue 3 中弃用
 
 推荐使用
 
-```css
-<style scoped>
+```scss
+<style scoped lang="scss">
 :deep(.demo) {
   color: red;
 }
