@@ -27,7 +27,7 @@ export default defineConfig({
           {
             text: "Vue",
             items: [
-              { text: "Vue 基础", link: "/vue-base/01-vue-base" },
+              { text: "Vue", link: "/vue" },
               { text: "Vue 2", link: "/vue2/01-vue2-base" },
               { text: "Vue 3", link: "/vue3/01-vue3-base" },
               { text: "Nuxt", link: "/nuxt" },
@@ -89,32 +89,6 @@ export default defineConfig({
               { text: "其它", link: "/16-others" },
               { text: "DOM", link: "/17-DOM" },
               { text: "BOM", link: "/18-BOM" },
-            ],
-          },
-        ],
-      },
-      "vue-base": {
-        base: "/vue-base",
-        items: [
-          {
-            text: "Vue 基础",
-            items: [
-              { text: "初识 Vue", link: "/01-vue-base" },
-              { text: "模板语法", link: "/02-template" },
-              { text: "数据绑定", link: "/03-data-binding" },
-              { text: "el 和 data的两种写法", link: "/04-el-data" },
-              { text: "数据代理和数据劫持", link: "/05-data-proxy" },
-              { text: "事件处理", link: "/06-event" },
-              { text: "计算属性 computed", link: "/07-computed" },
-              { text: "监视属性 watch", link: "/08-watch" },
-              { text: "绑定样式", link: "/09-style" },
-              { text: "条件渲染", link: "/10-conditional-rendering" },
-              { text: "列表渲染", link: "/11-list-rendering" },
-              { text: "过滤器 filters", link: "/12-filters" },
-              { text: "其它指令", link: "/13-others" },
-              { text: "自定义指令 directives", link: "/14-directives" },
-              { text: "生命周期", link: "/15-life-cycle" },
-              { text: "组件", link: "/16-components" },
             ],
           },
         ],
@@ -273,11 +247,17 @@ export default defineConfig({
           },
         ],
       },
+      vue: {
+        base: "/vue",
+        items: [{ text: "Vue 基础", link: "/base" }],
+      },
     },
-    socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/evanqhu/evanqhu.github.io" }],
+    // 大纲级别
     outline: {
       label: "页面导航",
     },
+    // 最后更新于
     lastUpdated: {
       text: "最后更新于",
       formatOptions: {
@@ -285,6 +265,7 @@ export default defineConfig({
         timeStyle: "medium",
       },
     },
+    // 搜索
     search: {
       provider: "local",
     },

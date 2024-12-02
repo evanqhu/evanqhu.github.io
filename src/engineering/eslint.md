@@ -463,8 +463,7 @@ module.exports = {
 
 ::: code-group
 
-```ts [nuxt.config.ts]
-// @ts-nocheck
+```typescript [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: ["@nuxt/eslint"],
   eslint: {
@@ -475,8 +474,7 @@ export default defineNuxtConfig({
 });
 ```
 
-```ts [eslint.config.mjs]
-// @ts-nocheck
+```typescript [eslint.config.mjs]
 import withNuxt from "./.nuxt/eslint.config.mjs";
 
 export default withNuxt(

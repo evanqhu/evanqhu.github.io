@@ -2,8 +2,7 @@
 
 使用场景：图片懒加载，无限滚动，加载更多
 
-```ts
-// @ts-nocheck
+```typescript
 /** 加载更多元素 */
 const moreRef = ref<HTMLDivElement>();
 

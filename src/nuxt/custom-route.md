@@ -46,8 +46,7 @@ definePageMeta({
 
 在 `nuxt.config.ts` 文件中使用钩子来自定义路由
 
-```ts
-// @ts-nocheck
+```typescript
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import type { NuxtPage } from '@nuxt/schema'
 

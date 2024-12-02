@@ -12,7 +12,7 @@ hero:
       link: /javascript/01-javascript-base
     - theme: alt
       text: Vue
-      link: /vue-base/01-vue-base
+      link: /vue
     - theme: alt
       text: 组件/算法
       link: /examples
