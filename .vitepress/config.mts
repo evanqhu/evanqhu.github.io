@@ -30,6 +30,7 @@ export default defineConfig({
               { text: "Vue 基础", link: "/vue-base/01-vue-base" },
               { text: "Vue 2", link: "/vue2/01-vue2-base" },
               { text: "Vue 3", link: "/vue3/01-vue3-base" },
+              { text: "Nuxt", link: "/nuxt" },
             ],
           },
           {
@@ -46,8 +47,7 @@ export default defineConfig({
           },
         ],
       },
-      { text: "Nuxt", link: "/nuxt/introduce", activeMatch: "/nuxt/" },
-      { text: "其它", link: "/others/notes", activeMatch: "/others/" },
+      { text: "其它", link: "/others", activeMatch: "/others/" },
       { text: "组件/算法", link: "/examples", activeMatch: "/examples/" },
       { text: "工程化", link: "/engineering", activeMatch: "/engineering/" },
     ],
@@ -201,6 +201,7 @@ export default defineConfig({
         items: [
           {
             text: "其他",
+            collapsed: false,
             items: [
               { text: "笔记", link: "/notes" },
               { text: "Git", link: "/git" },
@@ -212,6 +213,14 @@ export default defineConfig({
               { text: "交叉观察器", link: "/intersection-observer" },
               { text: "区分设备类型", link: "/device-detect" },
               { text: "深度作用选择器", link: "/deep-selector" },
+              { text: "自定义 VSCode 快捷键", link: "/vscode-shortcuts" },
+            ],
+          },
+          {
+            text: "SSR",
+            collapsed: false,
+            items: [
+              // { text: "笔记", link: "/notes" },
             ],
           },
         ],
@@ -251,10 +260,7 @@ export default defineConfig({
           {
             text: "其它",
             collapsed: false,
-            items: [
-              { text: "Chrome 调试", link: "/chrome-inspect" },
-              { text: "自定义 VSCode 快捷键", link: "/vscode-shortcuts" },
-            ],
+            items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
           },
         ],
       },
@@ -263,10 +269,7 @@ export default defineConfig({
         items: [
           {
             text: "Nuxt",
-            items: [
-              { text: "介绍", link: "/introduce" },
-              { text: "自定义路由", link: "/custom-route" },
-            ],
+            items: [{ text: "自定义路由", link: "/custom-route" }],
           },
         ],
       },
