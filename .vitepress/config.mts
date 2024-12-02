@@ -251,7 +251,10 @@ export default defineConfig({
           {
             text: "其它",
             collapsed: false,
-            items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
+            items: [
+              { text: "Chrome 调试", link: "/chrome-inspect" },
+              { text: "自定义 VSCode 快捷键", link: "/vscode-shortcuts" },
+            ],
           },
         ],
       },
