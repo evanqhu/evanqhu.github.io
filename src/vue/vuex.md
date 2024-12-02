@@ -1,4 +1,4 @@
-# Vuex
+# Vuex 状态管理器
 
 `npm i vuex@3`
 

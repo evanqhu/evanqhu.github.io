@@ -45,7 +45,7 @@ app.mount('#app')
 
 **创建 countStore `src/store/count.ts`**
 
-```ts
+```typescript
 // 引入 defineStore 用于创建 store
 import { defineStore } from 'pinia'
 
@@ -216,7 +216,7 @@ const { sum, school, bigSum, upperSchool } = storeToRefs(countStore)
 
 通过 store 的 `$subscribe()` 方法侦听 `state` 及其变化 (类似 `watch`)
 
-```ts
+```typescript
 // mutate 表示本次 state 变化的信息， state 表示变化后的 state 值
 talkStore.$subscribe((mutate, state) => {
   console.log('LoveTalk', mutate, state)
@@ -226,7 +226,7 @@ talkStore.$subscribe((mutate, state) => {
 
 ## store 组合式写法
 
-```ts
+```typescript
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { nanoid } from 'nanoid'
