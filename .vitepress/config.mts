@@ -32,9 +32,9 @@ const nav = [
       },
     ],
   },
-  { text: "其它", link: "/others", activeMatch: "/others/" },
-  { text: "组件/算法", link: "/examples", activeMatch: "/examples/" },
   { text: "工程化", link: "/engineering", activeMatch: "/engineering/" },
+  { text: "组件/算法", link: "/examples", activeMatch: "/examples/" },
+  { text: "其它", link: "/others", activeMatch: "/others/" },
 ];
 
 /** 侧边栏目录 */
@@ -79,6 +79,26 @@ const sidebar = {
       },
     ],
   },
+  vue: {
+    base: "/vue",
+    items: [
+      { text: "Vue 基础", link: "/base" },
+      { text: "Vue 2", link: "/vue2" },
+      { text: "Vue 3", link: "/vue3" },
+      { text: "Vuex 状态管理器", link: "/vuex" },
+      { text: "Pinia 状态管理器", link: "/pinia" },
+      { text: "Vue Router 路由", link: "/vue-router" },
+    ],
+  },
+  nuxt: {
+    base: "/nuxt",
+    items: [
+      {
+        text: "Nuxt",
+        items: [{ text: "自定义路由", link: "/custom-route" }],
+      },
+    ],
+  },
   react: {
     base: "/react",
     items: [
@@ -109,6 +129,45 @@ const sidebar = {
       },
     ],
   },
+  // 工程化
+  engineering: {
+    base: "/engineering",
+    items: [
+      {
+        text: "代码规范",
+        collapsed: false,
+        items: [
+          { text: "ESLint", link: "/eslint" },
+          { text: "CommitLint", link: "/commitlint" },
+          { text: "Vue 风格指南", link: "/vue-style-guide" },
+        ],
+      },
+      {
+        text: "其它",
+        collapsed: false,
+        items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
+      },
+    ],
+  },
+  // 组件/算法
+  examples: {
+    base: "/examples",
+    items: [
+      {
+        text: "算法",
+        collapsed: false,
+        items: [{ text: "深拷贝", link: "/deepclone/" }],
+      },
+      {
+        text: "组件",
+        collapsed: false,
+        items: [
+          { text: "无限瀑布流", link: "/masonary/" },
+          { text: "3D 轮播图", link: "/carousel-3d/" },
+        ],
+      },
+    ],
+  },
   // 其它
   others: {
     base: "/others",
@@ -134,68 +193,9 @@ const sidebar = {
         text: "SSR",
         collapsed: false,
         items: [
-          // { text: "笔记", link: "/notes" },
+          { text: "SSR", link: "/ssr" },
         ],
       },
-    ],
-  },
-  // 代码示例
-  examples: {
-    base: "/examples",
-    items: [
-      {
-        text: "算法",
-        collapsed: false,
-        items: [{ text: "深拷贝", link: "/deepclone/" }],
-      },
-      {
-        text: "组件",
-        collapsed: false,
-        items: [
-          { text: "无限瀑布流", link: "/masonary/" },
-          { text: "3D 轮播图", link: "/carousel-3d/" },
-        ],
-      },
-    ],
-  },
-  // 工程化
-  engineering: {
-    base: "/engineering",
-    items: [
-      {
-        text: "代码规范",
-        collapsed: false,
-        items: [
-          { text: "ESLint", link: "/eslint" },
-          { text: "CommitLint", link: "/commitlint" },
-          { text: "Vue 风格指南", link: "/vue-style-guide" },
-        ],
-      },
-      {
-        text: "其它",
-        collapsed: false,
-        items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
-      },
-    ],
-  },
-  nuxt: {
-    base: "/nuxt",
-    items: [
-      {
-        text: "Nuxt",
-        items: [{ text: "自定义路由", link: "/custom-route" }],
-      },
-    ],
-  },
-  vue: {
-    base: "/vue",
-    items: [
-      { text: "Vue 基础", link: "/base" },
-      { text: "Vue 2", link: "/vue2" },
-      { text: "Vue 3", link: "/vue3" },
-      { text: "Vuex 状态管理器", link: "/vuex" },
-      { text: "Pinia 状态管理器", link: "/pinia" },
-      { text: "Vue Router 路由", link: "/vue-router" },
     ],
   },
 };
