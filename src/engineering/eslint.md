@@ -301,7 +301,7 @@ module.exports = {
 
 - `eslint`
 - `prettier`
-- `eslint-plugin-vue ` Vue 官方 ESLint 插件
+- `eslint-plugin-vue` Vue 官方 ESLint 插件
 - `@vue/eslint-config-typescript` [npm 地址](https://www.npmjs.com/package/@vue/eslint-config-typescript)
   - Vue 官方 TS-ESLint 规则集
   - 内部依赖了 `@typescript-eslint/parser` 解析器和 `@typescript-eslint/eslint-plugin` 插件
@@ -370,6 +370,92 @@ module.exports = {
 :::
 
 > 使用 `.eslint.cjs` 作为 ESLint 配置文件的命名是为了明确它是一个 CommonJS 模块（运行在 Node 环境，使用 `require` 导入，`module.exports` 导出），便于与 ESM 文件区分。
+
+### 其他配置文件推荐
+
+::: details v3-admin-vite 项目
+
+```js
+// https://github.com/un-pany/v3-admin-vite/blob/main/.eslintrc.cjs
+// .eslintrc.cjs
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  extends: [
+    "plugin:vue/vue3-essential",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/eslint-config-typescript",
+  ],
+  parser: "vue-eslint-parser",
+  parserOptions: {
+    parser: "@typescript-eslint/parser",
+    ecmaVersion: 2020,
+    sourceType: "module",
+    jsxPragma: "React",
+    ecmaFeatures: {
+      jsx: true,
+      tsx: true,
+    },
+  },
+  rules: {
+    // TS
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-debugger": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+      },
+    ],
+    // Vue
+    "vue/no-v-html": "off",
+    "vue/require-default-prop": "off",
+    "vue/require-explicit-emits": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/html-self-closing": [
+      "error",
+      {
+        html: {
+          void: "always",
+          normal: "always",
+          component: "always",
+        },
+        svg: "always",
+        math: "always",
+      },
+    ],
+    // Prettier
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
+  },
+};
+```
+
+:::
 
 ## 08 Nuxt 中的方案
 
