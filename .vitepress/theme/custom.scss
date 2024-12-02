@@ -8,8 +8,17 @@
 }
 
 .my-img {
-  margin: 2rem auto;
+  margin: 1rem 0;
   border-radius: 8px;
+}
+
+// 设置图片缩放
+@for $i from 10 through 90 {
+  @if $i % 10==0 {
+    .zoom-#{$i} {
+      zoom: calc($i / 100);
+    }
+  }
 }
 
 .VPMenu {

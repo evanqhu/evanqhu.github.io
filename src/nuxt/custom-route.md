@@ -6,7 +6,7 @@
 
 我们不希望 `modules` 文件夹内的组件生成路由
 
-<img src="./images/file-structure.png" class="my-img">
+<img src="./images/file-structure.png" class="my-img zoom-80">
 
 ## 解决方案
 
