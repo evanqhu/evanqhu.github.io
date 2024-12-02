@@ -252,7 +252,6 @@ export default defineConfig({
         items: [{ text: "Vue 基础", link: "/base" }],
       },
     },
-    socialLinks: [{ icon: "github", link: "https://github.com/evanqhu/evanqhu.github.io" }],
     // 大纲级别
     outline: {
       label: "页面导航",
@@ -269,6 +268,7 @@ export default defineConfig({
     search: {
       provider: "local",
     },
+    socialLinks: [{ icon: "github", link: "https://github.com/evanqhu/evanqhu.github.io" }],
   },
   vite: {
     css: {
@@ -277,6 +277,15 @@ export default defineConfig({
           api: "modern-compiler",
         },
       },
+    },
+  },
+  markdown: {
+    container: {
+      tipLabel: "提示",
+      warningLabel: "警告",
+      dangerLabel: "危险",
+      infoLabel: "信息",
+      detailsLabel: "详细信息",
     },
   },
 });
