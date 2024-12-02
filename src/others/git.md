@@ -135,13 +135,13 @@ Git 是一款版本控制系统，它可以**追踪文件的更改**，并能**�
 
 配置姓名：
 
-```git
+```shell
 git config --global user.name "Your Name" 
 ```
 
 配置邮箱：
 
-```git
+```shell
 git config --global user.email "email@example.com" 
 ```
 
@@ -523,7 +523,7 @@ GitFlow 是团队开发的一种最佳实践，将代码划分为以下几个分
 
 第一步：维护好本地仓库（所有文件均接受版本控制）。
 
-```git
+```shell
 git add xxxx
 git commit -m '注释'
 ```
@@ -534,7 +534,7 @@ git commit -m '注释'
 
 第四步：配置本地仓库关联远程仓库：
 
-```git
+```shell
 git remote add origin https://xxxx/xxxx/xxxxx.git
 ```
 
@@ -548,7 +548,7 @@ git remote add origin https://xxxx/xxxx/xxxxx.git
 
 将本地仓库的 master 分支推送到远程仓库
 
-```git
+```shell
 git push -u origin master
 ```
 
@@ -563,7 +563,7 @@ git push -u origin master
 
 当本地仓库想获得远程仓库的最新修改时，可以使用`git pull`命令拉取远端代码。
 
-```git
+```shell
 git pull
 ```
 
@@ -578,13 +578,13 @@ git pull
 
 获取一个远程仓库的地址，随后执行克隆命令
 
-```git
+```shell
 git clone https://xxxx/xxxx/xxxx.git
 ```
 
 使用 `--depth 1` 参数可以克隆仓库的最近一次提交，这样可以减少克隆所需的时间和空间。
 
-```git
+```shell
 git clone --depth 1 https://xxxx/xxxx/xxxx.git
 ```
 
