@@ -46,7 +46,7 @@ pnpm i simple-git-hooks lint-staged @commitlint/{cli,types,config-conventional} 
 
 > 在 git 的生命周期钩子中执行某些命令，这里主要是 pre-commit 钩子，在 git commit 之前执行
 
-- 使用 husky
+### 1️⃣ 使用 husky
 
 ```bash
 pnpm exec husky init
@@ -58,7 +58,7 @@ pnpm exec husky init
 pnpm run lint-staged
 ```
 
-- 使用 simple-git-hooks
+### 2️⃣ 使用 simple-git-hooks
 
 在 `package.json` 中配置相关命令
 
@@ -69,6 +69,17 @@ pnpm run lint-staged
     "pre-commit": "pnpm run lint-staged"
   }
 }
+```
+
+执行脚本更新 git hooks 配置
+
+```shell
+# [Optional] These 2 steps can be skipped for non-husky users
+git config core.hooksPath .git/hooks/
+rm -rf .git/hooks
+
+# Update ./git/hooks
+npx simple-git-hooks
 ```
 
 ## 04 配置 lint-staged
