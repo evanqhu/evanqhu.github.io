@@ -40,18 +40,19 @@
 
 ## 02 创建 Vue 3 工程
 
-### 基于 create-vue 创建
+### 1️⃣ 基于 [create-vue](https://github.com/vuejs/create-vue) 创建
 
-官网：[create-vue](https://github.com/vuejs/create-vue) 默认打包工具为 Vite
+`create-vue` 是 Vue 官方的项目脚手架工具。你将会看到一些诸如 TypeScript 和测试支持之类的可选功能提示：
 
-```powershell
-## 执行创建命令
+```shell
 pnpm create vue@latest
 ```
 
-### 基于 Vite 创建
+<img src="./images/create-vue.png" alt="create-vue.png" class="my-img" />
 
-`Vite` 是新一代前端构建工具，官网地址：[https://cn.vitejs.dev/guide/](https://cn.vitejs.dev/guide/)，`Vite`的优势如下：
+### 2️⃣ 基于 [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) 创建
+
+`Vite` 是新一代前端构建工具，`Vite` 的优势如下：
 
 - 轻量快速的热重载（`HMR`），能实现极速的服务启动。
 - 对 `TypeScript`、`JSX`、`CSS` 等支持开箱即用。
@@ -62,14 +63,20 @@ pnpm create vue@latest
 
 <img src="./images/esm-based-dev-server.png" alt="esm-based-dev-server.png" class="my-img zoom-30" />
 
-- 具体操作如下（点击查看[官方文档](https://cn.vuejs.org/guide/quick-start.html)）
+`create-vite` 是 Vite 官方的项目脚手架工具。使用 Vite 创建项目时可以选择多种项目模板，包括 Vue、React、SSR 等等类型
 
-```powershell
+```shell
 ## 执行创建命令
 pnpm create vite
 ```
 
-自己动手编写一个 App 组件
+<img src="./images/create-vite.png" alt="create-vite.png" class="my-img" />
+
+选择某个框架之后，还可以自定义模板，比如这里选择 Vue 框架，还可以通过 create-vue 来自定义模板，也可以选择 Nuxt 模板等
+
+<img src="./images/create-vite-2.png" alt="create-vite-2.png" class="my-img" />
+
+### 自己动手编写一个 App 组件
 
 ```html
 <template>
