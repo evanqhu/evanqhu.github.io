@@ -14,9 +14,9 @@ pnpm install pinia
 
 2️⃣ 注册并使用插件
 
-`src/main.ts`
+::: code-group
 
-```typescript
+```typescript [src/main.js]
 import { createApp } from "vue";
 import App from "./App.vue";
 
@@ -32,6 +32,8 @@ app.use(pinia);
 app.mount("#app");
 ```
 
+:::
+
 此时开发者工具中已经有了 `Pinia` 选项
 
 ## 存储+读取数据
@@ -46,11 +48,11 @@ app.mount("#app");
 
 - 一个状态管理器可以包含多个 `store`
 
-### 创建 countStore
+### 创建 Store
 
-`src/stores/count.ts`
+::: code-group
 
-```typescript
+```typescript [src/stores/count.ts]
 // 引入 defineStore 用于创建 store
 import { defineStore } from "pinia";
 
@@ -73,11 +75,7 @@ export const useCountStore = defineStore("count", {
 });
 ```
 
-### 创建 talkStore
-
-`src/stores/talk.ts`
-
-```js
+```typescript [src/stores/talk.ts]
 import { defineStore } from "pinia";
 
 export const useTalkStore = defineStore("talk", {
@@ -92,6 +90,8 @@ export const useTalkStore = defineStore("talk", {
   actions: {},
 });
 ```
+
+:::
 
 ### 组件中使用 store
 

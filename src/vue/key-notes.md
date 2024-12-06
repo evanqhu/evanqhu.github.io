@@ -142,6 +142,53 @@ const objectOfAttrs = {
 
 <img src="./images/directive.png" alt="directive.png" class="my-img" />
 
+### CSS 中的 `v-bind()`
+
+单文件组件的 `<style>` 标签支持使用 `v-bind` CSS 函数将 CSS 的值链接到动态的组件状态：
+
+```vue
+<template>
+  <div class="text">hello</div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      color: "red",
+    };
+  },
+};
+</script>
+
+<style>
+.text {
+  color: v-bind(color);
+}
+</style>
+```
+
+这个语法同样也适用于 `<script setup>`，且支持 JavaScript 表达式 (需要用引号包裹起来)：
+
+```vue
+<script setup>
+import { ref } from "vue";
+const theme = ref({
+  color: "red",
+});
+</script>
+
+<template>
+  <p>hello</p>
+</template>
+
+<style scoped>
+p {
+  color: v-bind("theme.color");
+}
+</style>
+```
+
 ## 响应式基础
 
 ### 有状态的方法 (选项式)
@@ -2087,6 +2134,7 @@ const vnode = {
   ],
 };
 ```
+
 一个运行时渲染器将会遍历整个虚拟 DOM 树，并据此构建真实的 DOM 树。这个过程被称为挂载 (mount)。
 
 如果我们有两份虚拟 DOM 树，渲染器将会有比较地遍历它们，找出它们之间的区别，并应用这其中的变化到真实的 DOM 上。这个过程被称为更新 (patch)，又被称为“比对”(diffing) 或“协调”(reconciliation)。

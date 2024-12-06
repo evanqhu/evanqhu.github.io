@@ -1,6 +1,8 @@
 # 深度作用选择器
 
 ::: info Note
+https://cn.vuejs.org/api/sfc-css-features.html
+
 https://juejin.cn/post/6978781674070884366
 
 https://juejin.cn/post/7413669480624357386
@@ -58,16 +60,24 @@ Vue 3 中弃用（目前也能用）
 </style>
 ```
 
-### 4️⃣ `:deep()`
+### 4️⃣ `:deep()` 伪类
 
 推荐使用
 
 ```scss
 <style scoped lang="scss">
-:deep(.demo) {
+.parent :deep(.demo) {
   color: red;
 }
 </style>
+```
+
+上面的代码被编译成
+
+```css
+.a[data-v-f3f3eg9] .b {
+  color: red;
+}
 ```
 
 ## scoped 含义
