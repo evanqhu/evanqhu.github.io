@@ -22,13 +22,13 @@ cz-git：https://cz-git.qbb.sh/zh/guide/
 
 - 使用 husky
 
-```bash
+```sh
 pnpm i husky lint-staged @commitlint/{cli,types,config-conventional} commitizen cz-git -D
 ```
 
 - 使用 simple-git-hooks
 
-```bash
+```sh
 pnpm i simple-git-hooks lint-staged @commitlint/{cli,types,config-conventional} commitizen cz-git -D
 ```
 
@@ -48,13 +48,13 @@ pnpm i simple-git-hooks lint-staged @commitlint/{cli,types,config-conventional} 
 
 ### 1️⃣ 使用 husky
 
-```bash
+```sh
 pnpm exec husky init
 ```
 
 在 `.husky/pre-commit` 文件中配置相关命令
 
-```bash
+```sh
 pnpm run lint-staged
 ```
 
@@ -73,7 +73,7 @@ pnpm run lint-staged
 
 执行脚本更新 git hooks 配置
 
-```shell
+```sh
 # [Optional] These 2 steps can be skipped for non-husky users
 git config core.hooksPath .git/hooks/
 rm -rf .git/hooks
@@ -282,7 +282,7 @@ module.exports = {
 ```
 
 该脚本用于在提交代码时，自动执行拉取仓库、 lint-staged、commitizen 等工具，确保代码质量和提交信息的规范性。
-```bash
+```sh
 # commit.sh
 #!/bin/bash
 

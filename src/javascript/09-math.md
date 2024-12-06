@@ -17,7 +17,7 @@
 
 ### 获取随机颜色
 
-```javascript
+```js
 const getRandomColor = () => {
   return '#' + Math.random().toString(16).substring(2, 8).padEnd(0);
 };
@@ -25,7 +25,7 @@ const getRandomColor = () => {
 
 ### 获取随机值
 
-```javascript
+```js
 const selectFrom = (lowerValue, upperValue) => {
   const choices = upperValue - lowerValue + 1;
   return Math.floor(Math.random() * choices + lowerValue);

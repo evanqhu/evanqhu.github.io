@@ -63,7 +63,7 @@ Node 中的事件循环机制
 
 
 
-```javascript
+```js
 // 延迟定时器
 setTimeout(() => {
   console.log(1)

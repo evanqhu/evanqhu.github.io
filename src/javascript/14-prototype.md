@@ -12,7 +12,7 @@
   * 执行构造函数里面的代码，给这个空对象添加属性和方法；
   * 返回这个新对象（所以构造函数里面不需要 return ）
 
-```javascript
+```js
 // 构造函数
 function Star(name, age) {
   this.name = name;
@@ -29,7 +29,7 @@ const ldh = new Star('刘德华', 18);
 * **实例成员**是构造函数内部通过 this 添加的成员，如上方的 name，age；实例成员只能通过实例化的对象来访问，如通过 ldh 来访问实例成员；
 * **静态成员**是在构造函数本身上添加的成员，只能通过构造函数访问，不能通过实例化对象来访问。
 
-```javascript
+```js
 // 构造函数
 function Star(name, age) {
   this.name = name; // 实例成员
@@ -54,7 +54,7 @@ Star.prototype.sing = () => { console.log("singing" ); }
 >**每个构造函数都有一个 prototype 属性（也叫原型对象），指向另一个对象，这个对象的所有属性和方法都会被构造函数所拥有；**
 > **可以把不变的方法定义在原型对象上，这样所有对象的实例就可以共享这些方法；**
 
-```javascript
+```js
 function Star(name, age) {
   this.name = name;
   this.age = age;
@@ -75,7 +75,7 @@ ldh.sing; // 实例化的对象都可以使用构造函数原型对象上的方�
 
 **Star 原型对象**身上有一个 constructor 属性，指向 **Star 构造函数**；用于记录该对象引用于哪个构造函数。
 
-```javascript
+```js
 // 使用下面的方法只是在 Star 原型对象上添加属性，不会覆盖原来的原型对象
 Star.prototype.sing = function() { console.log('我会唱歌') };
 
@@ -98,7 +98,7 @@ Star.prototype = {
 扩展内置对象的方法；
 数组和字符串内置对象不能给原型对象覆盖操作，只能是用追加属性和方法的方式；
 
-```javascript
+```js
 // 给数组添加（追加）自定义求和方法
 Array.prototype.sum  = function() {
   let sum = 0;
@@ -120,7 +120,7 @@ const sum = arr.sum(); // 调用原型对象方法
 **thisArg 表示当前调用函数 this 的指向对象**
 arg 表示传递的其他参数
 
-```javascript
+```js
 function fn(x) {
   console.log(this.name, '你好啊', x)；
 };
@@ -138,7 +138,7 @@ fn.call(person, 666);
 **利用构造函数实现父类的属性，利用原型对象实现父类的方法；**
 通过 `call()` 把父类的 this 指向子类的 this。
 
-```javascript
+```js
 // 1. 父构造函数
 function Father(uname, age) {
   // this 指向父构造函数的实例对象

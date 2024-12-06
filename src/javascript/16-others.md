@@ -9,7 +9,7 @@
 * 标记清除：变量进入环境时标记“进入”，变量离开环境时，标记“离开”；
 * 引用计数：当变量 A（**引用类型**）赋值给了变量 B，则 A 引用次数 +1；当 B 不再指向A时，A 引用次数 -1；
 
-```javascript
+```js
 // 标记清除
 function test(){
   const a = 10 ; // 被标记，进入环境 
@@ -29,7 +29,7 @@ function test() {
 
 循环引用、闭包、DOM 泄露、定时器泄漏
 
-```javascript
+```js
 // 意外的全局变量：在函数中没有声明就赋值的变量，或者通了 this 声明，但最后挂到 window 上了
 
 // 闭包，维持函数内部局部变量，使其无法释放
@@ -59,7 +59,7 @@ clearInterval(t); // 如果不关计时器，node 对象和回调函数都不会
 
 1️⃣ 工厂模式
 
-```javascript
+```js
 function createPerson(name, age, job) {
   const obj = new Object();
   obj.name = name;
@@ -77,7 +77,7 @@ const person2 = createPerson("Greg", 27, "Doctor");
 
 2️⃣ 构造函数模式
 
-```javascript
+```js
 function Person(name, age, job) {
   this.name = name;
   this.age = age;
@@ -100,7 +100,7 @@ person2.sayName();  // Greg
 
 3️⃣ 原型模式
 
-```javascript
+```js
 function Person() { };
 Person.prototype.name = "Nicholas";
 Person.prototype.age = 29;

@@ -74,7 +74,7 @@ console.log()  // 写入浏览器控制台
 
 
 
-```javascript
+```js
 /* ********** 原始值类型 ********** */
 // 1.布尔型 Boolean
 const a = true;
@@ -101,7 +101,7 @@ const a = function() { console.log("hello") };
 
 ## 运算符
 
-```javascript
+```js
 /* ********** 算数运算符 ********** */
 // 取余操作符
 const a = 10 % 3; // 1

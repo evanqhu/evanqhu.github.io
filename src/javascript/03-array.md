@@ -2,7 +2,7 @@
 
 ## 创建数组
 
-```javascript
+```js
 // 1. 使用 new Array 构造函数创建
 const arr = new Array();
 
@@ -181,7 +181,7 @@ const index = arr.findIndex(item => item > 15); // 1
 
 ## 其他属性和方法
 
-```javascript
+```js
 const arr = [1, 2, 3]
 /* ********** 其他数组的方法 ********** */
 // length属 性，返回数组长度
@@ -274,7 +274,7 @@ const sum = arr.reduce((prev, item) => prev + item); // 数组元素求和
 
 #### for 语句
 
-```javascript
+```js
 // for...in 遍历数组的 key
 for (const key in arr) {
   console.log(arr[key]);

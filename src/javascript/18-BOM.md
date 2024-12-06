@@ -6,14 +6,14 @@
 
 ### 窗口位置
 
-```javascript
+```js
 window.screenLeft // 浏览器窗口距离屏幕左边的像素数
 window.screenTop // 浏览器窗口距离屏幕上边的像素数
 ```
 
 ### 窗口大小
 
-```javascript
+```js
 window.
 ```
 

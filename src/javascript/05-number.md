@@ -1,6 +1,6 @@
 # Number
 
-```javascript
+```js
 // 在所有数字运算中，JavaScript 会尝试将字符串转换为数字；
 // 使用全局函数判断一个元素是否为非数字
 isNaN("12"); // false 它可以转换成一个数字
@@ -12,7 +12,7 @@ const n = 15;
 
 ## 数字方法
 
-```javascript
+```js
 const num = 12.34
 // Number.toString()  数字转字符串，不改变原数字
 num.toString(); // "12.34"
@@ -26,7 +26,7 @@ num.toPrecision(3); // "12.3"
 
 ## 全局方法
 
-```javascript
+```js
 // 变量转数字
 num = Number("12"); // 12
 // 变量转字符串

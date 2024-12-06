@@ -43,7 +43,7 @@
 
 检查字符串是否符合美元书写格式 `$1,023,032.03`  如果是小数，小数部分长度为 2
 
-```javascript
+```js
 const pattern = /^\$[1-9]\d{0,2}(,\d{3})*(\.\d{2})?$/;
 pattern.test(str); // 返回 true or false
 
@@ -62,7 +62,7 @@ pattern.test(str); // 返回 true or false
 
 检查字符串是否符合 Vue 中双花括号语法 `{{ data }}`
 
-```javascript
+```js
 const pattern = /\{\{(.+?)\}\}/;
 pattern.test(str);
 ```

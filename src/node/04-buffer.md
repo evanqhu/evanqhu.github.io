@@ -10,7 +10,7 @@
 
 Buffer 是一个类或者构造函数。
 
-```javascript
+```js
 // 1. 创建一个 Buffer 实例 (不被推荐)
 const buf1 = new Buffer(10);
 console.log(buf); // <Buffer 00 00 00 00 00 00 00 00 00 00>
@@ -27,7 +27,7 @@ const buf3 = Buffer.allocUnsafe(10); // <Buffer 12 00 34 00 00 00 00 23 00 00>
 
 将数据存入 Buffer 实例。
 
-```javascript
+```js
 const buf = Buffer.from('hello, world');
 console.log(buf); // <Buffer 68 65 6c 6c 6f 2c 20 77 6f 72 6c 64> 存储为 16 进制
 console.log(buf.toString());

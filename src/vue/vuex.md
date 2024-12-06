@@ -20,7 +20,7 @@
 
 * 创建文件：```src/store/index.js``` 该文件用于创建 store
 
-```javascript
+```js
 /******************** src/store/index.js ********************/
 import Vue from 'vue'  // 引入 Vue 核心库
 import Vuex from 'vuex'  // 引入 Vuex 插件
@@ -63,7 +63,7 @@ export default new Vuex.Store({
 
 * 在 ```main.js``` 中创建 vm 时传入 ```store``` 配置项
 
-```javascript
+```js
 /******************** 入口文件 main.js ********************/
 import Vue from 'vue'  // 引入 Vue 核心库
 import store from './store'  // 引入 store（Vuex 插件的引入和使用都写在 Vuex 的配置文件中了）
@@ -153,7 +153,7 @@ computed: {
 
 * **mapGetters 方法**：用于帮助我们映射 ```getters``` 中的数据为计算属性
 
-```javascript
+```js
 import { mapGetters } from 'vuex'
 
 computed: {
@@ -206,7 +206,7 @@ methods:{
 - 目的：让代码更好维护，让多种数据分类更加明确；
 - 修改 ```store/index.js``` ，把不同组件的 Vuex 写在不同的 JS 文件中，也可以在同一个文件中
 
-```javascript
+```js
 const countOptions = {
   namespaced: true,  // 开启命名空间
   state: { x: 1 },

@@ -20,7 +20,7 @@ ESLint 是一个开源的 JavaScript 代码检查工具，用于识别和报告�
 
 ## 01 安装依赖包
 
-```bash
+```sh
 pnpm i eslint@latest eslint-define-config -D
 pnpm i eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
 pnpm i prettier eslint-plugin-prettier eslint-config-prettier -D
@@ -273,7 +273,7 @@ export default {
 
 - 安装依赖包
 
-```bash
+```sh
 pnpm i eslint @antfu/eslint-config -D
 ```
 
@@ -311,7 +311,7 @@ module.exports = {
 - `@rushstack/eslint-patch`
   - 配合 Vue 官方的两个规则集使用的
 
-```bash
+```sh
 pnpm i eslint prettier -D
 pnpm i eslint-plugin-vue @vue/eslint-config-typescript @vue/eslint-config-prettier -D
 ```

@@ -8,13 +8,13 @@
 
 1️⃣ 安装 Pinia
 
-```bash
+```sh
 pnpm install pinia
 ```
 
 2️⃣ 注册并使用插件
 
-```javascript
+```js
 // src/main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -111,13 +111,13 @@ export const useTalkStore = defineStore('talk', {
 
 1️⃣ 直接修改
 
-```ts
+```typescript
 countStore.sum = 666
 ```
 
 2️⃣ 批量修改 `$patch`
 
-```ts
+```typescript
 countStore.$patch({
   sum: 999,
   school: 'atguigu'

@@ -28,7 +28,7 @@ switch (表达式) {
 
 ## 循环语句
 
-```javascript
+```js
 // for 循环
 for (let i = 1; i <= 100; i++) {
   // 语句;
@@ -67,7 +67,7 @@ do {
 - `finally` 使您能够执行代码，在 try 和 catch 之后，无论结果如何
 
 
-```javascript
+```js
 try {
   tryCode; // 尝试执行代码块
 } catch (error) {

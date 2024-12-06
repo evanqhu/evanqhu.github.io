@@ -54,7 +54,7 @@ CLI Command Line Interface 命令行接口工具
 - 使用 `vue inspect > output.js` 可以查看到 Vue 脚手架的**默认配置**，比如 webpack 的那些配置。关于 webpack 的配置默认是隐藏的，如果要修改，使用 `vue.config.js`，修改后的配置会覆盖默认的配置；
 - 使用 `vue.config.js` 可以对脚手架进行个性化定制，详情见：https://cli.vuejs.org/zh
 
-```javascript
+```js
 // vue.config.js 文件
 const { defineConfig } = require("@vue/cli-service"); // CommonJS 模块化语法
 module.exports = defineConfig({
@@ -93,7 +93,7 @@ module.exports = {
 - `render` 配置项是用来代替 `template` 的，使用运行时 Vue 的时候无法使用 template
 - render 是 Vue 帮忙调用的函数，接受的参数为一个函数 createElement
 
-```javascript
+```js
 render(createElement) {
   return createElement('h1', '你好')
 }
@@ -127,7 +127,7 @@ render: h => h(App)  // h 函数的第一个参数是 HTML 元素或组件，第
 
 - `$listeners` 可以获取到父组件给子组件传递的自定义事件
 
-```javascript
+```js
 /******************** 父组件（传递数据） ********************/
 <Student name="李四" sex="女" :age="18" :checkTodo="checkTodo"/>
 // 数据或方法写在子组件标签中，可以直接写值，或加上冒号后写表达式或方法名
@@ -161,7 +161,7 @@ props: {
 
 但是 props 只能逐层传递，当需要跨越多层传递的时候比较麻烦，可以用**依赖注入**；写在组件配置对象中
 
-```javascript
+```js
 // 祖先，发送数据
 export default {
   provide: {
@@ -183,7 +183,7 @@ export default {
 - 功能：把多个组件共用的配置 options 提取成一个混入对象；`mixin`（混入），提供了一种非常灵活的方式，来分发 `Vue` 组件中的可复用功能；
 - 当组件自身的数据方法和混入中的数据方法冲突时，以组件自身为主；生命周期函数发生冲突时，先执行混入中的函数，再执行组件自身的生命周期函数。
 
-```javascript
+```js
 // 1.定义混入：在一个新的 mixin.js 文件中写
 // 混入对象文件里面所写的配置和 Vue 组件身上的配置项相同，包括 data、methods、mounted 等
 export const hunhe = {  // 分别暴露，可以有多个 hunhe，都需要挨个暴露
@@ -210,7 +210,7 @@ export default {
 - 功能：插件是用于增强 Vue 功能的，本质是包含 `install` 方法的一个对象，**该方法的第一个参数是 Vue 构造函数，第二个以后的参数是插件使用者传递的数据**。插件通常用来为 Vue 添加**全局功能**；
 - 插件比混入功能更加强大，因为插件传入了 Vue 构造函数作为参数，插件中可以包含混入。
 
-```javascript
+```js
 // 1.定义插件：在一个新的 plugin.js 文件中写
 Object.install = function (Vue, 形参) {
   // 添加全局过滤器
@@ -275,7 +275,7 @@ Vue.use(plugins, 实参)
 
 - webStorage 存储的数据不会自动发送到服务器上 。
 
-```javascript
+```js
 // 1.该方法接收一个键和值作为参数，会把键值对添加到存储中，如果键名存在，则更新其对应的值
 localStorage.setItem("key", "value");
 // 2.该方法接收一个键名作为参数，返回键名对应的值
@@ -373,7 +373,7 @@ export default {
 
 - 最好在 `beforeDestroy` 钩子中，用 `$off` 解绑当前组件所用到的事件。
 
-```javascript
+```js
 /******************** 安装全局事件总线（main.js） ********************/
 new Vue({
   beforeCreate() {  // 必须写在这个生命周期中
@@ -440,7 +440,7 @@ methods: {
   - 点击编辑按钮，div 变成 input 框，然后自动获取焦点；
   - 设置当页面渲染完成后再显示某些数据，比如查询多少个好友的时候；
 
-```javascript
+```js
 // 定义 message 原始值
 this.message = "修改后的值"; // 修改 message 的值
 // DOM 未更新
@@ -523,7 +523,7 @@ this.$nextTick(function () {
 
 ### 一个最简单的 node 服务器
 
-```javascript
+```js
 const express = require("express");
 const app = express();
 
@@ -779,7 +779,7 @@ ACL：访问控制列表
 
 使用全局自定义指令
 
-```javascript
+```js
 // array.js 与权限相关的全局函数
 export function checkArray(key) {
   let arr = ["1", "2", "3", "4", "demo"];
@@ -792,7 +792,7 @@ export function checkArray(key) {
 }
 ```
 
-```javascript
+```js
 // main.js 将 array 文件挂载到全局中 自定义指令
 import { checkArray } from "./common/array";
 Vue.directive("permission", {

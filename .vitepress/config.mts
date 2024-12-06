@@ -4,33 +4,32 @@ import { defineConfig } from "vitepress";
 const nav = [
   { text: "首页", link: "/" },
   {
-    text: "系统笔记",
-    activeMatch: "/(javascript|vue2|vue3|react|node|css)/",
+    text: "JavaScript",
+    activeMatch: "/(javascript|typescript)/",
+    items: [{ text: "JavaScript", link: "/javascript/01-javascript-base" }],
+  },
+  {
+    text: "Vue",
+    activeMatch: "/(vue|nuxt)/",
     items: [
-      {
-        text: "JavaScript",
-        items: [{ text: "JavaScript", link: "/javascript/01-javascript-base" }],
-      },
-      {
-        text: "Vue",
-        items: [
-          { text: "Vue", link: "/vue" },
-          { text: "Nuxt", link: "/nuxt" },
-        ],
-      },
-      {
-        text: "React",
-        items: [{ text: "React", link: "/react/01-react-start" }],
-      },
-      {
-        text: "Node",
-        items: [{ text: "Node", link: "/node/01-node-start" }],
-      },
-      {
-        text: "CSS",
-        items: [{ text: "CSS", link: "/css/01-animation" }],
-      },
+      { text: "Vue", link: "/vue" },
+      { text: "Nuxt", link: "/nuxt" },
     ],
+  },
+  {
+    text: "React",
+    activeMatch: "/(react|next)/",
+    items: [{ text: "React", link: "/react/01-react-start" }],
+  },
+  {
+    text: "Node",
+    activeMatch: "/(node)/",
+    link: "/node/01-node-start",
+  },
+  {
+    text: "CSS",
+    activeMatch: "/(css)/",
+    link: "/css/01-animation",
   },
   { text: "工程化", link: "/engineering", activeMatch: "/engineering/" },
   { text: "组件/算法", link: "/examples", activeMatch: "/examples/" },
@@ -82,12 +81,20 @@ const sidebar = {
   vue: {
     base: "/vue",
     items: [
-      { text: "Vue 基础", link: "/base" },
-      { text: "Vue 2", link: "/vue2" },
-      { text: "Vue 3", link: "/vue3" },
-      { text: "Vuex 状态管理器", link: "/vuex" },
-      { text: "Pinia 状态管理器", link: "/pinia" },
-      { text: "Vue Router 路由", link: "/vue-router" },
+      { text: "导航", link: "/" },
+      { text: "关键知识", link: "/key-notes" },
+      {
+        text: "系统笔记",
+        collapsed: false,
+        items: [
+          { text: "Vue 基础", link: "/base" },
+          { text: "Vue 2", link: "/vue2" },
+          { text: "Vue 3", link: "/vue3" },
+          { text: "Vuex 状态管理器", link: "/vuex" },
+          { text: "Pinia 状态管理器", link: "/pinia" },
+          { text: "Vue Router 路由", link: "/vue-router" },
+        ],
+      },
     ],
   },
   nuxt: {
@@ -192,9 +199,7 @@ const sidebar = {
       {
         text: "SSR",
         collapsed: false,
-        items: [
-          { text: "SSR", link: "/ssr" },
-        ],
+        items: [{ text: "SSR", link: "/ssr" }],
       },
     ],
   },

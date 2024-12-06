@@ -2,7 +2,7 @@
 
 ## 01 用户信息
 
-```bash
+```sh
 # 查看 git 版本
 git -v
 
@@ -16,7 +16,7 @@ git config --list
 
 ## 02 仓库基础操作
 
-```bash
+```sh
 # 初始化一个仓库
 git init
  
@@ -72,7 +72,7 @@ git blame <file>
 * 合并分支时，新分支中删除的文件在 master 中会被删除，新分支添加的文件在 master 中会被添加
 * 合并冲突
 
-```bash
+```sh
 # 创建分支
 git branch <branchname>
 
@@ -98,7 +98,7 @@ git pull = git fetch + git merge
 
 ### 解决冲突
 
-```bash
+```sh
 
 ```
 
@@ -135,13 +135,13 @@ Git 是一款版本控制系统，它可以**追踪文件的更改**，并能**�
 
 配置姓名：
 
-```shell
+```sh
 git config --global user.name "Your Name" 
 ```
 
 配置邮箱：
 
-```shell
+```sh
 git config --global user.email "email@example.com" 
 ```
 
@@ -523,7 +523,7 @@ GitFlow 是团队开发的一种最佳实践，将代码划分为以下几个分
 
 第一步：维护好本地仓库（所有文件均接受版本控制）。
 
-```shell
+```sh
 git add xxxx
 git commit -m '注释'
 ```
@@ -534,7 +534,7 @@ git commit -m '注释'
 
 第四步：配置本地仓库关联远程仓库：
 
-```shell
+```sh
 git remote add origin https://xxxx/xxxx/xxxxx.git
 ```
 
@@ -548,7 +548,7 @@ git remote add origin https://xxxx/xxxx/xxxxx.git
 
 将本地仓库的 master 分支推送到远程仓库
 
-```shell
+```sh
 git push -u origin master
 ```
 
@@ -563,7 +563,7 @@ git push -u origin master
 
 当本地仓库想获得远程仓库的最新修改时，可以使用`git pull`命令拉取远端代码。
 
-```shell
+```sh
 git pull
 ```
 
@@ -578,13 +578,13 @@ git pull
 
 获取一个远程仓库的地址，随后执行克隆命令
 
-```shell
+```sh
 git clone https://xxxx/xxxx/xxxx.git
 ```
 
 使用 `--depth 1` 参数可以克隆仓库的最近一次提交，这样可以减少克隆所需的时间和空间。
 
-```shell
+```sh
 git clone --depth 1 https://xxxx/xxxx/xxxx.git
 ```
 

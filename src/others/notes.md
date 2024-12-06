@@ -50,7 +50,7 @@ console.log(count); // 2
 
 复制的命令一般为：
 
-```bash
+```sh
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 ```
 
@@ -85,7 +85,7 @@ CDN 链接中一般是这样一段代码，其中 src 表示先尝试从本地�
 
 在 VS Code 中安装 `vsc-nvm` 插件，该插件会在打开终端时自动运行 `nvm use` 命令，选择的 Node 版本正是读取自 `.nvmrc` 文件
 
-```bash
+```sh
 # .nvmrc
 v18
 ```

@@ -21,7 +21,7 @@ Java 搭建的服务器适合于 CPU 密集型
 * Node 中任何一个模块 (JS 文件) 都被一个**看不见的外层函数**所包裹
 * 这个函数用于支持模块化语法和隐藏服务器内部实现
 
-```javascript
+```js
 function (exports, require, module, __filename, __dirname) {}
 // exports：用于支持 CommonJs 模块化规范的暴露语法
 // require：用于支持 CommonJs 模块化规范的引入语法

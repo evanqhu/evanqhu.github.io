@@ -129,7 +129,7 @@ vc.$route.query.title;
 
 - 作用：可以简化路由的跳转，代替 to 之后的路径
 
-```javascript
+```js
 // 注册路由的时候给路由命名 router/index.js
 {
   name: 'hello',
@@ -314,7 +314,7 @@ this.$router.go(); // 可前进也可后退，传入一个数字，指定跳转�
 
 ### 全局守卫：写在路由器外面
 
-```javascript
+```js
 const router = new VueRouter({
   // 先用一个变量接收路由器，在其暴露之前添加守卫
   routes: [
@@ -358,7 +358,7 @@ export default router;
 
 - 只有 `beforeEnter` 一个配置项
 
-```javascript
+```js
 export default {
   name: "guanyu",
   path: "/about",
@@ -383,7 +383,7 @@ export default {
 
 - 有 `beforeRouteEnter` 和 `beforeRouteLeave` 两个配置项，进入守卫和离开守卫
 
-```javascript
+```js
 export default {
   name: "About",
   beforeRouteEnter(to, from, next) {}, // 进入守卫：通过路由规则，进入该组件时被调用
@@ -726,7 +726,7 @@ const routes: [
 
 当 props 设置为 true 时，route.params 将被设置为组件的 props
 
-```javascript
+```js
 {
 	name:'xiang',
 	path:'detail/:id/:title/:content',
@@ -741,7 +741,7 @@ const routes: [
 
 当 props 是一个对象时，它将原样设置为组件 props。当 props 是静态的时候很有用
 
-```javascript
+```js
 {
 	name:'xiang',
 	path:'detail/:id/:title/:content',
@@ -756,7 +756,7 @@ const routes: [
 
 你可以创建一个返回 props 的函数。这允许你将参数转换为其他类型，将静态值与基于路由的值相结合等等
 
-```javascript
+```js
 {
 	name:'xiang',
 	path:'detail/:id/:title/:content',

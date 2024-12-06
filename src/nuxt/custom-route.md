@@ -32,7 +32,7 @@ definePageMeta({
 
 新建 `.nuxtignore` 文件
 
-```bash
+```sh
 # 告诉 Nuxt 在构建阶段忽略哪些文件
 
 # 指定 pages 文件夹下的 这些文件夹不生成路由

@@ -2,7 +2,7 @@
 
 不借助第三方库，搭建服务器。
 
-```javascript
+```js
 // 1. 引入 Node 内置的 http 模块
 const http = require('http');
 const qs = require('querystring'); // 将 key=value&key=value...这种形式的字符串解析为对象

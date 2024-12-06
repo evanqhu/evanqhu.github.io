@@ -7,7 +7,7 @@
 * 同步回调函数：立即在主线程执行，不会放入回调队列，如数组遍历相关的回调 `arr.forEach(() => {})`
 * 异步回调函数：不会立即执行，会放入回调队列中等待主线程执行完毕再执行，如定时器，ajax，Promise 的回调
 
-```javascript
+```js
 // 函数对象
 function Person() {};
 Person.age = 18;
@@ -68,7 +68,7 @@ Promise 是一个 ES6 提供的**类**，或者说是一个**构造函数**，�
 - 什么时候我们需要再写一个 then 而不是在当前的 then 接着编程？
   - 当你又需要调用一个异步任务的时候
 
-```javascript
+```js
 new Promise((resolve, reject) => {
   // 要做的事 (同步代码，里面开启一些异步任务)
   resolve(); // or reject()
@@ -111,7 +111,7 @@ new Promise((resolve, reject) => {
 // 1111 2222 3333 An error 几乎同时执行
 ```
 
-```javascript
+```js
 // 错误穿透
 const p = new Promise((resolve, reject) => {
   setTimeout(() => {
@@ -138,7 +138,7 @@ p.then(
 
 把 Promise 放在函数的返回值中，这样函数就成了一个异步函数，可以在调用函数之后使用 then 方法，也可以放在 await 之后，相当于用 Promise 封装了一个异步操作。
 
-```javascript
+```js
 // Promise 函数 (解决回调地狱)
 function print(delay, message) {
   return new Promise((resolve, reject) => {
@@ -194,7 +194,7 @@ function demo() {
 }
 ```
 
-```javascript
+```js
 async function fn1() {
   console.log(1);
   await fn2();
@@ -233,7 +233,7 @@ Promise 解决了传统回调函数的回调地狱的问题，但是导致了纵
 
 数组中的每一项都是一个对象，status 字段表示状态，value 表示成功的值，reason 表示失败的原因
 
-```javascript
+```js
 [
   { status: 'fulfilled', value: 1 },
   { status: 'fulfilled', value: 2 },
@@ -272,7 +272,7 @@ const p2 = Promise.reject(404);
 
 > 手动实现 `Promise.all()`
 
-```javascript
+```js
 const myPromiseAll = (promises) => {
   // 检查传入的是否为一个可迭代对象
   if (!Array.isArray(promises)) {
@@ -324,7 +324,7 @@ const myPromiseAll = (promises) => {
 * 同步任务 (synchronous)：在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务
 * 异步任务 (asynchronous)：不进入主线程、而进入"任务队列" (task queue) 的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行 **(异步永远和队列挂钩)**
 
-```javascript
+```js
 for (let i = 0; i < 3; i++) {
   setTimeout(function() { console.log(i) }, 1000);
 }
@@ -356,7 +356,7 @@ console.log(i);
 3. 微任务队列为空时，取一个宏任务执行；
 4. 宏任务执行过程中遇到微任务会添加到微任务队列中，待这个宏任务执行完毕后，再去取微任务；如果有微任务，则执行，如果没有，则再取宏任务执行。（每次要执行宏队列里面的一个任务之前，先看微队列里面是否有待执行的任务，如果有则先执行微任务）
 
-```javascript
+```js
 setTimeout(() => {
   console.log(0);
 }, 0);
@@ -413,7 +413,7 @@ new Promise((resolve, reject) => {
 > 4. `getInfo` 接口请求最终完成
 > 5. `then()` 和 `finally()` 的回调被放入微任务队列并执行
 
-```javascript
+```js
 init() {
     getInfo().then((res: any) => {
         console.log('🚀🚀🚀 then: ');

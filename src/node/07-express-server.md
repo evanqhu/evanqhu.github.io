@@ -2,7 +2,7 @@
 
 express 是基于 Node.js 的快速搭建服务器的框架。
 
-```javascript
+```js
 // 1.引入 express
 const express = require('express');
 
@@ -28,7 +28,7 @@ app.listen(3000, (err) => {
 
 ## request 和 response 的 API
 
-```javascript
+```js
 // request
 request.query	 // 获取查询字符串参数（query参数），拿到的是一个对象
 request.params  // 获取get请求参数路由的参数，拿到的是一个对象

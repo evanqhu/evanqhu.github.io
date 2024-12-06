@@ -4,7 +4,7 @@
 
 #### 声明函数
 
-```javascript
+```js
 // 1. 自定义函数 (命名函数)
 function fn() {};
 // 2. 函数表达式 (匿名函数)
@@ -16,7 +16,7 @@ const f = new Function('a', 'b', 'console.log(a + b)');
 
 #### 调用函数
 
-```javascript
+```js
 // 1.调用普通函数 fn(); fn.call() fn.apply()
 // 2.对象的方法，Object.key，value 是函数，则被调用了
 // 3.构造函数 new
@@ -37,7 +37,7 @@ void (function() {
   - `arguments` 无需指出参数名就可访问
   - `arguments` 身上有一个属性 `callee`，存储的是这个函数本身
 
-```javascript
+```js
 // args 可以换成其它名字，如 demo,它属于是剩余参数
 // arguments 不能换
 function fn(...args) {
@@ -96,7 +96,7 @@ const max = Math.max.apply(Math, arr);
 
 3️⃣ `bind()`
 
-```javascript
+```js
 // 该方法不会调用原来的函数，返回的是原函数改变 this 之后产生的新函数
 const fn2 = fn.bind(p, 1, 2);  
 // 可用在 setTimeout 里面，绑定回调函数，改变其 this 指向
@@ -133,7 +133,7 @@ obj.say(); // 输出 100（对象不产生作用域，箭头函数 say 实际上
 
 有权访问另一个函数作用域中变量的函数
 
-```javascript
+```js
 function fn() {
   const num = 10;
   function fun() {
@@ -146,7 +146,7 @@ fn();  // fn() 为闭包函数；被访问的变量所在的函数是闭包函�
 
 闭包延伸了变量的作用范围，可以用以下方法从外部作用域访问内部的局部变量
 
-```javascript
+```js
 function fn() {
   const num = 10;
   function fun() { console.log(num); };
@@ -193,7 +193,7 @@ console.log(counter.decrement()); // 输出：1
 以下代码点击任意 `li` 只会输出 4 。原因如下：
 点击事件是异步任务，只有点击了才会执行函数；但 for 循环是同步任务，它会立即执行，然后就给 4 个 `li` 注册了点击事件函数，这时 `i` 的值已经变为 4，所以点击任意 `li`，执行其点击事件函数，输出的都是 4。
 
-```javascript
+```js
 // 点击 li 输出其索引号（错误写法 var）
 const lis = document.querySelector('.nav').querySelectorAll('li'); // 4 个 li
 for (var i = 0; i < lis.length; i++) { 
@@ -234,7 +234,7 @@ for (var i = 0; i < lis.length; i++) {
 
 **定时器中的闭包（定时器是异步任务）**
 
-```javascript
+```js
 // 写法1：闭包
 for (let i = 0; i < lis.length; i++) {
   (function(i) {
@@ -294,7 +294,7 @@ const sleep = (timeoutMS) => new Promise((resolve) => { // 设置一个异步操
 
 一个函数内部自己调用自己，这个函数就是递归函数
 
-```javascript
+```js
 let num = 1;
 
 function fn() {
@@ -330,7 +330,7 @@ function fb(n) {
 
 赋值和浅拷贝的区别：赋值是赋的对象在**栈中的地址**，不是**堆中的数据**，不会创建新的对象，也就是说两个变量指向同一个存储空间；而浅拷贝会创建一个新的对象，新对象有着原始对象属性的一份精确拷贝，如果属性是基本类型，就拷贝值，如果是引用类型，就拷贝内存地址。
 
-```javascript
+```js
 const obj = {
   id: 1,
   name: 'Andy',

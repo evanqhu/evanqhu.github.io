@@ -4,41 +4,41 @@
 
 **所有字符串方法都会返回新字符串，它们不会修改原始字符串，因为字符串变量是不可修改的**
 
-```javascript
+```js
 const str = "hello world!";
 ```
 
 1️⃣ `length`
 
-```javascript
+```js
 // length 属性，返回字符串长度
 str.length; // 12
 ```
 
 2️⃣ `slice()`
 
-```javascript
+```js
 // String.slice(start, end) 裁剪字符串 (和数组的该方法相同)
 const s = str.slice(2, 5); // "llo"
 ```
 
 3️⃣ `substring()`
 
-```javascript
+```js
 // String.substring(start, end) 裁剪字符串，类似 slice，但不能传入负的索引值
 const s = str.substring(2, 5); // "llo"
 ```
 
 4️⃣ `substr()` 已弃用
 
-```javascript
+```js
 // String.substr(start, length)  第二个参数表示提取的字符串的长度，裁剪字符串
 const s = str.substr(2, 5)  // "llo w"
 ```
 
 5️⃣ `replace()`
 
-```javascript
+```js
 // String.replace(old, new) 用另一个值替换在字符串中指定的值，只替换首个匹配
 // 第一个参数可以传正则表达式
 const s = str.replace("e", "d")  // "hdllo world!"
@@ -47,7 +47,7 @@ const s = JSON.stringify(s).replace(/'/g, '"'); // 将数组中字符串的单�
 
 6️⃣ `split()`
 
-```javascript
+```js
 // String.split() 将字符串转换成数组
 const s = str.split(); // 不传入分隔符，字符串成为一整个数组，数组长度为 1
 const s = str.split(""); // 每个字符都被分开，数组长度为 12
@@ -55,7 +55,7 @@ const s = str.split(""); // 每个字符都被分开，数组长度为 12
 
 7️⃣ `concat()`
 
-```javascript
+```js
 // String.concat() 连接两个字符串
 const a = "hello ";
 const b = "world";
@@ -64,7 +64,7 @@ const c = a.concat(b); // "hello world"
 
 8️⃣ `startsWith()` `endsWith()`
 
-```javascript
+```js
 // String.startsWith() String.endsWith() 判断字符串是否以某个字串开头或结尾，返回布尔值
 const str = 'Hello ECMAScript 2015';
 const r1 = str.startsWith('Hello'); // true
@@ -73,7 +73,7 @@ const r2 = str.endsWith('2016'); // false
 
 9️⃣ 其它
 
-```javascript
+```js
 // String.toUpperCase()
 // String.toLowerCase()
 // String.trim() 去除首尾空白
@@ -84,7 +84,7 @@ const r2 = str.endsWith('2016'); // false
 
 1️⃣ `indexof()` `lastIndexOf()`
 
-```javascript
+```js
 const str = "hello world!";
 // String.indexOf(char, start) 返回字符串中一个子串第一处出现的索引，没找到返回 -1
 // 可声明第二个参数表示起始检索位置
@@ -96,28 +96,28 @@ const index = str.indexOf("wo"); // 6
 
 2️⃣ `search()`
 
-```javascript
+```js
 // String.search(str) 搜索特定值的字符串，并返回首次匹配的位置
 const index = str.search("wo"); // 6
 ```
 
 3️⃣ `includes()`
 
-```javascript
+```js
 // String.includes(str) 返回是否包含指定字符串的布尔值
 str.includes("m"); // false
 ```
 
 4️⃣ `charAt()`
 
-```javascript
+```js
 // String.charAt(index) 根据索引位置返回字符，类似于 str[index]
 str.charAt(0); // "h"
 ```
 
 ## 字符串遍历
 
-```javascript
+```js
 // 遍历索引 for...in
 for (const i in str) {
   console.log(str[i]);
@@ -133,7 +133,7 @@ for (const char of "Hello") {
 
 ### 求字符串中出现次数最多的字符
 
-```javascript
+```js
 /********** 求字符串中出现次数最多的字符 (Object 方法) **********/
 const mostFrequentChars = (str) => {
   // 创建一个空对象来存储字符和它们的计数

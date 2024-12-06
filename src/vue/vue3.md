@@ -44,7 +44,7 @@
 
 `create-vue` 是 Vue 官方的项目脚手架工具。你将会看到一些诸如 TypeScript 和测试支持之类的可选功能提示：
 
-```shell
+```sh
 pnpm create vue@latest
 ```
 
@@ -65,7 +65,7 @@ pnpm create vue@latest
 
 `create-vite` 是 Vite 官方的项目脚手架工具。使用 Vite 创建项目时可以选择多种项目模板，包括 Vue、React、SSR 等等类型
 
-```shell
+```sh
 ## 执行创建命令
 pnpm create vite
 ```
@@ -78,7 +78,7 @@ pnpm create vite
 
 ### 自己动手编写一个 App 组件
 
-```html
+```vue
 <template>
   <div class="app">
     <h1>你好啊！</h1>
@@ -86,9 +86,9 @@ pnpm create vite
 </template>
 
 <script lang="ts">
-  export default {
-    name: "App", // 组件名
-  };
+export default {
+  name: "App", // 组件名
+};
 </script>
 
 <style></style>
@@ -232,13 +232,13 @@ function changName() {
 
 1. 安装插件
 
-```bash
+```sh
 pnpm i vite-plugin-vue-setup-extend -D
 ```
 
 2. 在 `vite.config.ts` 中配置插件
 
-```javascript
+```js
 import { defineConfig } from "vite";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
 
@@ -886,13 +886,13 @@ defineExpose({ name, age });
 
 - 参数可以是一个数组，表示多个 props；
 
-```javascript
+```js
 const props = defineProps(["foo"]);
 ```
 
 - 参数可以是一个对象，该对象称为类型检查对象，对象中的属性表示接收到的 props，对象的值是用于验证传入 props 类型的构造函数，只能是 String，Number，Boolean 等，不能是 TS 定义的普通类型。TypeScript 类型只能用于编译时检查，而不能在运行时使用
 
-```javascript
+```js
 const props = defineProps({
   foo: String,
 });
@@ -904,7 +904,7 @@ const props = defineProps({
 
 - **写了泛型之后，函数不能再传参数了，否则会报错**
 
-```javascript
+```js
 const props = defineProps<{
   foo: string
   bar?: number
@@ -1235,13 +1235,13 @@ emit("send-toy", 具体数据);
 
 1️⃣ 安装 `mitt`
 
-```bash
+```sh
 pnpm i mitt
 ```
 
 2️⃣ 新建文件 `src\utils\emitter.ts` 进行配置，创建 `emitter`
 
-```javascript
+```js
 // 1. 引入 mitt
 import mitt from "mitt";
 
@@ -1254,7 +1254,7 @@ export default emitter;
 
 emitter 语法
 
-```javascript
+```js
 // ***************************** emitter 语法 **************************
 // 1. 绑定事件
 emitter.on("test", (value) => {
@@ -1295,7 +1295,7 @@ onUnmounted(() => {
 
 4️⃣ 提供数据的组件，在合适的时候触发事件
 
-```javascript
+```js
 // 提供数据的组件
 import emitter from "@/utils/emitter";
 

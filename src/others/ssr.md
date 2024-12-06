@@ -43,7 +43,7 @@ Nuxt：https://nuxt.com/docs/guide/concepts/rendering
 </ul>
 ```
 
-```javascript
+```js
 const tree = {
   tag: "ul", // 节点标签名
   props: {
@@ -263,7 +263,7 @@ initializeApp();
 
 ::: details 服务器配置代码 `server.js`
 
-```javascript
+```js
 // 入口文件，启动 SSR 服务器
 import fs from "node:fs/promises"; // 导入文件系统模块，用于读取文件（使用 Promises）
 import os from "node:os"; // 导入操作系统模块，用于获取环境变量

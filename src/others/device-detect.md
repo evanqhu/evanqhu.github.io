@@ -89,7 +89,7 @@ mediaQuery.addEventListener("change", handleDeviceChange);
 
 第三方库 `mobile-detect.js` 是一个轻量级工具，用于检测设备类型（如手机、平板、PC）。它通过解析 `userAgent` 信息识别设备。
 
-```bash
+```sh
 npm install mobile-detect
 ```
 

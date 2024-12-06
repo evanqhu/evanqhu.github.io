@@ -19,7 +19,7 @@ https://developer.chrome.com/docs/devtools/remote-debugging?hl=zh-cn
 
 - 安装 Android SDK Platform-Tools
 
-```bash
+```sh
 brew install android-platform-tools
 ```
 

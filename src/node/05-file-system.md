@@ -19,7 +19,7 @@
     * `w` 写入
 * `callback` 回调函数
 
-```javascript
+```js
 // 1. 引入内置的 fs 模块
 const fs = require('fs'); // fs.writeFile(file, data, [options], callback)
 // 2. 调用 writeFile 方法
@@ -56,7 +56,7 @@ fs.writeFile(
   * `emitClose` 强制关闭文件，默认为 `false`
   * `start` 写入文件的起始位置 (偏移量)
 
-```javascript
+```js
 // 1. 引入内置的 fs 模块
 const fs = require('fs');
 // 2. 创建一个可写流
@@ -87,7 +87,7 @@ ws.close(); // 在 Node 的 v8 版本中，要用 end 方法关闭流
 * `options` 可选参数
 * `callback` 回调函数
 
-```javascript
+```js
 fs.readFile(
   __dirname + '/test.mp4',
   (err, data) => {
@@ -116,7 +116,7 @@ fs.readFile(
   * `end`
   * `highWaterMark` 控制每次读取文件的大小，默认值是 64 KB
 
-```javascript
+```js
 // 1. 引入内置的 fs 模块
 const fs = require('fs');
 

@@ -12,7 +12,7 @@ Vue.js（简称 Vue）是一个用于构建用户界面的渐进式 JavaScript �
 - &#123;&#123; xxx &#125;&#125; 中的 xxx 要写 **JS 表达式**，且 xxx 可以自动读取到 data 中的所有属性
 - 一旦 data 中的数据发生改变，那么页面中用到该数据的地方也会自动更新
 
-```javascript
+```js
 // Vue 实例和 Vue 组件中常用的配置项（vm 和 vc 共有的）
 // main.js 里面 new Vue 生成的叫做 vm；其他 .vue 文件中 export default 的都是 vc
 new Vue({
@@ -203,7 +203,7 @@ xxx 是 **JS 表达式**，且可以直接读取到 data 中的所有属性
 
 ### el 的写法
 
-```javascript
+```js
 // 方法1
 new Vue({
   el: '#root', // new Vue 时配置 el 属性
@@ -219,7 +219,7 @@ vm.$mount('#root') // 创建 Vue 实例 vm，使用 vm.$mount('#root')，这是 
 
 组件中的 data 必须写成函数式，定义组件时会通过 `Vue.extend()` 生成组件实例，每次都返回一个全新的 VueComponent ；**如果采用对象的方式，一个组件在复用的时候，data 都指向同一个对象地址，改变一处会影响其他处**；而采用函数返回的对象地址是不同的，不会产生污染。
 
-```javascript
+```js
 new Vue({
   // 对象式，vue3 中已被废弃
   data: {
@@ -259,7 +259,7 @@ new Vue({
 
 ::: details Vue 响应式原理
 
-```javascript
+```js
 let number = 18;
 
 // 1. 数据属性 (4 项)
@@ -317,7 +317,7 @@ Object.defineProperty(person, "age", {
 >
 > Obeserver 的目的是将普通的数据转换成带有 getter 和 setter 的数据，实现响应式
 
-```javascript
+```js
 // Vue 数据劫持的基本原理 (实现响应式)
 
 // 1. 数据
@@ -359,7 +359,7 @@ function Observer(obj) {
 
 > 如果想直接为 data 添加 getter 和 setter 可以使用下面方法
 
-```javascript
+```js
 // 这种方法使用中转变量 value 存储了 obj[key] 的值，避免了无限循环
 const data = { name: "Vue", version: "2.0" };
 
@@ -394,7 +394,7 @@ new Observer(data);
 - 如果初始化时 vm 的 data 里面没有的属性，需要增加时，要调用 `Vue.set()`，不能直接使用 `vm._data` 添加，不然会没有 getter 和 setter
 - 但是注意：**不能使用此方法往 vm 和 vm.data 中添加属性**，只能往其下一层添加
 
-```javascript
+```js
 // Vue.set(target, key, val) or vm$set(target, key, val)
 Vue.set(vm._data.student, "sex", "男");
 Vue.set(vm.student, "sex", "男");
@@ -412,7 +412,7 @@ vm$set(vm.student, "sex", "男");
 
 > obs 身上具有 data 的所有属性，读取或修改这些属性时就会触发 getter 或 setter
 
-```javascript
+```js
 const data = { name: "Vue", version: "2.0" };
 
 /** Vue 2 这里用了递归 */
@@ -444,7 +444,7 @@ obs.name = "React"; // Setting name=React! 触发解析模板操作
 
 #### 4️⃣ Vue 3 响应式原理
 
-```javascript
+```js
 // 使用代理和反射 API 替代 Object.defineProperty
 const data = { name: "Vue", version: "2.0" };
 
@@ -469,7 +469,7 @@ proxy.name = "React"; // Setting name=React! 触发解析模板操作
 
 > 以全局事件总线为例
 
-```javascript
+```js
 class Vue {
   constructor() {
     // 用来存储 事件-事件回调函数 { 'myclick': [fn1, fn2, fn3] }
@@ -508,7 +508,7 @@ eventHub.$emit("sum", 1, 2, 4, 5, 6, 7, 8, 9, 10);
 
 #### 2️⃣ 观察者模式
 
-```javascript
+```js
 /** 发布者 (被观察者-主题-老师) */
 class Subject {
   constructor() {
@@ -575,7 +575,7 @@ sub.notify("这是一条消息");
 - 事件函数调用传参使用 `$event` 占位，这样就不会丢失默认传入的 event 参数
 - 在组件标签中，默认绑定的是自定义事件，如果要使用原生 DOM 事件，需要加 `.native` 修饰符
 
-```javascript
+```js
 // 如果在调用事件回调时没有传递 $event 参数，事件回调函数则不会收到事件对象
 @click = "sayName('Tom')"
 sayName(name) { console.log(name) }
@@ -588,7 +588,7 @@ showInfo(e, num) { console.log(e, num) }
 
 ### 事件修饰符
 
-```javascript
+```js
 @click.prevent="func"  // 阻止默认事件 如阻止链接自动跳转
 @click.stop= "func"    // 阻止事件冒泡 当内外标签绑定相同事件时，触发内部标签不会同时触发外部标签
 @click.once= "func"    // 事件只触发一次
@@ -600,7 +600,7 @@ showInfo(e, num) { console.log(e, num) }
 
 ### 键盘事件
 
-```javascript
+```js
 @keydown
 @keyup
 @keyup.enter.native="login" // enter 键抬起时触发登录
@@ -612,7 +612,7 @@ showInfo(e, num) { console.log(e, num) }
 - 计算属性依赖 return 实现功能；
 - 计算属性简写：当只读不改时，计算属性可简写为一个函数。
 
-```javascript
+```js
 new Vue({
   computed: {
     fullName: {
@@ -647,7 +647,7 @@ new Vue({
 
 ### 手动实现一个 computed 函数
 
-```javascript
+```js
 const memory = (fn) => {
   // 缓存对象，用于存储函数的计算结果
   const cache = new Map();
@@ -736,7 +736,7 @@ console.log(memoizedCalculation(6)); // 36（从缓存中读取，不会再次�
 
 ### 绑定 class 样式
 
-```javascript
+```js
 :class="mood"     // 字符串写法，适用于样式的类名不确定，需要动态指定
 :class="classArr" // 数组写法，适用于样式的个数不确定，类名也不确定
 :class="classObj" // 对象写法，适用于样式的个数确定，类名确定，但需要动态决定用不用
@@ -753,7 +753,7 @@ data: {
 
 ### 绑定 style 样式
 
-```javascript
+```js
 :style="styleObj"  // 对象写法
 :style="styleArr"  // 数组写法
 
@@ -805,7 +805,7 @@ data: {
 
 ### 列表过滤 filter
 
-```javascript
+```js
 new Vue({
   data: {
     // 1.data 中配置 keyWord 和 filPersons 数组
@@ -868,7 +868,7 @@ Vue 的 diff 算法（主要在 Vue 的 Virtual DOM 实现中）的核心是高�
   - 局部过滤器：在创建 vm 时传入 `filters` 配置项；
   - 全局过滤器：`Vue.filter(filterName, callback)`
 
-- 使用过滤器：`{{ xxx | 过滤器名 }}` 或 `v-bind: 属性 = "xxx | 过滤器名"`
+- 使用过滤器：`&#123;&#123; xxx | 过滤器名 &#125;&#125;` 或 `v-bind: 属性 = "xxx | 过滤器名"`
 - **callback 函数默认传入第一个参数是需要过滤的数据的 `value`**，上面的 xxx 是需要过滤的数据
 
 ```html
@@ -959,7 +959,7 @@ Vue 的 diff 算法（主要在 Vue 的 Virtual DOM 实现中）的核心是高�
 
 ## 15 生命周期
 
-<img src="./images/life-circle.png" alt="life-cycle.png" class="my-img" />
+<img src="./images/lifecircle-2.png" alt="lifecycle.png" class="my-img" />
 
 - 生命周期回调函数、生命周期函数、生命周期钩子，是 Vue 在关键时刻帮我们调用的一些特殊名称的函数；生命周期函数中的 this 指向是 vm 或组件实例对象 vc；
 - `mounted` Vue 完成模板的解析并把初始的真实 DOM 元素放入页面后（挂载完毕）调用；发送 ajax 请求、启动定时器、绑定自定义事件、订阅消息等**初始化操作**；
@@ -1055,7 +1055,7 @@ Vue 的 diff 算法（主要在 Vue 的 Virtual DOM 实现中）的核心是高�
 
 **在 index.html 里面只写了一个 id 为 app 的容器**
 
-```javascript
+```js
 // main.js 程序入口文件
 import Vue from "vue"; // 引入 Vue（使用 ES6 的模块化语法替代了在 HTML 的 src 属性中引入 vue）
 import App from "./App.vue"; // 引入根组件

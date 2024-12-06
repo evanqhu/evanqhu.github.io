@@ -10,7 +10,7 @@
 
 > **代理是使用 `Proxy` 构造函数创建的。这个构造函数接收两个参数：目标对象和处理程序对象**
 
-```javascript
+```js
 // 1. 目标对象
 const target = {
   id: 'target'
@@ -50,7 +50,7 @@ console.log(target === proxy); // false
 
 > **捕获器就是在处理程序对象 (handler) 中定义的“基本操作的拦截器”**
 
-```javascript
+```js
 // 目标对象
 const target = {
   foo: 'bar'
@@ -76,7 +76,7 @@ get(trapTarget, property, receiver) {};
 
 > **有了三个参数，重建被捕获方法的原始行为**
 
-```javascript
+```js
 // 重建被捕获方法的原始行为
 const target = {
   foo: 'bar'
@@ -97,7 +97,7 @@ console.log(target.foo); // bar
 >
 > 反射可以更方便程序员重建被捕获方法的原始行为 (修改捕获方法)
 
-```javascript
+```js
 // 目标对象
 const target = {
   foo: 'bar'
@@ -122,7 +122,7 @@ console.log(target.foo);  // bar
 const proxy = new Proxy(target, Reflect); 
 ```
 
-```javascript
+```js
 // 使用反射重建被捕获方法的原始行为
 const target = {
   foo: 'bar',
@@ -171,7 +171,7 @@ console.log(target.baz);  // qux
 
 > **通过捕获 get、set 和 has 等操作，可以知道对象属性什么时候被访问、被查询**
 
-```javascript
+```js
 const user = {
   name: 'Jake'
 };
@@ -195,7 +195,7 @@ proxy.age = 27; // Setting age=27
 
 > **代理的内部实现对外部代码是不可见的，因此要隐藏目标对象上的属性也轻而易举**
 
-```javascript
+```js
 const hiddenProperties = ['foo', 'bar'];
 const targetObject = {
   foo: 1,
@@ -236,7 +236,7 @@ console.log('baz' in proxy);  // true
 
 > **通过代理可以把运行时中原本不相关的部分联系到一起。这样就可以实现各种模式，从而让不同的代码互操作**
 
-```javascript
+```js
 // 把 userList 和 User关联起来，每次创建 User 实例的时候，都会把这个实例添加到 userList 数组中
 const userList = [];
 
@@ -263,7 +263,7 @@ console.log(userList);
 
 > **把集合绑定到一个事件分派程序，每次插入新实例时都会发送消息**
 
-```javascript
+```js
 const userList = [];
 
 function emit(newValue) {

@@ -22,7 +22,7 @@ HTTP 协议是无状态的，cookie 用于解决这个问题
 
 ## 请求报文
 
-```bash
+```sh
 ### 请求报文首行:请求方式 协议名://主机地址:端口号/？urlencoded参数 HTTP协议名/版本
 GET http://localhost:3000/?name=kobe&password=123 HTTP/1.1
 
@@ -57,7 +57,7 @@ name=kobe&password=123
 
 ## 响应报文
 
-```bash
+```sh
 ### 响应报文首行
 HTTP/1.1 200 OK # 协议名/协议版本 状态码
 

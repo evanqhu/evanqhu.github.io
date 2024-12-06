@@ -4,7 +4,7 @@
 
 JavaScript 类是 JavaScript 对象的模板；类的本质是一个函数；构造函数的另一种写法，ES6 引入的，作为构造函数的语法糖
 
-```javascript
+```js
 class Car { // 使用关键字 class 创建类
   // 类的共有属性放到 constructor 里面
   constructor(name, year) { // 构造函数，在 new 的时候自动调用该函数
@@ -25,7 +25,7 @@ const myCar1 = new Car("Ford", 2014);
 * `constructor` 里面的 `this` 指向的是创建的实例对象；方法中的 `this` 指向的是方法的调用者（子类继承父类的方法，方法的调用者还是父类）；
 * `super` 关键字是用于访问和调用对象父类上的函数。可以用于调用父类的构造函数，也可以调用普通函数。
 
-```javascript
+```js
 class Father { // 父类
   constructor(x, y) {
     this.x = x;
@@ -90,7 +90,7 @@ const ldh = new Star('刘德华', 18, '男');
 
 ## 对象方法
 
-```javascript
+```js
 // obj.hasOwnProperty(key) 判断对象是否具有某个键，而且是在其自身，不是原型链上的
 // for...in 遍历对象时也会返回其原型链上的属性
 // (key in obj) 也会返回一个布尔值

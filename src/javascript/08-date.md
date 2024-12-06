@@ -1,6 +1,6 @@
 # 日期对象 Date
 
-```javascript
+```js
 // Date() 是一个构造函数
 const t = new Date(); // Wed Aug 31 2022 21:31:53 GMT+0800 (中国标准时间) 当前时间
 new Date(year, month, day, hours, minutes, seconds, milliseconds);
