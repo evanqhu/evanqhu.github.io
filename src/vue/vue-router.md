@@ -424,7 +424,7 @@ const router = new VueRouter({
 })
 ```
 
-## 4.0 版本
+## 4.x 版本
 
 ## 对路由的理解
 
@@ -436,7 +436,9 @@ const router = new VueRouter({
 
 `Vue3` 中要使用 `vue-router` 的最新版本，目前是 `4` 版本
 
-路由配置文件代码如下：
+### 1️⃣ 创建路由器
+
+`src/router/index.js`
 
 ```js
 import { createRouter, createWebHistory } from "vue-router";
@@ -458,10 +460,11 @@ const router = createRouter({
 export default router;
 ```
 
-注册路由器
+### 2️⃣ 注册路由器
+
+`main.js`
 
 ```js
-// main.ts
 import router from "./router/index";
 
 app.use(router);
@@ -475,10 +478,11 @@ router.isReady().then(() => {
 });
 ```
 
-使用路由器
+### 3️⃣ 使用路由器
+
+`App.vue`
 
 ```vue
-<!-- App.vue -->
 <template>
   <div class="app">
     <h2 class="title">Vue 路由测试</h2>
@@ -502,13 +506,13 @@ import { RouterLink, RouterView } from "vue-router";
 
 ## 两个注意点
 
-路由组件通常存放在 `pages` 或 `views` 文件夹，一般组件通常存放在 `components` 文件夹
+路由组件通常存放在 `pages` 或 `views` 文件夹，非路由组件通常存放在 `components` 文件夹
 
 通过点击导航，视觉效果上“消失”了的路由组件，默认是被**卸载**掉的，需要的时候再去**挂载**
 
 ## 路由器工作模式
 
-1️⃣ `history` 模式
+### 1️⃣ `history` 模式
 
 优点：路径更加美观，不带有 `#`，更接近传统的网站路径
 
@@ -522,7 +526,7 @@ const router = createRouter({
 });
 ```
 
-2️⃣ `hash` 模式
+### 2️⃣ `hash` 模式
 
 优点：兼容性更好，因为不需要服务器端处理路径
 
@@ -536,7 +540,7 @@ const router = createRouter({
 });
 ```
 
-## 的两种写法
+## `to` 的两种写法
 
 ```vue
 <!-- 第一种：to 的字符串写法 (直接写完整的路径) -->
