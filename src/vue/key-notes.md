@@ -1204,6 +1204,8 @@ export default {
 
 ## 插槽
 
+### 原理
+
 插槽可以理解为**父组件传递对象**和**子组件调用函数**
 
 > 😀 父组件中写在子组件标签体中的内容是一个对象，对象里面有插槽属性，属性值是一个函数
@@ -1249,14 +1251,14 @@ const obj = {
 <!-- 子组件 -->
 <template>
   <div>
-    <slot></slot>
     <!-- 调用 default 函数 -->
+    <slot></slot>
 
-    <slot name="slot1"></slot>
     <!-- 调用 slot1 函数 -->
+    <slot name="slot1"></slot>
 
-    <slot name="slot2" msg="hello world"></slot>
     <!-- 调用 slot2 函数，参数为 "hello world" -->
+    <slot name="slot2" msg="hello world"></slot>
   </div>
 </template>
 ```
@@ -1285,6 +1287,43 @@ const obj = {
 `<slot>`  元素是一个**插槽出口** (slot outlet)，标示了父元素提供的**插槽内容** (slot content) 将在哪里被渲染。
 
 <img src="./images/slots.png" alt="slots.png" class="my-img" />
+
+### 示例
+
+```js
+// 子组件 Comp
+import { createElementVNode } from "vue";
+
+export default {
+  setup(props, { slots }) {
+    const _default = slots.default();
+    const slot1 = slots.slot1();
+    const slot2 = slots.slot2({ msg: "hello world" });
+
+    return () => {
+      return createElementVNode("div", null, [..._default, ...slot1, ...slot2]);
+    };
+  },
+};
+```
+
+```vue
+<!-- 父组件 -->
+<template>
+  <Comp>
+    <!-- 传递 default 函数 -->
+    <p>default slot</p>
+    <!-- 传递 slot1 函数 -->
+    <template v-slot:slot1>
+      <p>slot1</p>
+    </template>
+    <!-- 传递 slot2 函数，形参 msg -->
+    <template v-slot:slot2="{ msg }">
+      <p>slot2: {{ msg }}</p>
+    </template>
+  </Comp>
+</template>
+```
 
 ### 插槽默认内容
 
@@ -1378,6 +1417,34 @@ const obj = {
 ```
 
 <img src="./images/scoped-slots.svg" alt="scoped-slots.svg" class="my-img" />
+
+### 应用
+
+```vue
+<script setup lang="ts">
+// 异步数据包装组件
+const AsyncWrapper = defineComponent({
+  name: "AsyncWrapper",
+  async setup(_, ctx) {
+    // 获取热门电影列表
+    const list = await listMedia(type.value, queries.value[0].query, 1);
+    // 获取第一个电影的详情
+    const item = await getMedia(type.value, list.results[0].id);
+    // 调用插槽函数，并传入实参 item
+    return () => ctx.slots?.default?.({ item });
+  },
+});
+</script>
+
+<template>
+  <AsyncWrapper v-slot="{ item }">
+    <!-- 传递 default 插槽函数，形参 item -->
+    <NuxtLink :to="`/${type}/${item.id}`">
+      <MediaHero :item="item" />
+    </NuxtLink>
+  </AsyncWrapper>
+</template>
+```
 
 ## 依赖注入
 
