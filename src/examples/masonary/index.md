@@ -6,6 +6,8 @@ next: false
 
 # 无限瀑布流
 
+::: raw
+
 <script setup lang="ts">
 import VueMasonary from "./VueMasonary/index.vue"
 
@@ -22,8 +24,6 @@ const defaultFetchImages = async () => {
   )
 }
 </script>
-
-::: raw
 <VueMasonary :fetch-images="defaultFetchImages">
   <template #default="{ image, index }">
     <div v-if="index === 2" class="ad">广告</div>
@@ -42,8 +42,6 @@ const defaultFetchImages = async () => {
     </div>
   </template>
 </VueMasonary>
-:::
-
 
 <style lang="scss" scoped>
 .feeds-item {
@@ -72,3 +70,5 @@ const defaultFetchImages = async () => {
   }
 }
 </style>
+
+:::

@@ -6,6 +6,8 @@ next: false
 
 # 3D 轮播图
 
+::: raw
+
 <script setup lang="ts">
 import Carousel3D from "./Carousel3D/Carousel3D.vue"
 import CarouselSlide from "./Carousel3D/CarouselSlide.vue"
@@ -64,7 +66,6 @@ const slides = [
 ]
 </script>
 
-::: raw
 <Carousel3D display="5" startIndex="4" :width="150" :height="200" :perspective="0">
   <CarouselSlide
     v-for="(slide, i) in slides"
@@ -79,7 +80,6 @@ const slides = [
     <p>{{ rightIndex }}</p>
   </CarouselSlide>
 </Carousel3D>
-:::
 
 <style scoped>
 .carousel-3d-container {
@@ -89,3 +89,5 @@ const slides = [
   box-shadow: 0px 0px 20px 5px #ffdf5e;
 }
 </style>
+
+:::

@@ -171,6 +171,7 @@ const sidebar = {
         items: [
           { text: "无限瀑布流", link: "/masonary/" },
           { text: "3D 轮播图", link: "/carousel-3d/" },
+          { text: "评分", link: "/stars-rate/" },
         ],
       },
     ],

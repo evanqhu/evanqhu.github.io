@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "vitepress dev --port 5183 --host",
     "docs:dev": "vitepress dev --port 5183 --host",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
