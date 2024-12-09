@@ -194,6 +194,7 @@ const sidebar = {
           { text: "区分设备类型", link: "/device-detect" },
           { text: "深度作用选择器", link: "/deep-selector" },
           { text: "自定义 VSCode 快捷键", link: "/vscode-shortcuts" },
+          { text: "异步包装组件", link: "/async-wrapper" },
         ],
       },
       {

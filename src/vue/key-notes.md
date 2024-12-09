@@ -1422,7 +1422,13 @@ export default {
 
 ```vue
 <script setup lang="ts">
-// 异步数据包装组件
+/**
+ * 异步数据包装组件
+ * 在这里先获取数据，再传递给插槽函数
+ * 将异步逻辑集中在 AsyncWrapper 中，可以让父组件的代码更加简洁，关注点也更单一。
+ * 父组件只负责渲染布局，而异步数据的加载和传递则完全交由子组件处理。
+ * AsyncWrapper 将异步数据加载逻辑与页面渲染逻辑解耦，使得这部分异步逻辑更容易单独测试和优化。
+ */
 const AsyncWrapper = defineComponent({
   name: "AsyncWrapper",
   async setup(_, ctx) {
