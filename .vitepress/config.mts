@@ -155,6 +155,7 @@ const sidebar = {
         items: [
           { text: "Chrome 调试", link: "/chrome-inspect" },
           { text: "项目部署", link: "/deployment" },
+          { text: "模块化", link: "/modularity" },
         ],
       },
     ],
