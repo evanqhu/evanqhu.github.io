@@ -31,12 +31,14 @@ https://www.bilibili.com/video/BV13W42197jR/
 
 模块化的核心思想就是：模块之间是隔离的，通过导入和导出进行数据和功能的共享。
 
-- 导出（暴露）：模块公开其内部的一部分 (如变量、函数等)，使这些内容可以被其他模块使用
-- 导入（引入）：模块引入和使用其他模块导出的内容，以重用代码和功能
+- 导出 (暴露)：模块公开其内部的一部分 (如变量、函数等)，使这些内容可以被其他模块使用
+- 导入 (引入)：模块引入和使用其他模块导出的内容，以重用代码和功能
 
-<img src="./images/module.png" alt="module.png" class="my-img" />
+<img src="./images/module.png" alt="module.png" class="my-img zoom-20" />
 
 ## CommonJS 规范
+
+最早仅供服务端使用，后来在浏览器端可以通过 `browserify` 编译使用。目前在服务端项目中大量使用。
 
 ### 示例
 
@@ -54,7 +56,7 @@ function getCities() {
   return ["北京", "上海", "深圳", "成都", "武汉", "西安"];
 }
 
-// 通过给exports对象添加属性的方式，来导出数据（注意：此处没有导出getCities）
+// 通过给 exports 对象添加属性的方式，来导出数据 (注意：此处没有导出 getCities)
 exports.name = name;
 exports.slogan = slogan;
 exports.getTel = getTel;
@@ -72,7 +74,7 @@ function getHobby() {
   return ["抽烟", "喝酒", "烫头"];
 }
 
-// 通过给exports对象添加属性的方式，来导出数据（注意：此处没有导出getHobby）
+// 通过给 exports 对象添加属性的方式，来导出数据 (注意：此处没有导出 getHobby)
 exports.name = name;
 exports.slogan = slogan;
 exports.getTel = getTel;
@@ -92,7 +94,7 @@ const student = require("./student");
 
 在 CommonJS 标准中，导出数据有两种方式：
 
-- 第一种方式：`module.exports = value`
+- 第一种方式：`module.exports = { value }`
 - 第二种方式：`exports.name = value`
 
 #### 注意
@@ -146,7 +148,7 @@ npm i browserify -g
 2. 编译
 
 ```sh
-# index.js 是源文件，build.js 是输出的目标文件
+# index.js 是用 CommonJS 写的源文件，build.js 是编译后输出的目标文件
 browserify index.js -o build.js
 ```
 
@@ -158,19 +160,19 @@ browserify index.js -o build.js
 
 ## ES6 模块化规范
 
-ES6 模块化规范是一个官方标准的规范，它是在语言标准的层面上实现了模块化功能，是目前最流行的模块化规范，且浏览器与服务端均支持该规范。
+ES6 模块化规范是一个官方标准的规范，它是在语言标准的层面上实现了模块化功能，是目前最流行的模块化规范，且浏览器与服务端均支持该规范。 (在服务端运行需要稍微配置一下)
 
 ### 示例
 
 ::: code-group
 
 ```js [school.js]
-// 导出name
-export let name = { str: "尚硅谷" };
-// 导出slogan
+// 导出 name
+export const name = { str: "尚硅谷" };
+// 导出 slogan
 export const slogan = "让天下没有难学的技术！";
 
-// 导出name
+// 导出 name
 export function getTel() {
   return "010-56253825";
 }
@@ -181,12 +183,12 @@ function getCities() {
 ```
 
 ```js [student.js]
-// 导出name
+// 导出 name
 export const name = "张三";
-// 导出motto
+// 导出 motto
 export const motto = "相信明天会更好！";
 
-// 导出getTel
+// 导出 getTel
 export function getTel() {
   return "13877889900";
 }
@@ -197,14 +199,15 @@ function getHobby() {
 ```
 
 ```js [index.js]
-// 引入school模块暴露的所有内容
+// 引入 school 模块暴露的所有内容
 import * as school from "./school.js";
 
-// 引入student模块暴露的所有内容
+// 引入 student 模块暴露的所有内容
 import * as student from "./student.js";
 ```
 
 ```html [index.html]
+<!-- type 要改成 module -->
 <script type="module" src="./index.js"></script>
 ```
 
@@ -221,23 +224,21 @@ Node.js 中运行 ES6 模块代码有两种方式：
 
 ES6 模块化提供 3 种导出方式：分别导出、统一导出、默认导出
 
-#### 1️⃣ 分别导出
+::: code-group
 
-```js
-// 导出name
-export let name = { str: "尚硅谷" };
-// 导出slogan
+```js [分别导出]
+// 导出 name
+export const name = { str: "尚硅谷" };
+// 导出 slogan
 export const slogan = "让天下没有难学的技术！";
 
-// 导出getTel
+// 导出 getTel
 export function getTel() {
   return "010-56253825";
 }
 ```
 
-#### 2️⃣ 统一导出
-
-```js
+```js [统一导出]
 const name = { str: "尚硅谷" };
 const slogan = "让天下没有难学的技术！";
 
@@ -249,13 +250,11 @@ function getCities() {
   return ["北京", "上海", "深圳", "成都", "武汉", "西安"];
 }
 
-// 统一导出了：name, slogan, getTel
+// 统一导出 name, slogan, getTel
 export { name, slogan, getTel };
 ```
 
-#### 3️⃣ 默认导出
-
-```js
+```js [默认导出]
 const name = "张三";
 const motto = "走自己的路，让别人五路可走！";
 
@@ -271,6 +270,8 @@ function getHobby() {
 export default { name, motto, getTel };
 ```
 
+:::
+
 ### 导入数据
 
 对于 ES6 模块化来说，使用何种导入方式，要根据导出方式决定。
@@ -283,14 +284,14 @@ export default { name, motto, getTel };
 import * as school from "./school.js";
 ```
 
-#### 2️⃣ 命名导入 (对应导出方式：分别导出、统一导出)
+#### 2️⃣ 具名导入 (对应导出方式：分别导出、统一导出)
 
 导出数据
 
 ```js
-//分别导出
+// 分别导出
 export const name = { str: "尚硅谷" };
-//分别导出
+// 分别导出
 export const slogan = "让天下没有难学的技术！";
 
 function getTel() {
@@ -301,11 +302,11 @@ function getCities() {
   return ["北京", "上海", "深圳", "成都", "武汉", "西安"];
 }
 
-//统一导出
+// 统一导出
 export { getTel };
 ```
 
-命名导入
+具名导入
 
 ```js
 import { name, slogan, getTel } from "./school.js";
@@ -319,7 +320,7 @@ import { name as myName, slogan, getTel } from "./school.js";
 
 ```js
 const name = "张三";
-const motto = "走自己的路，让别人五路可走！";
+const motto = "走自己的路，让别人无路可走！";
 
 function getTel() {
   return "13877889900";
@@ -358,3 +359,65 @@ console.log(school);
 ```js
 import "./mock.js";
 ```
+
+## 数据引用问题
+
+### 1️⃣ CommonJS
+
+分析下方案例
+
+```js
+// data.js
+let sum = 1;
+
+function increment() {
+  sum++;
+}
+
+module.exports = { sum, increment };
+```
+
+```js
+// index.js
+const { sum, increment } = require("./data.js");
+
+console.log(sum); // 1
+increment();
+increment();
+console.log(sum); // 1
+```
+
+::: tip
+在 `index.js` 中通过 `require` 和解构赋值得到的 sum 只是 `data.js` 中 sum 的一个拷贝，调用 increment 修改的是 `data.js` 中 sum，不会修改 `index.js` 中的 sum
+:::
+
+### 2️⃣ ES6
+
+```js
+// data.js
+let sum = 1;
+
+function increment() {
+  sum++;
+}
+
+export { sum, increment };
+```
+
+```js
+// index.js
+import { sum, increment } from "./data.js";
+
+console.log(sum); // 1
+increment();
+increment();
+console.log(sum); // 3
+```
+
+::: tip
+在 ES6 中就存在这种数据引用的问题 (符号绑定)，导出的数据和导入的数据是共用的一块内存空间
+
+- `export` 导出的数据 A 和 `import` 导入的数据 A 指向的是同一块内存空间，也叫做符号绑定
+- `import` 导入的数据都是当作**常量**来处理的
+- 所以在 ES6 中要求导出的数据必须是**常量**
+:::
