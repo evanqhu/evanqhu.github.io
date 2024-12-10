@@ -57,7 +57,7 @@ class Son extends Father {
 对象由**属性**和**方法**组成，一个属性或方法就是一个键值 `key-value` 对；
 对象分为：自定义对象；内置对象：如 Dtae、Math；浏览器对象：如 Window、Location
 
-```jsx
+```js
 // 1.字面量创建对象（大括号）
 const obj = {
   uname: '张三',

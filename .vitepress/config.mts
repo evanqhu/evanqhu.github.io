@@ -152,7 +152,10 @@ const sidebar = {
       {
         text: "其它",
         collapsed: false,
-        items: [{ text: "Chrome 调试", link: "/chrome-inspect" }],
+        items: [
+          { text: "Chrome 调试", link: "/chrome-inspect" },
+          { text: "项目部署", link: "/deployment" },
+        ],
       },
     ],
   },

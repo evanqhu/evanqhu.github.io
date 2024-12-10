@@ -2,7 +2,7 @@
 
 ## 条件语句
 
-```jsx
+```js
 // if 条件语句
 if (表达式) {  
   // do something 
