@@ -19,9 +19,9 @@
 
 ## 代码实现
 
-`auto-update.js`
+::: code-group
 
-```js
+```js [auto-update.js]
 // 保存上次提取的 <script> 标签的 src 属性值数组，用于后续对比
 let lastSrcs;
 // 保存当前定时器的 ID
@@ -117,3 +117,100 @@ async function autoRefresh() {
 // 启动自动刷新功能
 autoRefresh();
 ```
+
+```typescript [类实现]
+interface Options {
+  timer?: number;
+}
+
+export class Updater {
+  oldScript: string[]; // 存储第一次值，也就是 script 的 hash 信息
+  newScript: string[]; // 获取新的值，也就是新的 script 的 hash 信息
+  dispatch: Record<string, Function[]>; // 小型发布订阅通知用户更新了
+
+  constructor(options: Options) {
+    this.oldScript = [];
+    this.newScript = [];
+    this.dispatch = {};
+    this.init(); // 初始化
+    this.timing(options?.timer); // 开启轮询
+  }
+
+  /** 初始化 */
+  async init() {
+    const html: string = await this.getHtml();
+    this.oldScript = this.parserScript(html);
+  }
+
+  /** 获取 html */
+  async getHtml() {
+    const html = await fetch("/").then((res) => res.text());
+    return html;
+  }
+
+  /** 解析 script 中的 src */
+  parserScript(html: string) {
+    const reg = new RegExp(/<script(?:\s+[^>]*)?>(.*?)<\/script\s*>/gi);
+    return html.match(reg) as string[];
+    // [
+    //   '<script src="a.js"></script>',
+    //   '<script>alert(\'Hello\');</script>'
+    // ]
+  }
+
+  // 发布订阅通知
+  on(key: "no-update" | "update", fn: Function) {
+    // 如果 this.dispatch[key] 不存在，则创建一个空数组
+    (this.dispatch[key] || (this.dispatch[key] = [])).push(fn);
+    return this;
+  }
+
+  // 比较新旧数组
+  compare(oldArr: string[], newArr: string[]) {
+    // 将新数组合并到旧数组中，并去重
+    const arr = Array.from(new Set(oldArr.concat(newArr)));
+    
+    // 如果合并后的数组长度等于旧数组的长度，说明没有新增的 script 标签 (可能有减少的)
+    if (arr.length === oldArr.length) {
+      this.dispatch["no-update"].forEach((fn) => {
+        fn();
+      });
+    } else {
+      // 否则通知更新
+      this.dispatch["update"].forEach((fn) => {
+        fn();
+      });
+    }
+  }
+
+  /** 启动轮训 */
+  timing(time = 10000) {
+    // 轮询
+    setInterval(async () => {
+      // 获取最新页面中的 script 链接
+      const newHtml = await this.getHtml();
+      // 解析 script 中的 src
+      this.newScript = this.parserScript(newHtml);
+      // 比较新旧数组
+      this.compare(this.oldScript, this.newScript);
+    }, time);
+  }
+}
+```
+
+```js [使用类]
+// 实例化该类
+const up = new Updater({
+  timer: 2000,
+});
+// 未更新通知
+up.on("no-update", () => {
+  console.log("未更新");
+});
+// 更新通知
+up.on("update", () => {
+  console.log("更新了");
+});
+```
+
+:::
