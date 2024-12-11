@@ -201,6 +201,7 @@ const sidebar = {
           { text: "深度作用选择器", link: "/deep-selector" },
           { text: "自定义 VSCode 快捷键", link: "/vscode-shortcuts" },
           { text: "异步包装组件", link: "/async-wrapper" },
+          { text: "自动检测更新", link: "/auto-update" },
         ],
       },
       {
