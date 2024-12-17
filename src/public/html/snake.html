@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>贪吃蛇游戏</title>
+  <style>
+    /* 设置页面整体布局为居中显示 */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    /* 游戏容器居中对齐 */
+    #game-container {
+      text-align: center;
+    }
+
+    /* 游戏画板样式 */
+    #game-board {
+      border: 2px solid #333;
+      background-color: white;
+    }
+
+    /* 分数显示样式 */
+    #score {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    /* 游戏结束提示 */
+    #game-over {
+      color: red;
+      font-size: 24px;
+      display: none;
+    }
+
+    /* 控制面板布局 */
+    #control-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* 按钮样式 */
+    .game-button {
+      font-size: 16px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+
+    /* 速度显示 */
+    #speed-display {
+      font-size: 18px;
+      margin: 0 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game-container">
+    <!-- 分数显示 -->
+    <div id="score">分数: 0</div>
+
+    <!-- 游戏控制面板 -->
+    <div id="control-panel">
+      <button id="start-button" class="game-button">开始游戏</button>
+      <button id="speed-down" class="game-button">- 速度</button>
+      <span id="speed-display">速度：正常</span>
+      <button id="speed-up" class="game-button">+ 速度</button>
+    </div>
+
+    <!-- 游戏画布 -->
+    <canvas id="game-board" width="400" height="400"></canvas>
+
+    <!-- 游戏结束提示 -->
+    <div id="game-over">游戏结束!</div>
+  </div>
+
+  <script>
+    // 获取页面元素的引用
+    const canvas = document.getElementById('game-board');
+    const ctx = canvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+    const gameOverElement = document.getElementById('game-over');
+    const startButton = document.getElementById('start-button');
+    const speedDownButton = document.getElementById('speed-down');
+    const speedUpButton = document.getElementById('speed-up');
+    const speedDisplay = document.getElementById('speed-display');
+
+    // 游戏配置常量
+    const gridSize = 20;  // 每个网格大小
+    const gridCount = canvas.width / gridSize;  // 网格数量
+
+    // 游戏速度级别（毫秒）
+    // const speedLevels = [200, 150, 100, 75, 50];
+    const speedLevels = [300, 250, 200, 150, 100];
+    let currentSpeedIndex = 2; // 默认中等速度的索引
+
+    // 游戏状态变量
+    let snake, food, dx, dy, score, gameOver, gameLoop;
+
+    // 初始化游戏状态
+    function initGame() {
+      // 设置初始蛇身（只有一个头）
+      snake = [{ x: 10, y: 10 }];
+      // 生成食物
+      food = generateFood();
+      // 初始移动方向（向右）
+      dx = 1;
+      dy = 0;
+      // 重置分数
+      score = 0;
+      // 游戏未结束
+      gameOver = false;
+
+      // 更新分数显示
+      scoreElement.textContent = `分数: ${score}`;
+      // 隐藏游戏结束提示
+      gameOverElement.style.display = 'none';
+      // 清空画布
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // 更新速度显示
+    function updateSpeedDisplay() {
+      // 对应不同速度级别的文字描述
+      const speedText = ['很慢', '较慢', '正常', '较快', '很快'];
+      speedDisplay.textContent = `速度：${speedText[currentSpeedIndex]}`;
+    }
+
+    // 随机生成食物位置
+    function generateFood() {
+      return {
+        x: Math.floor(Math.random() * gridCount),
+        y: Math.floor(Math.random() * gridCount)
+      };
+    }
+
+    // 游戏主循环
+    function drawGame() {
+      // 如果游戏结束，显示游戏结束提示并停止循环
+      if (gameOver) {
+        gameOverElement.style.display = 'block';
+        clearInterval(gameLoop);
+        return;
+      }
+
+      // 清空画布
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 计算蛇头的新位置
+      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      // 将新位置添加到蛇身数组前面
+      snake.unshift(head);
+
+      // 检查是否吃到食物
+      if (head.x === food.x && head.y === food.y) {
+        // 增加分数
+        score++;
+        scoreElement.textContent = `分数: ${score}`;
+        // 重新生成食物
+        food = generateFood();
+      } else {
+        // 如果没吃到食物，移除蛇尾
+        snake.pop();
+      }
+
+      // 碰撞检测
+      if (
+        // 检查是否撞墙
+        head.x < 0 || head.x >= gridCount ||
+        head.y < 0 || head.y >= gridCount ||
+        // 检查是否撞到自己
+        snake.slice(1).some(segment =>
+          segment.x === head.x && segment.y === head.y)
+      ) {
+        // 设置游戏结束
+        gameOver = true;
+      }
+
+      // 绘制蛇
+      ctx.fillStyle = 'green';
+      snake.forEach(segment => {
+        ctx.fillRect(
+          segment.x * gridSize,
+          segment.y * gridSize,
+          gridSize - 2,
+          gridSize - 2
+        );
+      });
+
+      // 绘制食物
+      ctx.fillStyle = 'red';
+      ctx.fillRect(
+        food.x * gridSize,
+        food.y * gridSize,
+        gridSize - 2,
+        gridSize - 2
+      );
+    }
+
+    // 键盘事件监听器（控制蛇的方向）
+    document.addEventListener('keydown', function (e) {
+      switch (e.key) {
+        case 'ArrowUp':
+          // 只有当前不是水平移动时才能转向上
+          if (dy === 0) { dx = 0; dy = -1; }
+          break;
+        case 'ArrowDown':
+          // 只有当前不是水平移动时才能转向下
+          if (dy === 0) { dx = 0; dy = 1; }
+          break;
+        case 'ArrowLeft':
+          // 只有当前不是垂直移动时才能转向左
+          if (dx === 0) { dx = -1; dy = 0; }
+          break;
+        case 'ArrowRight':
+          // 只有当前不是垂直移动时才能转向右
+          if (dx === 0) { dx = 1; dy = 0; }
+          break;
+      }
+    });
+
+    // 减速按钮事件
+    speedDownButton.addEventListener('click', function () {
+      // 如果当前不是最慢速度
+      if (currentSpeedIndex > 0) {
+        // 降低速度
+        currentSpeedIndex--;
+        // 更新速度显示
+        updateSpeedDisplay();
+        // 如果游戏正在进行，重新设置游戏循环
+        if (gameLoop) {
+          clearInterval(gameLoop);
+          gameLoop = setInterval(drawGame, speedLevels[currentSpeedIndex]);
+        }
+      }
+    });
+
+    // 加速按钮事件
+    speedUpButton.addEventListener('click', function () {
+      // 如果当前不是最快速度
+      if (currentSpeedIndex < speedLevels.length - 1) {
+        // 提高速度
+        currentSpeedIndex++;
+        // 更新速度显示
+        updateSpeedDisplay();
+        // 如果游戏正在进行，重新设置游戏循环
+        if (gameLoop) {
+          clearInterval(gameLoop);
+          gameLoop = setInterval(drawGame, speedLevels[currentSpeedIndex]);
+        }
+      }
+    });
+
+    // 开始游戏按钮事件
+    startButton.addEventListener('click', function () {
+      // 初始化游戏状态
+      initGame();
+      // 更新速度显示
+      updateSpeedDisplay();
+      // 开始游戏循环
+      gameLoop = setInterval(drawGame, speedLevels[currentSpeedIndex]);
+    });
+
+    // 初始化游戏
+    initGame();
+    // 初始化速度显示
+    updateSpeedDisplay();
+  </script>
+</body>
+
+</html>
